@@ -1,0 +1,529 @@
+:root {
+    --primary: #14a4f2;
+    --main-font: "IBM Plex Sans", serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    overflow-x: hidden;
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+}
+/* Ẩn sub-menu ban đầu */
+.sub-menu {
+    display: none;
+    position: absolute;
+    top: 0; /* Đặt dưới mục chính */
+    left: 100%;
+    background-color: #fff;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px 0;
+    list-style: none;
+    z-index: 1;
+}
+
+/* Định dạng các mục bên trong sub-menu */
+.sub-menu li {
+    padding: 5px 15px;
+}
+
+.sub-menu li a {
+    color: #333;
+    text-decoration: none;
+}
+
+/* Hiển thị sub-menu khi rê chuột vào dropdown-item */
+.dropdown-item:hover .sub-menu {
+    display: block;
+}
+
+/* Đảm bảo sub-menu nằm đúng vị trí bên trong menu */
+.dropdown-item {
+    position: relative;
+}
+
+/* Hero start */
+.hero {
+    /* padding: 0 30px; */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 10%;
+    /* height: 100vh; */
+    background-color: white;
+}
+
+.hero-content {
+    max-width: 55%;
+}
+
+.hero h1 {
+    /* font-family: "Open Sans", sans-serif; */
+    font-family: "IBM Plex Sans", serif;
+    font-size: 45px;
+    letter-spacing: 0.1px;
+    line-height: 1.2;
+    font-weight: 500;
+    margin: auto;
+}
+.highlight {
+    font-family: "DM Serif Display", serif;
+    font-weight: 400;
+    font-size: 48px;
+    color: #14a4f2; /* màu hồng nổi bật */
+    text-decoration: solid;
+    font-style: italic;
+}
+
+.sub-highlight {
+    color: #666;
+}
+.hero p {
+    /* font-family: "Inter", sans-serif; */
+    font-family: "IBM Plex Sans", serif;
+    font-weight: 300;
+    font-size: 1.2rem;
+    color: #555;
+    margin-top: 20px;
+    margin-bottom: 25px;
+}
+.search-bar {
+    position: relative;
+    display: flex;
+    /* height: 50px; */
+    /* margin-top: 20px; */
+}
+
+.icon-search {
+    position: absolute;
+    top: 20%;
+    left: 2%;
+    font-weight: 300;
+    font-size: 20px;
+    color: #14a4f2;
+}
+
+.search-bar input {
+    width: 70%;
+
+    /* padding-top: 5px;
+    padding-bottom: 5px; */
+    padding-top: 3%;
+    padding-bottom: 3%;
+    padding-left: 9%;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px 0 0 8px;
+    outline: none;
+}
+
+.search-bar button {
+    padding: 3% 5%;
+    font-size: 1rem;
+    background-color: #14a4f2; /* màu xanh dương nổi bật */
+    color: white;
+    border: none;
+    border-radius: 0 8px 8px 0;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.search-bar button:hover {
+    background-color: #3b5bb2;
+}
+
+.hero-image {
+    max-width: 50%;
+    position: relative;
+}
+
+.image_hero {
+    width: 80%;
+    float: right;
+}
+.image_idea {
+    position: absolute;
+    top: -3%;
+    right: -3%;
+    width: 17%;
+    animation: float 2s ease-in-out infinite;
+}
+/* Hero end */
+
+.joblist {
+    letter-spacing: 0.5px;
+    font-weight: 600;
+}
+/* Slider brand start */
+.slider_brand {
+    padding-top: 120px;
+    padding-bottom: 80px;
+    display: flex;
+}
+.image {
+    display: flex;
+}
+.image img {
+    margin: auto;
+}
+.logo {
+    padding: 15px;
+    border: 1px solid rgb(150, 148, 148); /* Đặt khung (border) màu đen quanh ảnh */
+    border-radius: 8px;
+}
+.slider_brand .slick-slide {
+    width: auto !important; /* Cho phép item tự điều chỉnh theo kích thước nội dung */
+    margin-right: 30px;
+}
+/* Slider brand end  */
+
+/* How to start start */
+.how-to-start {
+    padding: 50px 0;
+    text-align: center;
+}
+
+.how-to-title {
+    font-size: 40px;
+    /* margin-bottom: 60px; */
+    color: #333;
+    font-family: var(--main-font);
+    font-weight: 500;
+}
+
+.list-linked {
+    margin-top: 50px;
+    display: flex;
+    justify-content: space-around;
+    gap: 40px;
+    list-style: none;
+    padding: 0;
+}
+
+/* .ll-item {
+    text-align: center;
+    max-width: 200px;
+} */
+.out-cirlce {
+    margin: auto;
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    border: 1px solid white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    display: flex;
+}
+.circle1 {
+    display: flex;
+    margin: auto;
+    width: 125px;
+    height: 125px;
+    /* border: 2px solid #ea7140; */
+    background-color: #c0e4f7;
+    border-radius: 50%;
+}
+.circle2 {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin: auto;
+    border-radius: 50%;
+    /* border: 2px solid #007bff; */
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* box-shadow: 10px rgba(0, 0, 0, 0.1); */
+}
+
+.ll-item-title {
+    font-size: 20px;
+    font-weight: 400;
+    margin-bottom: 5px;
+}
+.ll-item-main {
+    margin-top: 20px;
+}
+.ll-item-main p {
+    font-size: 16px;
+    color: #666;
+    margin: 0;
+}
+
+/* Button styling */
+.button {
+    padding: 10px 25px;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: var(--primary);
+    border: 2px solid var(--primary);
+    background-color: transparent;
+    border-radius: 4px;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.button:hover {
+    background-color: var(--primary);
+    color: #fff;
+}
+
+/* How to start end */
+
+/* Slider freelancer start */
+/* .container .freelancer-section {
+    padding-left: 0;
+    padding-right: 0;
+} */
+.freelancer-section {
+    /* width: 100vw; */
+    /* background-color: #f3f4f9; */
+    text-align: center;
+    padding-top: 40px;
+    padding-bottom: 70px;
+}
+.container > freelancer-section {
+    margin: 0 -10px; /* Bù lại 10px padding của container */
+}
+
+.top {
+    color: black;
+    font-size: 40px;
+    font-family: var(--main-font);
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.slider-freelancer {
+    padding: 30px 0;
+    max-width: 100%; /* Đảm bảo kích thước container */
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+}
+
+.slider-freelancer .slick-slide img {
+    display: inline;
+}
+.slick-prev {
+    background-color: white;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    /* border: none; */
+    border: 1px solid rgb(189, 186, 186); /* Đặt khung (border) màu đen quanh ảnh */
+    z-index: 2;
+    padding: 3px 12px;
+    border-radius: 50%;
+    font-size: larger;
+}
+.slick-next {
+    background-color: white;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    /* border: none; */
+    border: 1px solid rgb(189, 186, 186); /* Đặt khung (border) màu đen quanh ảnh */
+    z-index: 2;
+    padding: 3px 12px;
+    border-radius: 50%;
+    font-size: larger;
+}
+.slick-next:hover,
+.slick-prev:hover {
+    background-color: var(--primary);
+    color: #ffffff;
+}
+
+/* Style cho từng thẻ freelancer */
+.freelancer-card {
+    width: 26%;
+    background: #fff;
+    padding: 20px 10px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    /* font-family: "Inter", sans-serif; */
+    font-family: DM Sans;
+    position: relative;
+    margin: 10px;
+}
+.freelancer-card img {
+    width: 25%;
+    height: auto;
+}
+
+.freelancer-avatar {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+/* Thông tin freelancer */
+.freelancer-info {
+    font-size: 14px;
+    color: #666;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    text-align: left;
+    margin: auto;
+    width: 60%;
+}
+
+.freelancer-name {
+    font-weight: 500;
+    font-size: 20px;
+    color: black;
+}
+
+.freelancer-work {
+    font-weight: 300;
+    font-size: 15px;
+    margin-top: -2px;
+    margin-bottom: 15px;
+}
+
+/* Tags */
+.freelancer-tags {
+    margin: 15px 0px;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    font-weight: 500;
+    /* margin-top: 10px; */
+}
+
+.tag {
+    background-color: #e0e0e0;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 12px;
+    color: #555;
+}
+
+/* Rating */
+.freelancer-rating {
+    border-top: 1px solid #bcb8b8;
+    font-weight: 500;
+    /* padding-bottom: 10px; */
+    padding-top: 15px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    color: #666;
+    margin-top: 10px;
+}
+/* Slider freelancer end */
+
+/* Footer start */
+.footer {
+    font-family: var(--main-font);
+}
+.logo-grap {
+    display: flex;
+    align-items: center; /* Căn giữa theo chiều ngang */
+}
+
+.footer-logo {
+    width: 70%;
+}
+
+.footer-icon a {
+    border-radius: 50%;
+    border: none;
+}
+.quick-links a:hover {
+    color: var(--primary);
+    cursor: pointer;
+}
+/* Footer end  */
+
+@keyframes float {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-20px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 991px) {
+    .hero {
+        padding-top: 14%;
+    }
+    .hero h1 {
+        font-size: 30px;
+    }
+    .hero p {
+        font-size: 18px;
+    }
+    .slider_brand {
+        padding-bottom: 80px;
+    }
+}
+
+@media (max-width: 767px) {
+    .hero {
+        flex-direction: column;
+    }
+    .hero-content {
+        max-width: 100%;
+    }
+    .hero-image {
+        text-align: center;
+        padding-top: 10%;
+        max-width: 100%;
+        display: flex;
+    }
+    .image_hero {
+        /* float:; */
+        width: 70%;
+        margin: 0 auto;
+    }
+    .image_idea {
+        /* position:absolute; */
+        top: 8%;
+        right: 8%;
+        width: 15%;
+        /* animation: float 2s ease-in-out infinite; */
+    }
+    .footer-logo {
+        width: 30%;
+        margin-bottom: 15px;
+    }
+    .logo-grap {
+        display: flex;
+        /* align-items: center; Căn giữa theo chiều ngang */
+        justify-content: center;
+    }
+    /* responsive list */
+    .list-linked {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px; /* Tạo khoảng cách giữa các mục, tùy chỉnh theo ý muốn */
+    }
+
+    .ll-item {
+        flex: 1 1 40%; /* Chiều rộng mỗi mục là 50% */
+        box-sizing: border-box; /* Đảm bảo padding/margin không gây tràn */
+    }
+    .how-to-title {
+        font-size: 30px;
+    }
+}
