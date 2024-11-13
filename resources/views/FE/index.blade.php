@@ -143,152 +143,80 @@
     {{-- Slide show end --}}
 
     {{-- Job list start --}}
-    <div class="py-5">
-        <div class="">
-            <h1 class="text-center mb-5 wow fadeInUp joblist" data-wow-delay="0.1s">Job Listing</h1>
-            <div id="tab-1" class="tab-pane fade show p-0 active wow fadeInUp" data-wow-delay="0.3s">
-                <div class="job-item p-4 mb-4">
-                    <div class="row g-4">
-                        <div class="col-sm-12 col-md-8 d-flex align-items-center">
-                            <img class="job-item-logo flex-shrink-0 img-fluid border rounded"
-                                src="{{ asset('homepage/images/com-logo-1.jpg') }}" alt=""
-                                style="width: 80px; height: 80px;">
-                            <div class="text-start ps-4">
-                                <h5 class="job-item-name mb-3">Software Engineer</h5>
-                                <span class="job-item-address text-truncate me-3"><i
-                                        class="fa fa-map-marker-alt text-primary me-2"></i>New York, USA</span>
-                                <span class="job-item-price text-truncate me-0"><i
-                                        class="far fa-money-bill-alt text-primary me-2"></i>$123 - $456</span>
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('homepage/lib/wow/wow.min.js') }}"></script>
+    <script src="{{ asset('homepage/lib/easing/easing.min.js') }}"></script>
+    <script src="{{ asset('homepage/lib/waypoints/waypoints.min.js') }}"></script>
+    <script src="{{ asset('homepage/lib/owlcarousel/owl.carousel.min.js') }}"></script>
+    <script src="{{ asset('homepage/js/main.js') }}"></script>
+    <div class="" style="text-align:center; padding:30px 0;">
+        <p class="text-center wow fadeInUp top joblist">Job Listing</p>
+        @if (isset($jobs) && count($jobs) > 0)
+            @foreach ($jobs as $job)
+                <div class="box wow fadeInUp" >
+                    <div class="box-body">
+                        <div class=left-box">
+                            <div class="left-top"> {{-- d-flex align-items-center mb-30 --}}
+                                <div class="left-top-logo"> {{-- me-15 --}}
+                                    <img src="{{ asset($job->company_logo) }}" class="">{{-- avatar avatar-lg me-3 avatar-logo --}}
+                                </div>
+                                <div class="left-top-title"> {{-- d-flex flex-column --}}
+                                    <a href="#" class="company-link">
+                                        <span class="company-name">{{ $job->company_name }}</span>
+                                        <span class="freelancer-tag">Freelancer</span>
+                                    </a>
+                                    <span class="place-time" style="text-align: left;"> {{-- fs-14 --}}
+                                        <i class="place-time-icon fa-solid fa-location-dot"></i>
+                                        <span class="place-time-content">{{ $job->location }} {{-- text-fade --}}
+                                            <em><small>{{ $job->created_at->diffForHumans() }}</small></em>
+                                        </span>
+                                </div>
+                            </div>
+                            <div class="left-buttom "> {{-- d-lg-flex align-items-center justify-content-between0 --}}
+                                <div class="left-buttom-tag"> {{-- d-lg-flex d-block align-items-center --}}
+                                    <span> {{-- d-inline-block mb-0 rounded info-tag --}}
+                                        <span class="tag-title">Salary:</span> ${{ $job->salary_min }} -
+                                        ${{ $job->salary_max }}
+                                    </span>
+                                    <span class="tag-open"> {{-- d-inline-block mb-0 rounded mx-10 my-0 info-tag --}}
+                                        <span class="tag-title">Openings Position:</span> {{ $job->openings_position }}
+                                    </span>
+                                    <span class="tag-exp"> {{-- d-inline-block mb-0 rounded info-tag --}}
+                                        <span class="tag-title">Experience:</span> {{ $job->experience_required }} year
+                                    </span>
+                                </div>
+                                <div class="left-buttom-more">{{-- ms-lg-10 --}}
+                                    <a href="{{ route('jobDetail', ['job_id' => $job->job_id]) }}"
+                                        class="btn btn-sm mt-lg-0 mt-2 more-info-btn">More Info</a>
+                                </div>
                             </div>
                         </div>
-                        <div
-                            class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
-                            <div class="d-flex mb-3">
-                                <a class="btn btn-light btn-square me-3" href=""><i
-                                        class="far fa-heart text-primary"></i></a>
-                                <a class="btn btn-primary" href="">Apply Now</a>
-                            </div>
-                            <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Date
-                                Line: 01 Jan, 2045</small>
+                        <div class="right-box"> {{-- position-relative w-xl-300 w-lg-250 ps-lg-20 bs-1 ms-lg-20 --}}
+                            <span class="job-title">
+                                <small class="text-fade fs-12">Openings Position</small><br>
+                                <span class="job-title-name">{{ $job->job_title }}</span>
+                            </span>
+                            <form action="{{ route('freelancer.applyJob') }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="job_id" value="{{ $job->job_id }}">
+                                <button id="apply-btn" type="submit" class="job-btn"> {{-- btn w-100 btn-primary --}}
+                                    Apply Now!
+                                </button>
+                            </form>
                         </div>
+
                     </div>
                 </div>
-                <div class="job-item p-4 mb-4">
-                    <div class="row g-4">
-                        <div class="col-sm-12 col-md-8 d-flex align-items-center">
-                            <img class="flex-shrink-0 img-fluid border rounded"
-                                src="{{ asset('homepage/images/com-logo-2.jpg') }}" alt=""
-                                style="width: 80px; height: 80px;">
-                            <div class="text-start ps-4">
-                                <h5 class="mb-3">Marketing Manager</h5>
-                                <span class="text-truncate me-3"><i class="fa fa-map-marker-alt text-primary me-2"></i>New
-                                    York, USA</span>
-                                <span class="text-truncate me-0"><i class="far fa-money-bill-alt text-primary me-2"></i>$123
-                                    - $456</span>
-                            </div>
-                        </div>
-                        <div
-                            class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
-                            <div class="d-flex mb-3">
-                                <a class="btn btn-light btn-square me-3" href=""><i
-                                        class="far fa-heart text-primary"></i></a>
-                                <a class="btn btn-primary" href="">Apply Now</a>
-                            </div>
-                            <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Date
-                                Line: 01 Jan, 2045</small>
-                        </div>
-                    </div>
-                </div>
-                <div class="job-item p-4 mb-4">
-                    <div class="row g-4">
-                        <div class="col-sm-12 col-md-8 d-flex align-items-center">
-                            <img class="flex-shrink-0 img-fluid border rounded"
-                                src="{{ asset('homepage/images/com-logo-3.jpg') }}" alt=""
-                                style="width: 80px; height: 80px;">
-                            <div class="text-start ps-4">
-                                <h5 class="mb-3">Product Designer</h5>
-                                <span class="text-truncate me-3"><i class="fa fa-map-marker-alt text-primary me-2"></i>New
-                                    York, USA</span>
-                                <span class="text-truncate me-0"><i
-                                        class="far fa-money-bill-alt text-primary me-2"></i>$123 - $456</span>
-                            </div>
-                        </div>
-                        <div
-                            class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
-                            <div class="d-flex mb-3">
-                                <a class="btn btn-light btn-square me-3" href=""><i
-                                        class="far fa-heart text-primary"></i></a>
-                                <a class="btn btn-primary" href="">Apply Now</a>
-                            </div>
-                            <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Date
-                                Line: 01 Jan, 2045</small>
-                        </div>
-                    </div>
-                </div>
-                <div class="job-item p-4 mb-4">
-                    <div class="row g-4">
-                        <div class="col-sm-12 col-md-8 d-flex align-items-center">
-                            <img class="flex-shrink-0 img-fluid border rounded"
-                                src="{{ asset('homepage/images/com-logo-4.jpg') }}" alt=""
-                                style="width: 80px; height: 80px;">
-                            <div class="text-start ps-4">
-                                <h5 class="mb-3">Creative Director</h5>
-                                <span class="text-truncate me-3"><i class="fa fa-map-marker-alt text-primary me-2"></i>New
-                                    York, USA</span>
-                                <span class="text-truncate me-0"><i
-                                        class="far fa-money-bill-alt text-primary me-2"></i>$123 - $456</span>
-                            </div>
-                        </div>
-                        <div
-                            class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
-                            <div class="d-flex mb-3">
-                                <a class="btn btn-light btn-square me-3" href=""><i
-                                        class="far fa-heart text-primary"></i></a>
-                                <a class="btn btn-primary" href="">Apply Now</a>
-                            </div>
-                            <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Date
-                                Line: 01 Jan, 2045</small>
-                        </div>
-                    </div>
-                </div>
-                <div class="job-item p-4 mb-4">
-                    <div class="row g-4">
-                        <div class="col-sm-12 col-md-8 d-flex align-items-center">
-                            <img class="flex-shrink-0 img-fluid border rounded"
-                                src="{{ asset('homepage/images/com-logo-5.jpg') }}" alt=""
-                                style="width: 80px; height: 80px;">
-                            <div class="text-start ps-4">
-                                <h5 class="mb-3">Wordpress Developer</h5>
-                                <span class="text-truncate me-3"><i class="fa fa-map-marker-alt text-primary me-2"></i>New
-                                    York, USA</span>
-                                <span class="text-truncate me-0"><i
-                                        class="far fa-money-bill-alt text-primary me-2"></i>$123 - $456</span>
-                            </div>
-                        </div>
-                        <div
-                            class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
-                            <div class="d-flex mb-3">
-                                <a class="btn btn-light btn-square me-3" href=""><i
-                                        class="far fa-heart text-primary"></i></a>
-                                <a class="btn btn-primary" href="">Apply Now</a>
-                            </div>
-                            <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Date
-                                Line: 01 Jan, 2045</small>
-                        </div>
-                    </div>
-                </div>
-                <a class="btn_more_job py-3 px-5" href="">Browse More Jobs >></a>
+            @endforeach
+            <div class="custom-pagination">
+                {{ $jobs->links('pagination::bootstrap-5') }}
             </div>
-        </div>
-        <!-- JavaScript Libraries -->
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="{{ asset('homepage/lib/wow/wow.min.js') }}"></script>
-        <script src="{{ asset('homepage/lib/easing/easing.min.js') }}"></script>
-        <script src="{{ asset('homepage/lib/waypoints/waypoints.min.js') }}"></script>
-        <script src="{{ asset('homepage/lib/owlcarousel/owl.carousel.min.js') }}"></script>
-        <!-- Template Javascript -->
-        <script src="{{ asset('homepage/js/main.js') }}"></script>
+        @else
+            <p>Không có công việc nào. </p>
+        @endif
+
     </div>
     {{-- job list end --}}
 
@@ -363,7 +291,8 @@
                             <img class="img-fluid w-100" src="{{ asset('homepage/images/about-1.jpg') }}">
                         </div>
                         <div class="col-6 text-start">
-                            <img class="img-fluid" src="{{ asset('homepage/images/about-2.jpg') }}" style="width: 85%; margin-top: 15%;">
+                            <img class="img-fluid" src="{{ asset('homepage/images/about-2.jpg') }}"
+                                style="width: 85%; margin-top: 15%;">
                         </div>
                         <div class="col-6 text-end">
                             <img class="img-fluid" src="{{ asset('homepage/images/about-3.jpg') }}" style="width: 85%;">
@@ -375,12 +304,13 @@
                 </div>
                 <div class="col-lg-6 wow fadeIn about-content" data-wow-delay="0.5s">
                     <span class="about-title">We Help To Find Talents</span>
-                    <p class="">Finding the right talent for your business has never been easier. 
-                    Our platform bridges the gap between employers and skilled freelancers, providing a 
-                    space where both parties can thrive. Discover top talent, streamline hiring processes, and build your team with confidence.</p>
-                    <p><i class="fa fa-check text-primary me-3"></i>Skilled professionals ready to join your team</p>
-                    <p><i class="fa fa-check text-primary me-3"></i>Simple and efficient hiring process</p>
-                    <p><i class="fa fa-check text-primary me-3"></i>Flexible solutions tailored to your business needs</p>
+                    <p class="">Finding the right talent for your business has never been easier.
+                        Our platform bridges the gap between employers and skilled freelancers, providing a
+                        space where both parties can thrive. Discover top talent, streamline hiring processes, and build
+                        your team with confidence.</p>
+                    <p><i class="fa fa-check icon-about me-3"></i>Skilled professionals ready to join your team</p>
+                    <p><i class="fa fa-check icon-about me-3"></i>Simple and efficient hiring process</p>
+                    <p><i class="fa fa-check icon-about me-3"></i>Flexible solutions tailored to your business needs</p>
                     <div class="">
                         <a class="btn btn-primary py-3 px-3 about-button" href="">Hire Freelancers Now</a>
                     </div>

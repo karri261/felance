@@ -1,4 +1,3 @@
-/********** Template CSS **********/
 :root {
     --primary: #14a4f2;
     --secondary: #2B9BFF;
@@ -6,6 +5,16 @@
     --dark: #2B3940;
 }
 
+.icon-about{
+    color: var(--primary);
+}
+.btn-primary{
+    background-color: var(--primary);
+    border: none;
+}
+.btn-primary:hover{
+    background-color: #1579af;
+}
 .back-to-top {
     position: fixed;
     display: none;
@@ -14,8 +23,6 @@
     z-index: 99;
 }
 
-
-/*** Spinner ***/
 #spinner {
     opacity: 0;
     visibility: hidden;
@@ -203,7 +210,7 @@
 }
 
 
-/*** Job Listing ***/
+/* ** Job Listing **
 .joblist{
     font-size: 40px;
     font-family: "IBM Plex Sans", serif;
@@ -257,7 +264,7 @@
 }
 .btn_more_job{
     margin:auto;
-}
+} */
 
 
 /*** Testimonial ***/

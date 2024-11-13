@@ -113,10 +113,6 @@ a {
     text-decoration: none;
 }
 
-a:hover {
-    /* color: var(--secondary-color); */
-}
-
 ::selection {
     background: var(--secondary-color);
     color: var(--white-color);

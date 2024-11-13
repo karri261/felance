@@ -7,6 +7,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: "IBM Plex Sans", serif;
 }
 
 body {
@@ -14,7 +15,7 @@ body {
     font-family: Arial, sans-serif;
     background-color: #ffffff;
 }
-/* Ẩn sub-menu ban đầu */
+
 .sub-menu {
     display: none;
     position: absolute;
@@ -27,7 +28,6 @@ body {
     z-index: 1;
 }
 
-/* Định dạng các mục bên trong sub-menu */
 .sub-menu li {
     padding: 5px 15px;
 }
@@ -37,12 +37,10 @@ body {
     text-decoration: none;
 }
 
-/* Hiển thị sub-menu khi rê chuột vào dropdown-item */
 .dropdown-item:hover .sub-menu {
     display: block;
 }
 
-/* Đảm bảo sub-menu nằm đúng vị trí bên trong menu */
 .dropdown-item {
     position: relative;
 }
@@ -155,10 +153,6 @@ body {
 }
 /* Hero end */
 
-.joblist {
-    letter-spacing: 0.5px;
-    font-weight: 600;
-}
 /* Slider brand start */
 .slider_brand {
     padding-top: 120px;
@@ -182,9 +176,178 @@ body {
 }
 /* Slider brand end  */
 
+/* Job list start */
+.joblist {
+    margin-bottom: 30px;
+}
+
+.box{
+    border: 1px solid rgb(211, 208, 208); /* Đặt khung (border) màu đen quanh ảnh */
+    margin-bottom: 20px;
+    background-color: white;
+    border-radius: 8px 8px 8px 8px;
+}
+.box:hover{
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    transition: box-shadow 0.3s ease; 
+}
+
+.box-body {
+    display: flex;
+    justify-content: space-between;
+    padding:10px;
+}
+
+.left-top{
+    display:flex;
+}
+
+.left-top-logo{
+    width: 70px;
+    height: 70px;
+}
+
+.left-top-title{
+    display:flex;
+    flex-direction: column;
+    gap: 4px;
+    /* align-items: center; */
+    /* justify-content: center; */
+}
+
+.right-box{
+    padding-left: 50px;
+    width:25%;
+    display:flex;
+    flex-direction: column;
+    align-items: baseline;
+    justify-content: space-between;
+    border-left: 1px solid rgb(211, 208, 208); /* Đặt khung (border) màu đen quanh ảnh */
+
+}
+.job-title-name{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.company-name{
+    font-size: 23px;
+    font-weight:bold;
+}
+.freelancer-tag{
+    margin-left: 10px;
+    margin-bottom: 3px;
+    padding: 3px 6px;
+    font-size: 16px;
+    color:rgb(64, 208, 88);
+    background-color: rgb(211, 250, 224);
+}
+
+.left-buttom{
+    display:flex;
+    flex-direction: row;
+}
+.left-buttom-tag{
+    font-size: 16px;
+    margin-top: 13px;
+    display:flex;
+    gap: 10px;
+    font-weight: 600;
+}
+.left-buttom-tag span{
+    padding: 2px 4px;
+    background-color: #f3f4f9;
+}
+.left-buttom-more{
+    margin-top: 13px;
+    margin-left: 20px;
+    background-color: rgb(211, 235, 248);
+}
+
+.left-buttom-more a:hover{
+    text-decoration: underline;
+    color:#0b6ea3;
+}
+
+.left-buttom-more a{
+    font-weight: 400;
+    color:var(--primary);
+}
+.tag-title{
+    color:#7c7a7a;
+    font-weight: 400;
+}
+
+.job-btn{
+    color:#fff;
+    background-color: var(--primary);
+    border:none;
+    padding: 6px 30px;
+    font-size: 16px;
+    font-weight: 500;
+}
+.job-btn:hover{
+    background-color: #1579af;
+}
+/* .justify-content-between {
+    display: flex;
+    justify-content: space-between;
+}
+
+.avatar-logo {
+    margin-right: 15px;
+    border: 1px solid #eee;
+}
+
+.company-link {
+    color: #000;
+    margin-bottom: 1rem;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+.freelancer-tag {
+    background-color: #e9f5ea;
+    color: #3da643;
+    font-size: 75%;
+    padding: 2px 5px;
+    border-radius: 5px;
+}
+
+.info-tag {
+    background-color: #e9edf2;
+    padding: 5px 10px;
+    color: #172b4c;
+    border-radius: 5px;
+    font-size: 14px;
+    margin-top: 0.5rem;
+}
+
+.info-tag + .info-tag {
+    margin-left: 10px;
+}
+
+.more-info-btn {
+    background-color: #e4f3ff;
+    color: #2196f3;
+    margin-left: 10px;
+}
+
+.job-title {
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.custom-pagination {
+    display: flex;
+    justify-content: center;
+} */
+
+/* JOb list end */
+
 /* How to start start */
 .how-to-start {
-    padding: 50px 0;
+    padding: 70px 0;
     text-align: center;
 }
 
@@ -297,7 +460,7 @@ body {
     color: black;
     font-size: 40px;
     font-family: var(--main-font);
-    margin-bottom: 10px;
+    /* margin-bottom: 10px; */
     font-weight: 500;
 }
 
@@ -396,7 +559,9 @@ body {
 
 /* Tags */
 .freelancer-tags {
-    margin: 15px 0px;
+    font-size: 14px;
+    /* margin: 15px 0px; */
+    /* margin-bottom: 20px; */
     display: flex;
     justify-content: center;
     gap: 8px;
@@ -476,6 +641,25 @@ body {
     .slider_brand {
         padding-bottom: 80px;
     }
+    .right-box{
+        padding-left:10px;
+    }
+    .job-btn{
+        padding: 6px 10px;
+    }
+    .left-buttom-tag{
+        flex-direction: column;
+        align-items: baseline;
+    }
+    .left-buttom-more{
+        display: none;
+    }
+    .right-box{
+        width:30%;
+        padding-left: 30px;
+        justify-content:space-around;
+        text-align: left !important;
+    }
 }
 
 @media (max-width: 767px) {
@@ -525,5 +709,30 @@ body {
     }
     .how-to-title {
         font-size: 30px;
+    }
+    .company-name{
+        font-size: 20px;
+    }
+    .freelancer-tag{
+        font-size: 13px;
+    }
+    .right-box{
+        width:30%;
+        padding-left: 10px;
+    }   
+}
+
+@media (max-width: 575px) {
+    .company-name{
+        font-size: 18px;
+    }
+    .left-buttom-tag {
+        font-size: 13px;
+    }
+    .freelancer-tag{
+        display:none;
+    }
+    .right-box{
+        width:40%;
     }
 }
