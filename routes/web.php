@@ -67,6 +67,17 @@ Route::middleware(['auth'])->group(function () {
 
     Route::prefix('employer')->group(function () {
         Route::get('/', [EmployerController::class, 'dashboard'])->name('employer');
+
+        Route::get('/profile', [EmployerController::class, 'profile'])->name('employer.profile');
+        Route::post('/update-profile', [EmployerController::class, 'updateProfile'])->name('employer.updateProfile');
+        Route::post('/change-password', [EmployerController::class, 'changePassword'])->name('employer.changePassword');
+        Route::post('/deactivate-account', [EmployerController::class, 'deactivateAccount'])->name('employer.deactivateAccount');
+
+        Route::get('/inbox', [EmployerController::class, 'inbox'])->name('employer.inbox');
+        Route::get('/conversations', [MessageController::class, 'getConversations']);
+        Route::get('/conversations/{id}/messages', [MessageController::class, 'getMessages']);
+        Route::post('/conversations/{id}/messages', [MessageController::class, 'sendMessage']);
+        Route::post('/conversations', [MessageController::class, 'createConversation']);
     });
 
     Route::prefix('admin')->group(function () {

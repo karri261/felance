@@ -12,7 +12,7 @@ class CreateEmployersTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->string('company_name')->nullable();
-            $table->string('company_logo')->nullable();
+            $table->string('company_logo')->default('freelancer_assets/images/default-avt.png');
             $table->string('languages')->nullable();
             $table->string('address')->nullable();
             $table->string('phone_number')->nullable();
@@ -21,7 +21,6 @@ class CreateEmployersTable extends Migration
             $table->string('instagram')->nullable();
             $table->string('twitter')->nullable();
             $table->string('linkedin')->nullable();
-            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

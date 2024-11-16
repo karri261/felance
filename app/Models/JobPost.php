@@ -12,6 +12,7 @@ class JobPost extends Model
     protected $primaryKey = 'job_id';
 
     protected $fillable = [
+        'user_id',
         'job_title',
         'company_name',
         'company_logo',
@@ -33,8 +34,6 @@ class JobPost extends Model
     public function favorites()
     {
         return $this->hasMany(Favorite::class, 'job_id', 'job_id');
-        // Tham số thứ 2: foreign key trong bảng favorites
-        // Tham số thứ 3: local key trong bảng job_posts
     }
 
     public function isFavoritedBy($userId)

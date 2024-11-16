@@ -21,7 +21,6 @@ class CreateFreelancersTable extends Migration
             $table->string('instagram')->nullable();
             $table->string('twitter')->nullable();
             $table->string('linkedin')->nullable();
-            $table->text('image')->nullable();
             $table->timestamps();
         });
     }

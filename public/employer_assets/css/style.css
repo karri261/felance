@@ -1,0 +1,189 @@
+/*============NAV BAR================== */
+.horizontal-menu {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+.horizontal-menu .top-navbar {
+    font-weight: 400;
+    background: #ffffff;
+    border-bottom: 1px solid #e8e5e5;
+}
+.horizontal-menu .top-navbar .navbar-brand-wrapper {
+    width: auto;
+    height: 70px;
+}
+.horizontal-menu .top-navbar .navbar-brand-wrapper .navbar-brand {
+    font-size: 1.5rem;
+    margin-right: 0;
+    padding: 0.25rem 0;
+    text-align: left;
+}
+.horizontal-menu .top-navbar .navbar-brand-wrapper .navbar-brand img {
+    max-width: 100%;
+    height: 36px;
+    margin: auto;
+    vertical-align: middle;
+}
+.horizontal-menu .top-navbar .navbar-menu-wrapper .navbar-nav .nav-item {
+    position: relative;
+    margin-left: 30px;
+    display: flex;
+    align-items: center;
+}
+.horizontal-menu .top-navbar .navbar-menu-wrapper .navbar-nav .nav-item i {
+    font-size: 20px;
+}
+.horizontal-menu .top-navbar .navbar-menu-wrapper .navbar-nav .nav-item img {
+    width: 36px;
+}
+
+.horizontal-menu
+    .top-navbar
+    .navbar-menu-wrapper
+    .navbar-nav
+    .nav-item
+    .navbar-dropdown {
+    position: absolute;
+    margin-top: 0;
+    right: 0;
+    left: auto;
+    top: 70px;
+}
+
+.horizontal-menu
+    .top-navbar
+    .navbar-menu-wrapper
+    .navbar-nav
+    .nav-item
+    .navbar-dropdown
+    img {
+    width: 64px;
+}
+
+.horizontal-menu .bottom-navbar {
+    background: #181824;
+    position: relative;
+    top: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+}
+@media (max-width: 767.98px) {
+    .horizontal-menu .bottom-navbar .page-navigation {
+        flex-direction: column;
+    }
+}
+.horizontal-menu .bottom-navbar .page-navigation .nav-item .nav-link.active,
+.horizontal-menu .bottom-navbar .page-navigation .nav-item .nav-link:focus {
+    position: relative;
+}
+.horizontal-menu .bottom-navbar .page-navigation .nav-item .nav-link:hover {
+    background-color: #202024;
+}
+.horizontal-menu
+    .bottom-navbar
+    .page-navigation
+    .nav-item
+    .nav-link.active:hover {
+    background-color: #181824;
+}
+.horizontal-menu
+    .bottom-navbar
+    .page-navigation
+    .nav-item
+    .nav-link.active::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background-color: #ffffff;
+}
+.horizontal-menu .bottom-navbar .page-navigation > .nav-item > .nav-link {
+    color: #ffffff;
+    padding: 22px 30px;
+    line-height: 1;
+    font-weight: 400;
+    font-size: 15px;
+}
+.horizontal-menu .bottom-navbar .page-navigation > .nav-item > .nav-link span {
+    margin-left: 7px;
+}
+/* ===================PROFILE==================== */
+.profile {
+    height: 70vh;
+}
+@media (max-width: 767.98px) {
+    .profile {
+        height: auto;
+    }
+}
+.profile .box {
+    position: relative;
+    margin-bottom: 30px;
+    width: 100%;
+    background-color: #ffffff;
+    border-radius: 5px;
+    padding: 0px;
+    transition: 0.5s;
+    display: -ms-flexbox;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 0 30px 0 rgba(82, 63, 105, 0.05);
+}
+.profile .widget-user-header {
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    padding: 20px;
+}
+.profile .widget-user-header .widget-user-image > img {
+    width: 65px;
+    height: auto;
+    float: left;
+}
+.profile .widget-user-header .widget-user-username {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 75px;
+}
+.profile .widget-user-header .widget-user-desc {
+    margin-top: 0;
+    margin-left: 75px;
+}
+.profile .nav > li > a:hover,
+.profile .nav > li > a:active,
+.profile .nav > li > a:focus,
+.profile .nav > li > a.active {
+    color: #ffffff !important;
+    background: #29b2fe;
+}
+.profile .box-footer i {
+    font-size: 13px;
+    margin-right: 5px;
+}
+.profile .box-body {
+    padding: 1.5rem 1.5rem;
+    flex: 1 1 auto;
+    border-radius: 5px;
+}
+.profile .box-body i {
+    margin-right: 10px;
+}
+.profile .row {
+    margin-bottom: 10px !important;
+}
+.profile #pills-changePass .form-group .input-group,
+.profile #pills-deactivate .form-group .input-group {
+    overflow: hidden;
+    margin-bottom: 0;
+    border: 1px solid #efefef;
+    position: relative;
+    border-radius: 7px;
+}
+.profile #pills-changePass .form-group .input-group input,
+.profile #pills-deactivate .form-group .input-group input {
+    border: none;
+}

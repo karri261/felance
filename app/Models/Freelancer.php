@@ -23,4 +23,9 @@ class Freelancer extends Model
         'linkedin',
         'image_paths',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

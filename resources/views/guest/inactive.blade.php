@@ -29,7 +29,7 @@
                                 Reactivate your account?
                             </p>
                             <p style="text-align: center; color: #1e1e1e;">
-                                You deactivated your account on <strong>{{ $updatedAt->format('Y-m-d') }}</strong> . <br>
+                                You deactivated your account on <strong>{{ $updatedAt->format('d-m-Y') }}</strong> . <br>
                                 By clicking <strong>"Yes, reactivate"</strong>  you will pause the deactivation process and reactivate your account.</p>
                         </div>
                         <form action="{{ route('reActive') }}" method="post">

@@ -21,7 +21,7 @@ class Employer extends Model
         'instagram',
         'twitter',
         'linkedin',
-        'image',
+        'image_paths',
     ];
 
     public function user()

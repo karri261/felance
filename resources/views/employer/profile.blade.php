@@ -1,5 +1,5 @@
-@extends('freelancer.master')
-@section('title', 'Freelancer| Profile')
+@extends('employer.master')
+@section('title', 'Employer| Profile')
 
 @section('main-content')
     <div class="container profile">
@@ -26,12 +26,12 @@
                     <div class="box box-widget widget-user-2">
                         <div class="widget-user-header bg-secondary-light">
                             <div class="widget-user-image">
-                                <img class="rounded-circle bg-danger" src="{{ asset($freelancer->avatar) }}"
+                                <img class="rounded-circle bg-danger" src="{{ asset($employer->company_logo) }}"
                                     alt="User Avatar">
                             </div>
                             <h3 class="widget-user-username">{{ $user->firstname }} {{ $user->lastname }}</h3>
                             <h6 class="widget-user-desc fs-14 text-fade" style="text-transform: capitalize">
-                                {{ $user->status }}</h6>
+                                {{ $employer->company_name }}</h6>
                         </div>
                         <div class="box-footer">
                             <ul class="nav d-block fs-16" id="pills-tab23" role="tablist">
@@ -78,7 +78,7 @@
                                 aria-labelledby="pills-edit-tab">
                                 <div class="row">
                                     <div class="col-12">
-                                        <form class="form" action="{{ route('freelancer.updateProfile') }}" method="POST"
+                                        <form class="form" action="{{ route('employer.updateProfile') }}" method="POST"
                                             enctype="multipart/form-data">
                                             @csrf
                                             <div>
@@ -88,7 +88,7 @@
                                                 </h4>
                                                 <hr class="my-15">
                                                 <div class="row">
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-5">
                                                         <div class="form-group">
                                                             <label class="form-label">First Name</label>
                                                             <input type="text" class="form-control"
@@ -96,7 +96,7 @@
                                                                 name="firstname">
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-5">
                                                         <div class="form-group">
                                                             <label class="form-label">Last Name</label>
                                                             <input type="text" class="form-control"
@@ -106,39 +106,27 @@
                                                     </div>
                                                 </div>
                                                 <div class="row">
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-5">
                                                         <div class="form-group">
                                                             <label class="form-label">Languages</label>
                                                             <input type="text" class="form-control"
                                                                 placeholder="Languages"
-                                                                value="{{ $freelancer->languages }}" name="languages">
+                                                                value="{{ $employer->languages }}" name="languages">
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-3">
+                                                    <div class="col-md-5">
                                                         <div class="form-group">
-                                                            <label class="form-label" style="margin-right: 15px">Your CV</label>
-                                                            <br>
-                                                            <input type="file" name="cv" id="cv"
-                                                                accept=".pdf,.doc,.docx" onchange="updateFileName()"
-                                                                style="display: none;">
-                                                            <button type="button" style="border: none; padding: 5px 10px"
-                                                                onclick="document.getElementById('cv').click()">Choose
-                                                                File</button>
-                                                            <span id="file-name">
-                                                                @if ($freelancer->cv_path)
-                                                                    {{ basename($freelancer->cv_path) }}
-                                                                @else
-                                                                    No file chosen
-                                                                @endif
-                                                            </span>
+                                                            <label class="form-label">Company name</label>
+                                                            <input type="text" class="form-control"
+                                                                placeholder="Company name"
+                                                                value="{{ $employer->company_name }}" name="company_name">
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-3">
+                                                    <div class="col-md-2">
                                                         <div class="form-group d-flex">
-                                                            <label class="form-label">Avatar</label>
                                                             <br>
                                                             <img id="avatarImg" class="rounded-circle bg-danger"
-                                                                src="{{ asset($freelancer->avatar) }}" alt="User Avatar"
+                                                                src="{{ asset($employer->company_logo) }}" alt="User Avatar"
                                                                 style="cursor: pointer; width: 100px;">
                                                             <input type="file" name="avatar" id="avatarInput"
                                                                 style="display: none;" accept="image/*">
@@ -153,7 +141,7 @@
                                                 <div class="form-group">
                                                     <label class="form-label">Address</label>
                                                     <input class="form-control" type="text" placeholder="Address"
-                                                        value="{{ $freelancer->address }}" name="address">
+                                                        value="{{ $employer->address }}" name="address">
                                                 </div>
                                                 <div class="form-group">
                                                     <label class="form-label">Email</label>
@@ -164,12 +152,12 @@
                                                     <label class="form-label">Contact Number</label>
                                                     <input class="form-control" type="tel"
                                                         placeholder="Contact Number"
-                                                        value="{{ $freelancer->phone_number }}" name="phone_number">
+                                                        value="{{ $employer->phone_number }}" name="phone_number">
                                                 </div>
                                                 <div class="form-group">
                                                     <label class="form-label">Bio</label>
                                                     <textarea rows="4" class="form-control" placeholder="Bio" name="bio">
-                                                            {{ $freelancer->bio }}
+                                                            {{ $employer->bio }}
                                                         </textarea>
                                                 </div>
                                                 <h4 class="box-title text-primary mt-30 fs-18">
@@ -180,22 +168,22 @@
                                                 <div class="form-group">
                                                     <label class="form-label">Facebook</label>
                                                     <input class="form-control" type="text" placeholder="Facebook"
-                                                        value="{{ $freelancer->facebook }}" name="facebook">
+                                                        value="{{ $employer->facebook }}" name="facebook">
                                                 </div>
                                                 <div class="form-group">
                                                     <label class="form-label">Twitter</label>
                                                     <input class="form-control" type="text" placeholder="Twitter"
-                                                        value="{{ $freelancer->twitter }}" name="twitter">
+                                                        value="{{ $employer->twitter }}" name="twitter">
                                                 </div>
                                                 <div class="form-group">
                                                     <label class="form-label">Instagram</label>
                                                     <input class="form-control" type="text" placeholder="Instagram"
-                                                        value="{{ $freelancer->instagram }}" name="instagram">
+                                                        value="{{ $employer->instagram }}" name="instagram">
                                                 </div>
                                                 <div class="form-group">
                                                     <label class="form-label">Linkedin</label>
                                                     <input class="form-control" type="text" placeholder="Linkedin"
-                                                        value="{{ $freelancer->linkedin }}" name="linkedin">
+                                                        value="{{ $employer->linkedin }}" name="linkedin">
                                                 </div>
                                                 <h4 class="box-title text-primary mt-30 fs-18">
                                                     <i class="fa-regular fa-images"></i>
@@ -252,7 +240,7 @@
                                 aria-labelledby="pills-changPass-tab">
                                 <div class="row">
                                     <div class="col-12">
-                                        <form class="form" action="{{ route('freelancer.changePassword') }}"
+                                        <form class="form" action="{{ route('employer.changePassword') }}"
                                             method="POST">
                                             @csrf
                                             <div>
@@ -318,9 +306,6 @@
                                                 <button type="submit" class="btn btn-success" style="margin: 0 5px">
                                                     <i class="fa-regular fa-floppy-disk"></i> Save changes
                                                 </button>
-                                                {{-- <button type="button" class="btn btn-danger" style="margin: 0 5px">
-                                                        <i class="fa-solid fa-trash-can"></i> Cancel
-                                                    </button> --}}
                                             </div>
                                         </form>
                                     </div>
@@ -331,7 +316,7 @@
                                 <div class="row">
                                     <div class="col-12">
                                         <form class="form" method="POST"
-                                            action="{{ route('freelancer.deactivateAccount') }}">
+                                            action="{{ route('employer.deactivateAccount') }}">
                                             @csrf
                                             <div>
                                                 <h4 class="box-title text-primary fs-18" style="color: #29B2FE">
