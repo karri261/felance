@@ -4,11 +4,17 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\FreelancerController;
+use App\Http\Controllers\EmployerController;
+use App\Http\Controllers\JobPostController;
+use App\Http\Controllers\MessageController;
 
 Route::get('/', [HomeController::class, 'index'])->name('welcome');
 
 Route::get('/login', [UserController::class, 'login'])->name('login');
 Route::post('/login', [UserController::class, 'postLogin'])->name('postLogin');
+
+Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 
 Route::post('/reactive', [UserController::class, 'reActive'])->name('reActive');
 Route::get('/inactive', [UserController::class, 'inactive'])->name('inactive');
@@ -34,9 +40,36 @@ Route::post('/register/resend-verification-code', [UserController::class, 'resen
 Route::get('/register/role', [UserController::class, 'role'])->name('role');
 Route::post('/register/select-role', [UserController::class, 'selectRole'])->name('selectRole');
 
-Route::get('/freelancer', [UserController::class, 'freelancer'])->name('freelancer');
-Route::get('/employer', [UserController::class, 'employer'])->name('employer');
+Route::get('/goodbye', [UserController::class, 'goodbye'])->name('goodbye');
 
-Route::prefix('admin')->group(function () {
-    Route::get('/', [DashboardController::class, 'index'])->name('user.index');
+Route::middleware(['auth'])->group(function () {
+    Route::prefix('freelancer')->group(function () {
+        Route::get('/', [FreelancerController::class, 'dashboard'])->name('freelancer');
+
+        Route::get('/filter-jobs', [JobPostController::class, 'filterJobs'])->name('filterJobs');
+        Route::get('/job-detail/{job_id}', [JobPostController::class, 'jobDetail'])->name('jobDetail');
+
+        Route::get('/profile', [FreelancerController::class, 'profile'])->name('freelancer.profile');
+        Route::post('/update-profile', [FreelancerController::class, 'updateProfile'])->name('freelancer.updateProfile');
+        Route::post('/change-password', [FreelancerController::class, 'changePassword'])->name('freelancer.changePassword');
+        Route::post('/deactivate-account', [FreelancerController::class, 'deactivateAccount'])->name('freelancer.deactivateAccount');
+
+        Route::get('/lists', [FreelancerController::class, 'myLists'])->name('freelancer.myLists');
+        Route::post('/favorite-job', [FreelancerController::class, 'favoriteJob'])->name('freelancer.favoriteJob');
+        Route::post('/apply-job', [FreelancerController::class, 'applyJob'])->name('freelancer.applyJob');
+
+        Route::get('/inbox', [FreelancerController::class, 'inbox'])->name('freelancer.inbox');
+        Route::get('/conversations', [MessageController::class, 'getConversations']);
+        Route::get('/conversations/{id}/messages', [MessageController::class, 'getMessages']);
+        Route::post('/conversations/{id}/messages', [MessageController::class, 'sendMessage']);
+        Route::post('/conversations', [MessageController::class, 'createConversation']);
+    });
+
+    Route::prefix('employer')->group(function () {
+        Route::get('/', [EmployerController::class, 'dashboard'])->name('employer');
+    });
+
+    Route::prefix('admin')->group(function () {
+        Route::get('/', [DashboardController::class, 'index'])->name('admin');
+    });
 });

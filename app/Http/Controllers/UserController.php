@@ -29,6 +29,7 @@ class UserController extends Controller
             $user = Auth::user();
 
             if ($user->status === 'active') {
+                Session::put('user_data', ['email' => $user->email]);
                 return $user->role_id === 2 ? redirect()->route('freelancer') : redirect()->route('employer');
             } elseif ($user->status === 'inactive') {
                 Session::put('user_data', ['email' => $user->email]);
@@ -212,8 +213,7 @@ class UserController extends Controller
 
         // Lấy thông tin người dùng từ session
         $userData = Session::get('user_data');
-        $userData['role_id'] = $roleId; // Gán role_id cho dữ liệu người dùng
-
+        $userData['role_id'] = $roleId;
         // Lưu người dùng vào bảng users
         $user = User::create($userData);
 
@@ -240,13 +240,15 @@ class UserController extends Controller
         return view('guest.banded');
     }
 
-    public function freelancer()
+    public function goodbye()
     {
-        return view('freelancer.main');
+        return view('user.bye');
     }
 
-    public function employer()
+    public function logout(Request $request)
     {
-        return view('employer.main');
+        $request->session()->forget('user_data');
+        $request->session()->invalidate();
+        return redirect('/login');
     }
 }

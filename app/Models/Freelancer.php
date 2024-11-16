@@ -11,7 +11,16 @@ class Freelancer extends Model
 
     protected $fillable = [
         'user_id',
-        'skills',
+        'avatar',
+        'languages',
+        'cv_path',
+        'address',
+        'phone_number',
         'bio',
+        'facebook',
+        'instagram',
+        'twitter',
+        'linkedin',
+        'image_paths',
     ];
 }

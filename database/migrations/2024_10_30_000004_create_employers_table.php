@@ -12,7 +12,16 @@ class CreateEmployersTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->string('company_name')->nullable();
-            $table->text('company_description')->nullable();
+            $table->string('company_logo')->nullable();
+            $table->string('languages')->nullable();
+            $table->string('address')->nullable();
+            $table->string('phone_number')->nullable();
+            $table->text('bio')->nullable();
+            $table->string('facebook')->nullable();
+            $table->string('instagram')->nullable();
+            $table->string('twitter')->nullable();
+            $table->string('linkedin')->nullable();
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

@@ -1,6 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Afacad+Flux:wght@100..1000&family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+
+* {
+    font-family: "IBM Plex Sans", sans-serif;
+}
 body {
-    font-family: "DM Sans", serif;
     background-color: #FBFBFC;
 }
 
@@ -9,20 +12,6 @@ p {
     font-weight: 300;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-.h1,
-.h2,
-.h3,
-.h4,
-.h5,
-.h6 {
-    font-family: "Roboto", sans-serif;
-}
 
 a {
     -webkit-transition: 0.3s all ease;
@@ -165,24 +154,6 @@ h2 {
 .social-login a:hover {
     color: #fff;
 }
-.social-login a.facebook {
-    background: #3b5998;
-}
-.social-login a.facebook:hover {
-    background: #344e86;
-}
-.social-login a.twitter {
-    background: #1da1f2;
-}
-.social-login a.twitter:hover {
-    background: #0d95e8;
-}
-.social-login a.google {
-    background: #ea4335;
-}
-.social-login a.google:hover {
-    background: #e82e1e;
-}
 
 .control {
     display: block;
@@ -239,7 +210,6 @@ h2 {
 }
 
 .control__indicator:after {
-    font-family: "icomoon";
     content: "\e5ca";
     position: absolute;
     display: none;

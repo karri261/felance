@@ -12,6 +12,20 @@ class Employer extends Model
     protected $fillable = [
         'user_id',
         'company_name',
-        'company_description',
+        'company_logo',
+        'languages',
+        'address',
+        'phone_number',
+        'bio',
+        'facebook',
+        'instagram',
+        'twitter',
+        'linkedin',
+        'image',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }
