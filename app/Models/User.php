@@ -18,26 +18,18 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'firstname',
+        'lastname',
         'email',
         'password',
+        'role_id',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
     protected function casts(): array
     {
         return [
@@ -45,4 +37,15 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function freelancer()
+    {
+        return $this->hasOne(Freelancer::class, 'user_id');
+    }
+
+    public function employer()
+    {
+        return $this->hasOne(Employer::class, 'user_id');
+    }
+
 }

@@ -158,42 +158,45 @@
                 <div class="box wow fadeInUp" >
                     <div class="box-body">
                         <div class=left-box">
-                            <div class="left-top"> {{-- d-flex align-items-center mb-30 --}}
-                                <div class="left-top-logo"> {{-- me-15 --}}
-                                    <img src="{{ asset($job->company_logo) }}" class="">{{-- avatar avatar-lg me-3 avatar-logo --}}
+                            <div class="left-top">
+                                <div class="left-top-logo">
+                                    <img src="{{ asset($job->company_logo) }}" style="
+                                    width: 70px;
+                                    height: 70px;
+                                    border-radius: 50%;">
                                 </div>
-                                <div class="left-top-title"> {{-- d-flex flex-column --}}
+                                <div class="left-top-title"> 
                                     <a href="#" class="company-link">
                                         <span class="company-name">{{ $job->company_name }}</span>
                                         <span class="freelancer-tag">Freelancer</span>
                                     </a>
-                                    <span class="place-time" style="text-align: left;"> {{-- fs-14 --}}
+                                    <span class="place-time" style="text-align: left;">
                                         <i class="place-time-icon fa-solid fa-location-dot"></i>
-                                        <span class="place-time-content">{{ $job->location }} {{-- text-fade --}}
+                                        <span class="place-time-content">{{ $job->location }} 
                                             <em><small>{{ $job->created_at->diffForHumans() }}</small></em>
                                         </span>
                                 </div>
                             </div>
-                            <div class="left-buttom "> {{-- d-lg-flex align-items-center justify-content-between0 --}}
-                                <div class="left-buttom-tag"> {{-- d-lg-flex d-block align-items-center --}}
-                                    <span> {{-- d-inline-block mb-0 rounded info-tag --}}
+                            <div class="left-buttom ">
+                                <div class="left-buttom-tag">
+                                    <span>
                                         <span class="tag-title">Salary:</span> ${{ $job->salary_min }} -
                                         ${{ $job->salary_max }}
                                     </span>
-                                    <span class="tag-open"> {{-- d-inline-block mb-0 rounded mx-10 my-0 info-tag --}}
+                                    <span class="tag-open">
                                         <span class="tag-title">Openings Position:</span> {{ $job->openings_position }}
                                     </span>
-                                    <span class="tag-exp"> {{-- d-inline-block mb-0 rounded info-tag --}}
+                                    <span class="tag-exp"> 
                                         <span class="tag-title">Experience:</span> {{ $job->experience_required }} year
                                     </span>
                                 </div>
-                                <div class="left-buttom-more">{{-- ms-lg-10 --}}
+                                <div class="left-buttom-more">
                                     <a href="{{ route('jobDetail', ['job_id' => $job->job_id]) }}"
                                         class="btn btn-sm mt-lg-0 mt-2 more-info-btn">More Info</a>
                                 </div>
                             </div>
                         </div>
-                        <div class="right-box"> {{-- position-relative w-xl-300 w-lg-250 ps-lg-20 bs-1 ms-lg-20 --}}
+                        <div class="right-box">
                             <span class="job-title">
                                 <small class="text-fade fs-12">Openings Position</small><br>
                                 <span class="job-title-name">{{ $job->job_title }}</span>
@@ -201,7 +204,7 @@
                             <form action="{{ route('freelancer.applyJob') }}" method="POST">
                                 @csrf
                                 <input type="hidden" name="job_id" value="{{ $job->job_id }}">
-                                <button id="apply-btn" type="submit" class="job-btn"> {{-- btn w-100 btn-primary --}}
+                                <button id="apply-btn" type="submit" class="job-btn">
                                     Apply Now!
                                 </button>
                             </form>

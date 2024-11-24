@@ -200,6 +200,7 @@ body {
 
 .left-top{
     display:flex;
+    align-items: center;
 }
 
 .left-top-logo{
@@ -441,13 +442,7 @@ body {
 /* How to start end */
 
 /* Slider freelancer start */
-/* .container .freelancer-section {
-    padding-left: 0;
-    padding-right: 0;
-} */
 .freelancer-section {
-    /* width: 100vw; */
-    /* background-color: #f3f4f9; */
     text-align: center;
     padding-top: 40px;
     padding-bottom: 70px;
@@ -592,12 +587,13 @@ body {
 /* Slider freelancer end */
 
 /* Footer start */
+/* ===================FOOTER===================== */
 .footer {
     font-family: var(--main-font);
 }
 .logo-grap {
     display: flex;
-    align-items: center; /* Căn giữa theo chiều ngang */
+    align-items: center;
 }
 
 .footer-logo {
@@ -611,6 +607,9 @@ body {
 .quick-links a:hover {
     color: var(--primary);
     cursor: pointer;
+}
+.footer a {
+    color: #fff;
 }
 /* Footer end  */
 
