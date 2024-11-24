@@ -9,6 +9,7 @@ class JobPost extends Model
 {
     use HasFactory;
 
+    protected $table = 'job_posts';
     protected $primaryKey = 'job_id';
 
     protected $fillable = [
@@ -28,7 +29,9 @@ class JobPost extends Model
         'categories',
         'qualification',
         'career_level',
-        'job_type'
+        'end_date',
+        'short_describe',
+        'status'
     ];
 
     public function favorites()
@@ -39,5 +42,10 @@ class JobPost extends Model
     public function isFavoritedBy($userId)
     {
         return $this->favorites()->where('user_id', $userId)->exists();
+    }
+
+    public function applicants()
+    {
+        return $this->hasMany(Applicant::class, 'job_id', 'job_id');
     }
 }

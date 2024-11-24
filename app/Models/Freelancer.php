@@ -22,10 +22,16 @@ class Freelancer extends Model
         'twitter',
         'linkedin',
         'image_paths',
+        'rating',
     ];
 
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function applicants()
+    {
+        return $this->hasMany(Applicant::class, 'user_id', 'user_id');
     }
 }

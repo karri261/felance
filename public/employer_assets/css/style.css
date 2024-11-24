@@ -1,9 +1,148 @@
+.row {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+a {
+    text-decoration: none !important;
+}
+.text-fade {
+    color: #7e8299 !important;
+}
+.pb-10 {
+    padding-bottom: 10px !important;
+}
+.fw-500 {
+    font-weight: 500 !important;
+}
+.pe-50 {
+    padding-right: 50px !important;
+}
+.fs-12 {
+    font-size: 12px !important;
+}
+.fs-13 {
+    font-size: 13px !important;
+}
+.fs-14 {
+    font-size: 14px !important;
+}
+.fs-15 {
+    font-size: 15px !important;
+}
+.fs-16 {
+    font-size: 16px !important;
+}
+.fs-18 {
+    font-size: 18px !important;
+}
+.fs-19 {
+    font-size: 19px !important;
+}
+.my-0 {
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+}
+.mt-10 {
+    margin-top: 10px !important;
+}
+.mb-10 {
+    margin-bottom: 10px !important;
+}
+.my-10 {
+    margin-top: 10px !important;
+    margin-bottom: 10px !important;
+}
+.mt-20 {
+    margin-top: 20px !important;
+}
+.mb-20 {
+    margin-bottom: 20px !important;
+}
+.mt-30 {
+    margin-top: 30px !important;
+}
+.mb-30 {
+    margin-bottom: 30px !important;
+}
+.mx-10 {
+    margin-left: 10px !important;
+    margin-right: 10px !important;
+}
+.w-40 {
+    width: 40%;
+}
+.w-100 {
+    width: 100%;
+}
+@media (min-width: 1200px) {
+    .w-xl-300 {
+        width: 300px;
+    }
+}
+@media (min-width: 992px) {
+    .w-lg-250 {
+        width: 250px;
+    }
+}
+@media (min-width: 992px) {
+    .ms-lg-20 {
+        margin-left: 20px !important;
+    }
+}
+@media (min-width: 992px) {
+    .ps-lg-20 {
+        padding-left: 20px !important;
+    }
+}
+@media (min-width: 992px) {
+    .ps-lg-30 {
+        padding-left: 30px !important;
+    }
+}
+@media (min-width: 768px) {
+    .w-md-p50 {
+        width: 50%;
+    }
+}
+.float-start {
+    float: left !important;
+}
+.bs-1 {
+    border-left: 1px solid #f3f6f9 !important;
+}
+.waves-effect {
+    position: relative;
+    cursor: pointer;
+    display: inline-block;
+    overflow: hidden;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    vertical-align: middle;
+    z-index: 1;
+    transition: 0.3s ease-out;
+}
+.py-10 {
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+}
+.px-20 {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+}
+.bg-white {
+    background-color: #fff !important;
+}
+.bg-secondary-light {
+    background-color: #e9edf2;
+    color: #172b4c;
+}
+
 /*============NAV BAR================== */
 .horizontal-menu {
     position: fixed;
     top: 0;
     width: 100%;
-    z-index: 1000;
+    z-index: 600;
 }
 .horizontal-menu .top-navbar {
     font-weight: 400;
@@ -112,10 +251,29 @@
 .horizontal-menu .bottom-navbar .page-navigation > .nav-item > .nav-link span {
     margin-left: 7px;
 }
-/* ===================PROFILE==================== */
-.profile {
-    height: 70vh;
+
+/* ===================FOOTER===================== */
+.logo-grap {
+    display: flex;
+    align-items: center;
 }
+
+.footer-logo {
+    width: 70%;
+}
+
+.footer-icon a {
+    border-radius: 50%;
+    border: none;
+}
+.quick-links a:hover {
+    color: var(--primary);
+    cursor: pointer;
+}
+.footer a {
+    color: #fff;
+}
+/* ===================PROFILE==================== */
 @media (max-width: 767.98px) {
     .profile {
         height: auto;
@@ -187,3 +345,593 @@
 .profile #pills-deactivate .form-group .input-group input {
     border: none;
 }
+
+/* ================DASHBOARD=================== */
+#job-list {
+    height: 68vh;
+}
+.tab-content .box {
+    position: relative;
+    margin-bottom: 30px;
+    width: 100%;
+    background-color: #ffffff;
+    border-radius: 5px;
+    padding: 0px;
+    transition: 0.5s;
+    display: -ms-flexbox;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 0 30px 0 rgba(82, 63, 105, 0.05);
+}
+.tab-content .box .box-body {
+    padding: 1.5rem 1.5rem;
+    flex: 1 1 auto;
+    border-radius: 5px;
+}
+
+.tab-content .box .box-body .avatar {
+    position: relative;
+    display: inline-block;
+    width: 36px;
+    height: 36px;
+    line-height: 36px;
+    text-align: center;
+    text-transform: uppercase;
+    border-radius: 5px;
+}
+.tab-content .box .box-body .avatar-lg {
+    width: 48px;
+    height: 48px;
+    line-height: 48px;
+    font-size: 1.286rem;
+}
+
+.custom-pagination .pagination li a,
+.custom-pagination .pagination li span {
+    box-sizing: border-box;
+    display: inline-block;
+    min-width: 50px;
+    margin: 0 3px;
+    text-decoration: none;
+    cursor: pointer;
+    border: 1px solid #e4e6ef;
+    border-radius: 2px;
+    text-align: center;
+}
+.custom-pagination .d-none {
+    flex-direction: column;
+}
+
+.widget.courses-search-bx .input-group {
+    display: block;
+    position: relative;
+}
+.widget.courses-search-bx .input-group label {
+    font-size: 1rem;
+    font-weight: 400;
+    color: #172b4c;
+    position: absolute;
+    top: 10px;
+    left: 0;
+    transition: all 0.3s ease;
+    pointer-events: none;
+}
+.widget.courses-search-bx .input-group .form-control {
+    width: 100%;
+    background-color: transparent;
+    padding: 10px 0;
+    border: none;
+    border-bottom: 2px solid #f3f6f9;
+}
+.widget.courses-search-bx .input-group .form-control:focus {
+    outline: none;
+    box-shadow: none;
+}
+.widget.courses-search-bx .input-group .form-control:focus ~ label,
+.widget.courses-search-bx .input-group .form-control:valid ~ label {
+    top: -10px;
+    font-size: 0.8rem;
+    color: #1a73e8;
+}
+
+[type="checkbox"]:not(:checked),
+[type="checkbox"]:checked,
+[type="radio"]:not(:checked),
+[type="radio"]:checked {
+    position: absolute;
+    left: -9999px;
+    opacity: 0;
+}
+
+[type="checkbox"] + label,
+[type="radio"] + label {
+    position: relative;
+    padding-left: 35px;
+    cursor: pointer;
+    display: inline-block;
+    min-height: 25px;
+    line-height: 25px;
+    font-size: 1rem;
+}
+
+[type="checkbox"] + label:before,
+[type="checkbox"]:not(.filled-in) + label:after,
+[type="radio"] + label:before,
+[type="radio"]:not(.filled-in) + label:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 18px;
+    height: 18px;
+    z-index: 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-top: 2px;
+    transition: 0.2s;
+}
+[type="checkbox"].filled-in + label:after,
+[type="radio"].filled-in + label:after {
+    border-radius: 5px;
+}
+[type="checkbox"].filled-in + label:before,
+[type="checkbox"].filled-in + label:after,
+[type="radio"].filled-in + label:before,
+[type="radio"].filled-in + label:after {
+    content: "";
+    left: 0;
+    position: absolute;
+    transition: border 0.25s, background-color 0.25s, width 0.2s 0.1s,
+        height 0.2s 0.1s, top 0.2s 0.1s, left 0.2s 0.1s;
+    z-index: 1;
+}
+[type="checkbox"].filled-in:not(:checked) + label:before,
+[type="radio"].filled-in:not(:checked) + label:before {
+    width: 0;
+    height: 0;
+    border: 3px solid transparent;
+    left: 6px;
+    top: 10px;
+    transform: rotateZ(37deg);
+    transform-origin: 100% 100%;
+}
+[type="checkbox"].filled-in:not(:checked) + label:after,
+[type="radio"].filled-in:not(:checked) + label:after {
+    height: 20px;
+    width: 20px;
+    background-color: transparent;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    top: 2px;
+    z-index: 0;
+}
+[type="checkbox"].filled-in:checked + label:before,
+[type="radio"].filled-in:checked + label:before {
+    top: 2px;
+    left: 1px;
+    width: 8px;
+    height: 13px;
+    border-top: 1px solid transparent;
+    border-left: 1px solid transparent;
+    border-right: 1px solid #fff !important;
+    border-bottom: 1px solid #fff !important;
+    transform: rotateZ(37deg);
+    transform-origin: 100% 100%;
+}
+[type="checkbox"].filled-in:checked + label:after,
+[type="radio"].filled-in:checked + label:after {
+    top: 2px;
+    width: 20px;
+    height: 20px;
+    border: 1px solid #29b2fe;
+    background-color: #29b2fe;
+    z-index: 0;
+}
+/* ======================JOB DETAIL==================== */
+.job-detail .box {
+    position: relative;
+    margin-bottom: 30px;
+    width: 100%;
+    background-color: #ffffff;
+    border-radius: 5px;
+    padding: 0px;
+    transition: 0.5s;
+    display: -ms-flexbox;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 0 30px 0 rgba(82, 63, 105, 0.05);
+    padding: 30px 30px;
+}
+.job-detail .box .box-body ul li {
+    list-style-type: none;
+    padding-left: 25px;
+    position: relative;
+}
+.job-detail .box .box-body ul li::after {
+    content: "✓";
+    position: absolute;
+    color: #29b2fe;
+    left: 0;
+    top: 0;
+}
+.job-detail .box .me-15 {
+    margin-right: 15px !important;
+    font-size: 28px;
+    color: #29b2fe;
+}
+.job-detail .box .btn-social-icon {
+    border-radius: 50%;
+    margin-right: 20px;
+    color: #fff;
+    width: 40px;
+    height: 40px;
+}
+.job-detail .box .btn-facebook {
+    background-color: #31497e;
+}
+.job-detail .box .btn-twitter {
+    background-color: #1e1e1e;
+}
+.job-detail .box .btn-linkedin {
+    background-color: #005582;
+}
+.job-detail .box .btn-instagram {
+    background-color: #c21c54;
+}
+
+/* ======================APPLICANT=============================== */
+.notify {
+    position: absolute;
+    right: 10px;
+    top: -30%;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: red;
+    text-align: center;
+    color: #fff;
+    border-radius: 50%;
+}
+.applicant {
+    height: 70vh;
+}
+.applicant .title {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+.freelancer-section {
+    text-align: center;
+    padding-top: 40px;
+    padding-bottom: 70px;
+}
+.container > freelancer-section {
+    margin: 0 -10px;
+}
+
+.btn-mark-as-done {
+    width: 120px;
+    background: transparent;
+    border: 1px solid #6a737b;
+    padding: 5px 7px;
+    margin-top: 10px;
+    font-size: 14px;
+    color: #6a737b;
+}
+
+.btn-mark-as-done:hover {
+    background: #6a737b;
+    color: #fff;
+}
+.btn-done {
+    width: 120px;
+    background: transparent;
+    border: 1px solid #357a32;
+    padding: 5px 7px;
+    margin-top: 10px;
+    font-size: 14px;
+    color: #357a32;
+}
+.btn-done:hover {
+    background: #357a32;
+    color: #fff;
+}
+.btn-rating {
+    margin-left: 15px;
+    text-align: center;
+    width: 140px;
+    background: transparent;
+    border: 1px solid #ffc107;
+    padding: 5px 7px;
+    margin-top: 10px;
+    font-size: 14px;
+    color: #ffc107;
+}
+.btn-rating:hover {
+    background: #ffc107;
+    color: #fff;
+}
+.top {
+    color: black;
+    font-size: 40px;
+    font-weight: 500;
+}
+
+.slider-freelancer {
+    padding: 30px 0;
+    max-width: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+}
+
+.slider-freelancer .slick-slide img {
+    display: inline;
+}
+.slick-prev {
+    background-color: white;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    border: 1px solid rgb(189, 186, 186);
+    z-index: 2;
+    padding: 3px 12px;
+    border-radius: 50%;
+    font-size: larger;
+}
+.slick-next {
+    background-color: white;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    border: 1px solid rgb(189, 186, 186);
+    z-index: 2;
+    padding: 3px 12px;
+    border-radius: 50%;
+    font-size: larger;
+}
+.slick-next:hover,
+.slick-prev:hover {
+    background-color: var(--primary);
+    color: #ffffff;
+}
+
+.freelancer-card {
+    width: 20%;
+    background: #fff;
+    padding: 20px 10px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    position: relative;
+    margin: 10px;
+}
+.freelancer-card img {
+    width: 25%;
+    height: auto;
+}
+
+.freelancer-avatar {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.freelancer-info {
+    font-size: 14px;
+    color: #666;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    text-align: left;
+    margin: auto;
+    width: 75%;
+}
+
+.freelancer-name {
+    font-weight: 500;
+    font-size: 20px;
+    color: black;
+    margin-bottom: 7px !important;
+}
+
+.applicant-status {
+    background-color: #ddd;
+    font-size: 12px;
+    padding: 3px 7px;
+    border-radius: 20px;
+}
+
+.freelancer-work {
+    font-weight: 300;
+    font-size: 15px;
+    margin-bottom: 7px;
+}
+
+.freelancer-tags {
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    font-weight: 500;
+}
+
+.tag {
+    background-color: #e0e0e0;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 12px;
+    color: #555;
+}
+
+.freelancer-rating {
+    border-top: 1px solid #bcb8b8;
+    font-weight: 500;
+    padding-top: 15px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    color: #666;
+    margin-top: 10px;
+}
+/* =====================APPLICANT=============================*/
+@media (max-width: 767.98px) {
+    .applicant {
+        height: auto;
+    }
+}
+
+/* =====================APPLICANT PROFILE======================*/
+.appProfile .box {
+    position: relative;
+    margin-bottom: 30px;
+    width: 100%;
+    background-color: #ffffff;
+    border-radius: 5px;
+    padding: 0px;
+    transition: 0.5s;
+    display: -ms-flexbox;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 0 30px 0 rgba(82, 63, 105, 0.05);
+}
+.appProfile .box-body {
+    padding: 1.5rem 1.5rem;
+    flex: 1 1 auto;
+    border-radius: 5px;
+}
+.appProfile .social-links {
+    justify-content: center;
+}
+
+.appProfile .social-links a {
+    margin: 0 10px;
+    font-size: 18px;
+    color: #1e1e1e;
+}
+.appProfile .rating-star {
+    padding: 0;
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0;
+}
+.appProfile .rating-star li {
+    margin: 5px 3px;
+}
+.appProfile .rating-star .active {
+    color: #ffc107;
+}
+
+.appProfile .box-body .box-title {
+    display: inline-block;
+    margin: 0;
+    margin-bottom: 1rem;
+    color: #172b4c;
+}
+
+.appProfile .box-body ul li {
+    line-height: 24px;
+}
+
+.appProfile .list-unstyled {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+/* =========================RATING================== */
+.rate-box {
+    display: flex;
+    justify-content: center;
+}
+.comment-box {
+    text-align: left;
+}
+.comment-box p {
+    margin-bottom: 5px;
+}
+.rate {
+    float: left;
+    height: 46px;
+    padding: 0 10px;
+}
+.rate:not(:checked) > input {
+    position: absolute;
+    top: -9999px;
+}
+.rate:not(:checked) > label {
+    float: right;
+    width: 1em;
+    overflow: hidden;
+    white-space: nowrap;
+    cursor: pointer;
+    font-size: 30px;
+    color: #ccc;
+}
+[type="checkbox"] + label:before,
+[type="checkbox"]:not(.filled-in) + label:after,
+[type="radio"] + label:before,
+[type="radio"]:not(.filled-in) + label:after {
+    border: none !important;
+}
+[type="checkbox"] + label, [type="radio"] + label {
+    line-height: 20px !important;
+}
+.rate:not(:checked) > label:before {
+    content: "★ ";
+}
+.rate > input:checked ~ label {
+    color: #ffc700;
+}
+.rate:not(:checked) > label:hover,
+.rate:not(:checked) > label:hover ~ label {
+    color: #ffc700;
+}
+.rate > input:checked + label:hover,
+.rate > input:checked + label:hover ~ label,
+.rate > input:checked ~ label:hover,
+.rate > input:checked ~ label:hover ~ label,
+.rate > label:hover ~ input:checked ~ label {
+    color: #ffc700;
+}
+/* ===================REPORT======================== */
+.btn-report {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border: none;
+    background: transparent;
+}
+
+.box.position-sticky {
+    z-index: 500;
+}
+
+body.modal-open .box.position-sticky {
+    z-index: 900;
+}
+
+.horizontal-menu .navbar {
+    z-index: 800 !important;
+}
+
+.modal-backdrop {
+    z-index: -1 !important;
+}
+
+.modal {
+    z-index: 1045;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.modal-dialog {
+    z-index: 1050 !important;
+}
+

@@ -42,9 +42,9 @@
                                         <i class="fa-solid fa-angle-left"></i>
                                     </a>
                                     <a class="nav-link " href=" {{ route('employer.profile') }}"
-                                        style="margin-bottom: 15px">
-                                        <img class="img-xs rounded-circle me-2" src="{{ asset($employer->company_logo) }}"
-                                            alt="Profile image" style="width: 48px">
+                                        style="margin-bottom: 15px; border-radius: 50%">
+                                        <img class="img-xs me-2" src="{{ asset($employer->company_logo) }}"
+                                            alt="Profile image" style="width: 48px; border-radius: 50%">
                                     </a>
                                     <span style="font-size: 30px; font-weight: bold; margin-bottom: 15px">Message</span>
                                 </div>
@@ -69,7 +69,13 @@
                                                             alt="user img" style="width: 48px">
                                                     </div>
                                                     <div class="flex-grow-1 ms-3 chat-inf">
-                                                        <h3>@{{ conversation.user.user.firstname }} @{{ conversation.user.user.lastname }}</h3>
+                                                        <h3>
+                                                            @{{ conversation.user.user.firstname }} @{{ conversation.user.user.lastname }}
+                                                            <span v-if="conversation.job_title" class="job-tag">
+                                                                @{{ conversation.job_title }}
+                                                            </span>
+                                                        </h3>
+                                                       
                                                         <p v-if="conversation.last_message">@{{ conversation.last_message.content }}
                                                         </p>
                                                     </div>

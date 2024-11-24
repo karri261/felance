@@ -2,27 +2,40 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Employer;
-use Illuminate\Support\Facades\Auth;
-use App\Models\JobPost;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use App\Models\User;
+use App\Models\Conversation;
 use App\Models\Messages;
+use App\Models\Employer;
+use App\Models\JobPost;
+use App\Models\Applicant;
+use App\Models\Freelancer;
+use App\Models\Rating;
+
 
 class EmployerController extends Controller
 {
     public function dashboard()
     {
-        $jobs = JobPost::orderBy('created_at', 'desc')->paginate(7);
         $user = Auth::user();
+        $jobs = JobPost::where('user_id', $user->id)->orderBy('created_at', 'desc')->paginate(7);
+
+        foreach ($jobs as $job) {
+            $job->pendingApplications = Applicant::where('job_id', $job->job_id)
+                ->where('status', 'pending')
+                ->count();
+        }
         $employer = Employer::where('user_id', $user->id)->first();
+        $missingInfo = !$employer->company_name || !$employer->address;
         $messages = Messages::all();
-        return view('employer.index', compact('jobs', 'user','employer', 'messages'));
+        return view('employer.index', compact('jobs', 'user', 'employer', 'messages', 'missingInfo'));
     }
-    
+
     public function profile()
     {
         $user = Auth::user();
@@ -137,10 +150,262 @@ class EmployerController extends Controller
         }
     }
 
+    public function postJob()
+    {
+        $user = Auth::user();
+        $employer = Employer::where('user_id', $user->id)->first();
+
+        if ( !$employer->company_name || !$employer->address) {
+            return redirect()->route('employer')
+                ->with('error', 'Please complete your company information before posting a job.');
+        }
+        return view('employer.postJob', compact('user', 'employer'));
+    }
+
+    public function postJobPOST(Request $request)
+    {
+        $request->validate([
+            'job_title' => 'required|string|max:255',
+            'category' => 'required|string',
+            'gender' => 'required|string',
+            'salary_min' => 'required|numeric|min:0',
+            'salary_max' => 'required|numeric|min:0',
+            'opening' => 'required|integer|min:1',
+            'experience' => 'required|integer|min:0',
+            'qualification' => 'required|string',
+            'career_level' => 'required|string',
+            'end_date' => 'required|date',
+            'short_describe' => 'required|string',
+            'job_description' => 'required|string',
+            'responsibilities' => 'required|string',
+            'background' => 'required|string',
+        ]);
+
+        $user = Auth::user();
+        $employer = Employer::where('user_id', $user->id)->first();
+
+        JobPost::create([
+            'job_title' => $request->job_title,
+            'company_name' => $employer->company_name,
+            'company_logo' => $employer->company_logo,
+            'location' => $employer->address,
+            'salary_min' => $request->salary_min,
+            'salary_max' => $request->salary_max,
+            'openings_position' => $request->opening,
+            'experience_required' => $request->experience,
+            'job_description' => $request->job_description,
+            'responsibilities' => $request->responsibilities,
+            'background' => $request->background,
+            'gender' => $request->gender,
+            'categories' => $request->category,
+            'qualification' => $request->qualification,
+            'career_level' => $request->career_level,
+            'end_date' => $request->end_date,
+            'short_describe' => $request->short_describe,
+            'status' => 'Waiting for approval',
+            'user_id' => $user->id,
+        ]);
+
+        return redirect()->route('employer')->with('success', 'Job post submitted and waiting for approval.');
+    }
+
+    public function editJob($job_id)
+    {
+        $user = Auth::user();
+        $employer = Employer::where('user_id', $user->id)->first();
+
+        $job = JobPost::findOrFail($job_id);
+
+        return view('employer.edit-job', compact('job', 'user', 'employer'));
+    }
+
+    public function editJobPost(Request $request, $job_id)
+    {
+        $request->validate([
+            'job_title' => 'required|string|max:255',
+            'category' => 'required|string',
+            'gender' => 'required|string',
+            'salary_min' => 'required|numeric|min:0',
+            'salary_max' => 'required|numeric|min:0',
+            'opening' => 'required|integer|min:1',
+            'experience' => 'required|integer|min:0',
+            'qualification' => 'required|string',
+            'career_level' => 'required|string',
+            'end_date' => 'required|date',
+            'short_describe' => 'required|string',
+            'job_description' => 'required|string',
+            'responsibilities' => 'required|string',
+            'background' => 'required|string',
+        ]);
+
+        $user = Auth::user();
+        $job = JobPost::where('user_id', $user->id)->where('job_id', $job_id)->firstOrFail();
+
+        $job->job_title = $request->job_title;
+        $job->salary_min = $request->salary_min;
+        $job->salary_max = $request->salary_max;
+        $job->openings_position = $request->opening;
+        $job->experience_required = $request->experience;
+        $job->job_description = $request->job_description;
+        $job->responsibilities = $request->responsibilities;
+        $job->background = $request->background;
+        $job->gender = $request->gender;
+        $job->categories = $request->category;
+        $job->qualification = $request->qualification;
+        $job->career_level = $request->career_level;
+        $job->end_date = $request->end_date;
+        $job->short_describe = $request->short_describe;
+        $job->save();
+
+        return redirect()->route('employer')->with('success', 'Update successfully.');
+    }
+
+    public function deleteJob($job_id)
+    {
+        $job = JobPost::findOrFail($job_id);
+
+        if (!$job) {
+            return redirect()->back()->with('error', 'Job not found!');
+        }
+
+        $job->delete();
+
+        return redirect()->route('employer')->with('success', 'Job deleted successfully!');
+    }
+
+    public function applicantList($job_id)
+    {
+        $user = Auth::user();
+        $job = JobPost::findOrFail($job_id);
+        $applicants = Applicant::with('user', 'job', 'freelancer')
+            ->where('job_id', $job_id)
+            ->get();
+        $employer = Employer::where('user_id', $user->id)->first();
+
+        return view('employer.applicant', compact('job', 'user', 'employer', 'applicants'));
+    }
+
+    public function applicantProfile($user_id, $job_id)
+    {
+        $user = Auth::user();
+        $employer = Employer::where('user_id', $user->id)->first();
+        $job = JobPost::findOrFail($job_id);
+
+        $applicant = Applicant::where('user_id', $user_id)
+            ->where('job_id', $job_id)
+            ->first();
+
+        $freelancer = Freelancer::where('user_id', $user_id)->first();
+        $images = json_decode($freelancer->image_paths, true);
+
+        $userView = User::where('id', $user_id)->first();
+        return view('employer.applicant-profile', compact('user', 'job', 'freelancer', 'userView', 'employer', 'applicant', 'images'));
+    }
+
+    public function applicantProfileRate($user_id, $job_id)
+    {
+        $user = Auth::user();
+        $employer = Employer::where('user_id', $user->id)->first();
+        $job = JobPost::findOrFail($job_id);
+
+        $applicant = Applicant::where('user_id', $user_id)
+            ->where('job_id', $job_id)
+            ->first();
+
+        $freelancer = Freelancer::where('user_id', $user_id)->first();
+        $images = json_decode($freelancer->image_paths, true);
+
+        $userView = User::where('id', $user_id)->first();
+        return view('employer.applicant-profile-rate', compact('user', 'job', 'freelancer', 'userView', 'employer', 'applicant', 'images'));
+    }
+
+    public function browserRequest(Request $request, $applicantId)
+    {
+        $applicant = Applicant::findOrFail($applicantId);
+
+        $job = JobPost::findOrFail($applicant->job_id);
+        $employer = Employer::where('user_id', $job->user_id)->first();
+
+        if ($request->action === 'accept') {
+            $applicant->status = 'accepted';
+            $applicant->save();
+
+            $appUser = User::where('id', $applicant->user_id)->first();
+
+            $mailContent = [
+                'applicantName' => $appUser->firstname . ' ' . $appUser->lastname,
+                'jobTitle' => $job->job_title,
+                'companyName' => $employer->company_name,
+            ];
+
+            Mail::to($appUser->email)->send(new \App\Mail\ApplicationAccept($mailContent));
+
+            Conversation::create([
+                'user1_id' => $job->user_id,
+                'user2_id' => $applicant->user_id,
+                'applicant_id' => $applicantId,
+            ]);
+        } elseif ($request->action === 'reject') {
+            $applicant->status = 'rejected';
+            $applicant->save();
+        }
+        return redirect()->route('employer.applicantList', ['job_id' => $job->job_id])
+            ->with('status', 'Applicant status updated successfully.');
+    }
+
+    public function markAsDone($job_id, Request $request)
+    {
+        $job = JobPost::find($job_id);
+
+        $job->finish = $request->is_done;
+        $job->save();
+    }
+
+    public function rating($job_id)
+    {
+        $user = Auth::user();
+        $employer = Employer::where('user_id', $user->id)->first();
+
+        $job = JobPost::findOrFail($job_id);
+        $applicants = Applicant::with('user', 'job', 'freelancer')
+            ->where('job_id', $job_id)
+            ->where('status','accepted')
+            ->get();
+
+        return view('employer.rating', compact('job', 'user', 'employer', 'applicants'));
+    }
+
+    public function ratePost(Request $request)
+    {
+        $request->validate([
+            'applicant_id' => 'required|exists:applicants,id',
+            'rate' => 'required|integer|min:1|max:5',
+            'comment' => 'max:500'
+        ]);
+
+        Rating::create([
+            'applicant_id' => $request->applicant_id,
+            'score' => $request->rate,
+            'comment' => $request->comment
+        ]);
+
+        $applicant = Applicant::findOrFail($request->applicant_id);
+
+        $applicant_ids = Applicant::where('user_id', $applicant->user_id)->pluck('id');
+        $averageRating = Rating::whereIn('applicant_id', $applicant_ids)->avg('score');
+
+        $job_id = $applicant->job_id;
+        $freelancer = Freelancer::where('user_id', $applicant->user_id)->first();
+        $freelancer->rating = $averageRating; 
+        $freelancer->save();
+
+        return redirect()->route('employer.rating', ['job_id' => $job_id])->with('success', 'Rating saved successfully!');
+    }
+
     public function inbox()
     {
-        $jobs = JobPost::orderBy('created_at', 'desc')->paginate(7);
         $user = Auth::user();
+        $jobs = JobPost::where('user_id', $user->id)->orderBy('created_at', 'desc')->paginate(7);
         $employer = Employer::where('user_id', $user->id)->first();
         $messages = Messages::all();
         return view('employer.inbox', compact('jobs', 'user', 'employer', 'messages'));

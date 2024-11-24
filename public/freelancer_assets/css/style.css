@@ -3,6 +3,9 @@
 .text-fade {
     color: #7e8299 !important;
 }
+.fw-500 {
+    font-weight: 500;
+}
 .fs-12 {
     font-size: 12px !important;
 }
@@ -27,6 +30,9 @@
 .my-0 {
     margin-top: 0px !important;
     margin-bottom: 0px !important;
+}
+.pb-10 {
+    padding-bottom: 10px !important;
 }
 .mt-10 {
     margin-top: 10px !important;
@@ -53,6 +59,9 @@
 .mx-10 {
     margin-left: 10px !important;
     margin-right: 10px !important;
+}
+.pe-50 {
+    padding-right: 50px;
 }
 .w-100 {
     width: 100%;
@@ -82,6 +91,11 @@
         padding-left: 30px !important;
     }
 }
+@media (min-width: 768px) {
+    .w-md-p50 {
+        width: 50%;
+    }
+}   
 .bs-1 {
     border-left: 1px solid #f3f6f9 !important;
 }
@@ -141,7 +155,7 @@ input:focus {
     position: fixed;
     top: 0;
     width: 100%;
-    z-index: 1000;
+    z-index: 600;
 }
 .horizontal-menu .top-navbar {
     font-weight: 400;
@@ -249,6 +263,28 @@ input:focus {
 }
 .horizontal-menu .bottom-navbar .page-navigation > .nav-item > .nav-link span {
     margin-left: 7px;
+}
+
+/* ===================FOOTER===================== */
+.logo-grap {
+    display: flex;
+    align-items: center;
+}
+
+.footer-logo {
+    width: 70%;
+}
+
+.footer-icon a {
+    border-radius: 50%;
+    border: none;
+}
+.quick-links a:hover {
+    color: var(--primary);
+    cursor: pointer;
+}
+.footer a {
+    color: #fff;
 }
 /* ================DASHBOARD=================== */
 .tab-content .box {
@@ -449,7 +485,7 @@ input:focus {
     position: relative;
 }
 .job-detail .box .box-body ul li::after {
-    content: "✔";
+    content: "✓";
     position: absolute;
     color: #29b2fe;
     left: 0;
@@ -480,9 +516,6 @@ input:focus {
     background-color: #c21c54;
 }
 /* ===================PROFILE==================== */
-.profile {
-    height: 70vh;
-}
 @media (max-width: 767.98px) {
     .profile {
         height: auto;
@@ -560,6 +593,13 @@ input:focus {
     overflow: hidden;
     /* padding-top: 70px; */
     height: 100%;
+}
+
+.message-area .job-tag {
+    font-size: 12px;
+    background: #eee;
+    padding: 3px 5px;
+    border-radius: 5px;
 }
 
 .chat-area {
@@ -684,6 +724,7 @@ a.add img {
     line-height: 1.5;
     text-transform: capitalize;
     margin-bottom: 0;
+    display: block;
 }
 
 .chat-list p {
@@ -1130,5 +1171,101 @@ button:focus {
         border-bottom-left-radius: 6px;
     }
 }
+/* ==============USER PROFILE============= */
+.appProfile .box {
+    position: relative;
+    margin-bottom: 30px;
+    width: 100%;
+    background-color: #ffffff;
+    border-radius: 5px;
+    padding: 0px;
+    transition: 0.5s;
+    display: -ms-flexbox;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 0 30px 0 rgba(82, 63, 105, 0.05);
+}
+.appProfile .box-body {
+    padding: 1.5rem 1.5rem;
+    flex: 1 1 auto;
+    border-radius: 5px;
+}
+.appProfile .social-links {
+    justify-content: center;
+}
 
+.appProfile .social-links a {
+    margin: 0 10px;
+    font-size: 18px;
+    color: #1e1e1e;
+}
+.appProfile .rating-star {
+    padding: 0;
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0;
+}
+.appProfile .rating-star li {
+    margin: 5px 3px;
+}
+.appProfile .rating-star .active {
+    color: #ffc107;
+}
 
+.appProfile .box-body .box-title {
+    display: inline-block;
+    margin: 0;
+    margin-bottom: 1rem;
+    color: #172b4c;
+}
+
+.appProfile .box-body ul li {
+    line-height: 24px;
+}
+
+.appProfile .list-unstyled {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* ===================REPORT======================== */
+.btn-report {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border: none;
+    background: transparent;
+}
+
+.box.position-sticky {
+    z-index: 500;
+}
+
+body.modal-open .box.position-sticky {
+    z-index: 900;
+}
+
+.horizontal-menu .navbar {
+    z-index: 800 !important;
+}
+
+.modal-backdrop {
+    z-index: -1 !important;
+}
+
+.modal {
+    z-index: 1045;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.modal-dialog {
+    z-index: 1050 !important;
+}
+
+.slick-prev:before,
+.slick-next:before {
+    color: #1e1e1e !important;
+}

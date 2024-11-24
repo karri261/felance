@@ -14,8 +14,8 @@ class CreateJobPostsTable extends Migration
             $table->string('company_name'); 
             $table->string('company_logo'); 
             $table->string('location'); 
-            $table->decimal('salary_min', 10, 2); 
-            $table->decimal('salary_max', 10, 2); 
+            $table->decimal('salary_min', 10, 0); 
+            $table->decimal('salary_max', 10, 0); 
             $table->integer('openings_position'); 
             $table->string('experience_required'); 
             $table->text('job_description');
