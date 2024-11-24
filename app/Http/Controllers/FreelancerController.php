@@ -12,6 +12,7 @@ use App\Models\JobPost;
 use App\Models\Freelancer;
 use App\Models\Favorite;
 use App\Models\Applicant;
+use App\Models\Employer;
 use App\Models\Messages;
 use Carbon\Carbon;
 
@@ -19,7 +20,7 @@ class FreelancerController extends Controller
 {
     public function dashboard()
     {
-        $jobs = JobPost::orderBy('created_at', 'desc')->paginate(7);
+        $jobs = JobPost::where('status', 'approved')->orderBy('created_at', 'desc')->paginate(7);
         $user = Auth::user();
         $freelancer = Freelancer::where('user_id', $user->id)->first();
         return view('freelancer.index', compact('jobs', 'user', 'freelancer'));
@@ -184,6 +185,18 @@ class FreelancerController extends Controller
         }
     }
 
+    public function companyProfile($user_id)
+    {
+        $user = Auth::user();
+        $freelancer = Freelancer::where('user_id', $user->id)->first();
+
+        $employer = Employer::where('user_id', $user_id)->first();
+        $images = $employer && $employer->image_paths ? json_decode($employer->image_paths, true) : [];
+
+        $userView = User::where('id', $user_id)->first();
+        return view('freelancer.company-profile', compact('user', 'freelancer', 'userView', 'employer', 'images'));
+    }
+
     public function applyJob(Request $request)
     {
         $userId = Auth::id();
@@ -194,7 +207,6 @@ class FreelancerController extends Controller
         if ($existingApplication) {
             return redirect()->route('freelancer.myLists')->with('status', 'You have already applied for this job.');
         } else {
-            
         }
         Applicant::create([
             'user_id' => $userId,
@@ -212,5 +224,21 @@ class FreelancerController extends Controller
         $freelancer = Freelancer::where('user_id', $user->id)->first();
         $messages = Messages::all();
         return view('freelancer.inbox', compact('jobs', 'user', 'freelancer', 'messages'));
+    }
+
+    public function getCompletedJobs()
+    {
+        $user = Auth::user();
+        $freelancer = Freelancer::where('user_id', $user->id)->first();
+
+        $completedJobs = JobPost::whereHas('applicants', function ($query) use ($user) {
+            $query->where('user_id', $user->id)
+                ->where('finish', '1');
+        })->with(['applicants' => function ($query) use ($user) {
+            $query->where('user_id', $user->id)
+                ->with('rating');
+        }])->paginate(7);
+
+        return view('freelancer.finishedJob', compact('completedJobs', 'freelancer', 'user'));
     }
 }

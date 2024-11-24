@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user1_id');
             $table->unsignedBigInteger('user2_id');
+            $table->foreignId('applicant_id')->nullable()->constrained('applicants')->onDelete('cascade');
             $table->timestamp('last_message_at')->nullable();
             $table->timestamps();
 
-            // Foreign keys
             $table->foreign('user1_id')
                 ->references('id')
                 ->on('users')
@@ -29,14 +29,10 @@ return new class extends Migration
                 ->on('users')
                 ->onDelete('cascade');
 
-            // Prevent duplicate conversations between same users
             $table->unique(['user1_id', 'user2_id']);
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('conversations');

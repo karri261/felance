@@ -26,6 +26,7 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
+        "ckeditor5": "^43.3.1",
         "socket.io": "^4.8.1"
     }
 }

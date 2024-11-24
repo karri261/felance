@@ -19,6 +19,7 @@ class MessageController extends Controller
             ->with(['messages' => function ($query) {
                 $query->latest();
             }])
+            ->with('applicant.job') 
             ->get()
             ->map(function ($conversation) {
                 $currentUserId = Auth::id();
@@ -33,10 +34,17 @@ class MessageController extends Controller
                 } elseif ($isEmployer && $otherUserId) {
                     $otherUser = Freelancer::with('user')->where('user_id', $otherUserId)->first();
                 }
+
+                $jobTitle = null;
+                if ($conversation->applicant && $conversation->applicant->job) {
+                    $jobTitle = $conversation->applicant->job->job_title;
+                }
+
                 return [
                     'id' => $conversation->id,
                     'user' => $otherUser,
-                    'last_message' => $conversation->messages->first()
+                    'last_message' => $conversation->messages->first(),
+                    'job_title' => $jobTitle
                 ];
             });
         return response()->json($conversations);

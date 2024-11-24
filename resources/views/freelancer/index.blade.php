@@ -95,30 +95,30 @@
                         <h4 class="pb-15 mb-25 bb-1">Salary</h4>
                         <ul class="list-unstyled">
                             <li>
-                                <input type="radio" id="levels_1" class="filled-in" name="salary" value="lt_100">
+                                <input type="radio" id="levels_1" class="filled-in" name="salary" value="lt_50">
                                 <label for="levels_1" class="d-flex justify-content-between align-items-center form-label">
+                                    Less than $50
+                                </label>
+                            </li>
+                            <li>
+                                <input type="radio" id="levels_2" class="filled-in" name="salary" value="lt_100">
+                                <label for="levels_2" class="d-flex justify-content-between align-items-center form-label">
                                     Less than $100
                                 </label>
                             </li>
                             <li>
-                                <input type="radio" id="levels_2" class="filled-in" name="salary" value="lt_500">
-                                <label for="levels_2" class="d-flex justify-content-between align-items-center form-label">
-                                    Less than $500
-                                </label>
-                            </li>
-                            <li>
-                                <input type="radio" id="levels_3" class="filled-in" name="salary" value="lt_1000">
+                                <input type="radio" id="levels_3" class="filled-in" name="salary" value="lt_250">
                                 <label for="levels_3"
                                     class="d-flex justify-content-between align-items-center form-label">
-                                    Less than $1000
+                                    Less than $250
                                 </label>
                             </li>
                             <li>
                                 <input type="radio" id="levels_4" class="filled-in" name="salary"
-                                    value="gt_1000">
+                                    value="gt_250">
                                 <label for="levels_4"
                                     class="d-flex justify-content-between align-items-center form-label">
-                                    Greater than $1000
+                                    Greater than $250
                                 </label>
                             </li>
                         </ul>
@@ -144,7 +144,7 @@
 
                 // Send AJAX request
                 $.ajax({
-                    url: '{{ route('filterJobs') }}',
+                    url: '{{ route('freelancer.filterJobs') }}',
                     method: 'GET',
                     data: {
                         job_name: jobName,

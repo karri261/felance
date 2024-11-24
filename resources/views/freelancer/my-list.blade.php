@@ -82,20 +82,19 @@
                                                                     style="margin-bottom: 30px">
                                                                     <div class="me-15">
                                                                         <img src="{{ asset($favorite->job->company_logo) }}"
-                                                                            class="avatar avatar-lg me-3"
-                                                                            style="border: 1px solid #eee">
+                                                                            class="avatar avatar-lg me-3">
                                                                     </div>
                                                                     <div class="d-flex flex-column">
                                                                         <a href="#" class="text-dark mb-1"
                                                                             style="text-decoration: none; font-size: 20px">
-                                                                            {{ $favorite->job->company_name }}
-                                                                            <span
+                                                                            {{ $favorite->job->short_describe }}
+                                                                            {{-- <span
                                                                                 style="background-color: #e9f5ea; color: #3da643; font-size: 75%; padding: 2px 5px; border-radius: 5px">
                                                                                 Freelancer
-                                                                            </span>
+                                                                            </span> --}}
                                                                         </a>
                                                                         <span class="fs-14">
-                                                                            <i class="fa-solid fa-location-dot"></i>
+                                                                            {{ $favorite->job->company_name }} - 
                                                                             <span class="text-fade">{{ $favorite->job->location }}
                                                                                 <em><small>{{ $favorite->job->created_at->diffForHumans() }}</small></em>
                                                                             </span>
@@ -122,7 +121,7 @@
                                                                         </h6>
                                                                     </div>
                                                                     <div class="ms-lg-10">
-                                                                        <a href="{{ route('jobDetail', ['job_id' => $favorite->job->job_id]) }}"
+                                                                        <a href="{{ route('freelancer.jobDetail', ['job_id' => $favorite->job->job_id]) }}"
                                                                             class="btn btn-sm mt-lg-0 mt-2"
                                                                             style="background-color: #e4f3ff; color: #2196f3; margin-left: 10px">
                                                                             More Info
@@ -178,24 +177,19 @@
                                                                     style="margin-bottom: 30px">
                                                                     <div class="me-15">
                                                                         <img src="{{ asset($applicant->job->company_logo) }}"
-                                                                            class="avatar avatar-lg me-3"
-                                                                            style="border: 1px solid #eee">
+                                                                            class="avatar avatar-lg me-3">
                                                                     </div>
                                                                     <div class="d-flex flex-column">
                                                                         <a href="#" class="text-dark mb-1"
                                                                             style="text-decoration: none; font-size: 20px">
-                                                                            {{ $applicant->job->company_name }}
-                                                                            <span
-                                                                                style="background-color: #e9f5ea; color: #3da643; font-size: 75%; padding: 2px 5px; border-radius: 5px">
-                                                                                Freelancer
-                                                                            </span>
+                                                                            {{ $applicant->job->short_describe }}
                                                                             <span
                                                                                 style="background-color: #e9f5ea; color: #848784; font-size: 75%; padding: 2px 10px; border-radius: 5px; margin-left: 10px">
                                                                                 {{ ucfirst($applicant->status) }}
                                                                             </span>
                                                                         </a>
                                                                         <span class="fs-14">
-                                                                            <i class="fa-solid fa-location-dot"></i>
+                                                                            {{ $applicant->job->company_name }} - 
                                                                             <span class="text-fade">{{ $applicant->job->location }}
                                                                                 <em><small>{{ $applicant->job->created_at->diffForHumans() }}</small></em>
                                                                             </span>
@@ -222,7 +216,7 @@
                                                                         </h6>
                                                                     </div>
                                                                     <div class="ms-lg-10">
-                                                                        <a href="{{ route('jobDetail', ['job_id' => $applicant->job->job_id]) }}"
+                                                                        <a href="{{ route('freelancer.jobDetail', ['job_id' => $applicant->job->job_id]) }}"
                                                                             class="btn btn-sm mt-lg-0 mt-2"
                                                                             style="background-color: #e4f3ff; color: #2196f3; margin-left: 10px">
                                                                             More Info

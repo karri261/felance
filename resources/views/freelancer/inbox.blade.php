@@ -72,7 +72,12 @@
                                                                 alt="user img" style="width: 48px">
                                                         </div>
                                                         <div class="flex-grow-1 ms-3 chat-inf">
-                                                            <h3>@{{ conversation.user.user.firstname }} @{{ conversation.user.user.lastname }}</h3>
+                                                            <h3>
+                                                                @{{ conversation.user.user.firstname }} @{{ conversation.user.user.lastname }}
+                                                                <span class="job-tag">
+                                                                    @{{ conversation.user.company_name }}
+                                                                </span>
+                                                            </h3>
                                                             <p v-if="conversation.last_message">@{{ conversation.last_message.content }}
                                                             </p>
                                                         </div>

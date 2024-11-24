@@ -8,6 +8,7 @@ use App\Http\Controllers\FreelancerController;
 use App\Http\Controllers\EmployerController;
 use App\Http\Controllers\JobPostController;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\ReportController;
 
 Route::get('/', [HomeController::class, 'index'])->name('welcome');
 
@@ -46,8 +47,8 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('freelancer')->group(function () {
         Route::get('/', [FreelancerController::class, 'dashboard'])->name('freelancer');
 
-        Route::get('/filter-jobs', [JobPostController::class, 'filterJobs'])->name('filterJobs');
-        Route::get('/job-detail/{job_id}', [JobPostController::class, 'jobDetail'])->name('jobDetail');
+        Route::get('/filter-jobs', [JobPostController::class, 'filterJobs'])->name('freelancer.filterJobs');
+        Route::get('/job-detail/{job_id}', [JobPostController::class, 'jobDetail'])->name('freelancer.jobDetail');
 
         Route::get('/profile', [FreelancerController::class, 'profile'])->name('freelancer.profile');
         Route::post('/update-profile', [FreelancerController::class, 'updateProfile'])->name('freelancer.updateProfile');
@@ -58,11 +59,17 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/favorite-job', [FreelancerController::class, 'favoriteJob'])->name('freelancer.favoriteJob');
         Route::post('/apply-job', [FreelancerController::class, 'applyJob'])->name('freelancer.applyJob');
 
+        Route::get('/company_profile/{user_id}', [FreelancerController::class, 'companyProfile'])->name('freelancer.companyProfile');
+
         Route::get('/inbox', [FreelancerController::class, 'inbox'])->name('freelancer.inbox');
         Route::get('/conversations', [MessageController::class, 'getConversations']);
         Route::get('/conversations/{id}/messages', [MessageController::class, 'getMessages']);
         Route::post('/conversations/{id}/messages', [MessageController::class, 'sendMessage']);
         Route::post('/conversations', [MessageController::class, 'createConversation']);
+
+        Route::post('/report', [ReportController::class, 'report'])->name('freelancer.report');
+
+        Route::get('/finished-job', [FreelancerController::class, 'getCompletedJobs'])->name('freelancer.finishedJob');
     });
 
     Route::prefix('employer')->group(function () {
@@ -72,6 +79,26 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/update-profile', [EmployerController::class, 'updateProfile'])->name('employer.updateProfile');
         Route::post('/change-password', [EmployerController::class, 'changePassword'])->name('employer.changePassword');
         Route::post('/deactivate-account', [EmployerController::class, 'deactivateAccount'])->name('employer.deactivateAccount');
+
+        Route::get('/filter-jobs', [JobPostController::class, 'EmployfilterJobs'])->name('employer.filterJobs');
+        Route::get('/job-detail/{job_id}', [JobPostController::class, 'EmployjobDetail'])->name('employer.jobDetail');
+        Route::get('/edit-job/{job_id}', [EmployerController::class, 'editJob'])->name('employer.editJob');
+        Route::post('/edit-job/{job_id}', [EmployerController::class, 'editJobPost'])->name('employer.editJobPost');
+        Route::post('/delete-job/{job_id}', [EmployerController::class, 'deleteJob'])->name('employer.deleteJob');
+
+        Route::get('/applicant/{job_id}', [EmployerController::class, 'applicantList'])->name('employer.applicantList');
+        Route::get('/applicant_profile/{user_id}/{job_id}', [EmployerController::class, 'applicantProfile'])->name('employer.applicantProfile');
+        Route::post('/applicants/{applicant_id}', [EmployerController::class, 'browserRequest'])->name('applicant.browserRequest');
+
+        Route::get('/postJob', [EmployerController::class, 'postJob'])->name('employer.postJob');
+        Route::post('/postJob', [EmployerController::class, 'postJobPOST'])->name('employer.postJobPOST');
+
+        Route::post('/mark-as-done/{job_id}', [EmployerController::class, 'markAsDone'])->name('employer.markAsDone');
+        Route::get('/applicant_profile-rate/{user_id}/{job_id}', [EmployerController::class, 'applicantProfileRate'])->name('employer.applicantProfileRate');
+        Route::get('/rating/{job_id}', [EmployerController::class, 'rating'])->name('employer.rating');
+        Route::post('/rate-freelancer', [EmployerController::class, 'ratePost'])->name('employer.rate');
+
+        Route::post('/report', [ReportController::class, 'report'])->name('employer.report');
 
         Route::get('/inbox', [EmployerController::class, 'inbox'])->name('employer.inbox');
         Route::get('/conversations', [MessageController::class, 'getConversations']);
