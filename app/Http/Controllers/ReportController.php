@@ -26,4 +26,15 @@ class ReportController extends Controller
 
         return redirect()->back()->with('status', 'Report submitted successfully.');
     }
+
+    public function index()
+    {
+        $reports = Report::all();
+        return view('Admin/pages.manage_report', compact('reports'));
+    }
+    public function report_detail_for_admin($report_id)
+    {
+        $report = Report::find($report_id);
+        return view('Admin/pages.report_detail', compact('report'));
+    }
 }

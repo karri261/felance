@@ -18,4 +18,14 @@ class Report extends Model
         'admin_decision',
     ];
 
+    public function reporter()
+    {
+        return $this->belongsTo(User::class, 'reporter_id');
+    }
+
+    public function reportedUser()
+    {
+        return $this->belongsTo(User::class, 'reported_user_id');
+    }
+
 }

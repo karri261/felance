@@ -30,7 +30,9 @@ class UserController extends Controller
 
             if ($user->status === 'active') {
                 Session::put('user_data', ['email' => $user->email]);
-                return $user->role_id === 2 ? redirect()->route('freelancer') : redirect()->route('employer');
+                return $user->role_id === 1 ? redirect()->route('admin')
+                    : ($user->role_id === 2 ? redirect()->route('freelancer')
+                    : redirect()->route('employer'));
             } elseif ($user->status === 'inactive') {
                 Session::put('user_data', ['email' => $user->email]);
                 return redirect()->route('inactive', ['updatedAt' => $user->updated_at->format('d-m-Y')]);
