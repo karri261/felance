@@ -11,13 +11,13 @@
                                                 </div>
                                                 <div class="left-top-title"> 
                                                     <div>
-                                                        <span class="company-name">{{ $job->company_name }}</span>
-                                                        <span class="freelancer-tag">{{ $job->status }}</span>
+                                                        <span class="company-name">{{ $job->short_describe }}</span>
                                                     </div>
                                                     <span class="place-time" style="text-align: left;">
-                                                        <i class="place-time-icon fa-solid fa-location-dot"></i>
-                                                        <span class="place-time-content">{{ $job->location }}
-                                                            <em><small>{{ $job->created_at->diffForHumans() }}</small></em>
+                                                        {{-- <i class="place-time-icon fa-solid fa-location-dot"></i> --}}
+                                                        <span class="place-time-content" style="color:rgb(84, 138, 226);">{{ $job->company_name}}</span>
+                                                        <span class="place-time-content"> - {{ $job->location }}
+                                                            <em><small> {{ $job->created_at->diffForHumans() }}</small></em>
                                                         </span>
                                                 </div>
                                             </div>
@@ -31,6 +31,8 @@
                                                         <span class="tag-title">Experience:</span>
                                                         {{ $job->experience_required }} year
                                                     </span>
+                                                    <span class="freelancer-tag">{{ $job->status }}</span>
+
                                                 </div>
                                             </div>
                                         </div>

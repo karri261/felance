@@ -6,12 +6,13 @@
                 <span class="menu-title">Approve job post</span>
                 <div class="notification-bell">
                     <div class="circle-bell">
+                        {{-- <span id="notification-count">{{ $waitingJobsCount }}</span> --}}
                         <span id="notification-count">{{ $waitingJobsCount }}</span>
+
                     </div>
                 </div>
             </a>
         </li>
-        {{-- <li class="nav-item nav-category">Manage UI</li> --}}
         <li class="nav-item" id="manage-ui-nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
                 <i class="menu-icon mdi mdi-floor-plan"></i>
@@ -50,18 +51,6 @@
                 <i class="menu-icon mdi mdi-file-document"></i>
                 <span class="menu-title">Manage Reports</span>
             </a>
-        </li>
-        <li class="nav-item" id="Chart">
-            <a class="nav-link" data-bs-toggle="collapse" href="#charts" aria-expanded="false" aria-controls="charts">
-                <i class="menu-icon mdi mdi-chart-line"></i>
-                <span class="menu-title">Charts</span>
-                <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="charts">
-                <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="pages/charts/chartjs.html">ChartJs</a></li>
-                </ul>
-            </div>
         </li>
     </ul>
 </nav>

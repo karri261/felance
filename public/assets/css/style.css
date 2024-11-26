@@ -35709,6 +35709,15 @@ dl li {
     padding: 10px;
 }
 
+#approve-box-body{
+    justify-content:flex-start !important;
+}
+
+#approve-left-box{
+    width:70%;
+    padding-left: 30px;
+}
+
 .left-top {
     display: flex;
     align-items: center;
@@ -35733,12 +35742,20 @@ dl li {
 }
 
 .right-box {
+    padidng-top:10px;
     padding-left: 50px;
     width: 25%;
     display: flex;
     flex-direction: column;
     align-items: baseline;
     border-left: 1px solid rgb(211, 208, 208);
+}
+
+#approve-right-box{
+    align-items: center !important;
+}
+#approve-check{
+    margin-left: 0 !important;
 }
 
 .check {
@@ -35766,12 +35783,12 @@ dl li {
 }
 
 .job-title-name {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: bold;
 }
 
 .company-name {
-    font-size: 23px;
+    font-size: 20px;
     font-weight: bold;
 }
 .freelancer-tag {
@@ -35780,7 +35797,12 @@ dl li {
     padding: 3px 6px;
     font-size: 16px;
     color: rgb(21 149 43);
-    background-color: rgb(211, 250, 224);
+    background-color: rgb(211, 250, 224) !important;
+}
+
+.place-time{
+    font-size:15px;
+    color:#2b2f32;
 }
 
 .left-buttom {
@@ -35788,8 +35810,8 @@ dl li {
     flex-direction: row;
 }
 .left-buttom-tag {
-    font-size: 16px;
-    margin-top: 13px;
+    font-size: 14px;
+    margin-top: 23px;
     display: flex;
     gap: 10px;
     font-weight: 600;
@@ -35885,6 +35907,17 @@ dl li {
 .job-detail .detail-box .btn-instagram {
     background-color: #c21c54;
 }
+.job-information{
+    display:flex;
+    gap:30px;
+}
+.job-information-right{
+    width:35%;
+}
+.detail-infor{
+    color:gray;
+    font-size: 15px;
+}
 /* job detail end */
 
 /* ======================MANAGE JOB PAGE==================== */
@@ -35901,6 +35934,9 @@ dl li {
 }
 #job-list {
     height: 68vh;
+}
+#location-input-group{
+    width:100%;
 }
 .tab-content .box {
     position: relative;

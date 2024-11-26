@@ -15,7 +15,7 @@ class UpdateReportsTable extends Migration
     {
         Schema::table('reports', function (Blueprint $table) {
             // Đổi tên cột 'reason' thành 'title'
-            $table->renameColumn('reason', 'title');
+            // $table->renameColumn('reason', 'title');
 
             // Thêm cột 'detail' kiểu VARCHAR(255)
             $table->string('detail', 255)->nullable()->after('title');

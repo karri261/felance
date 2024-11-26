@@ -22,7 +22,7 @@
                         <h4 style="margin-bottom: 25px">Location</h4>
                         <div class="widget placeholdertx" style="margin-bottom: 20px">
                             <div class="form-group">
-                                <div class="input-group">
+                                <div class="input-group" id="location-input-group">
                                     <input name="location" type="text" required="" class="form-control"
                                         placeholder="Type Location">
                                 </div>
