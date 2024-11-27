@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\FreelancerController;
@@ -108,6 +108,6 @@ Route::middleware(['auth'])->group(function () {
     });
 
     Route::prefix('admin')->group(function () {
-        Route::get('/', [DashboardController::class, 'index'])->name('admin');
+        Route::get('/', [AdminController::class, 'index'])->name('admin');
     });
 });
