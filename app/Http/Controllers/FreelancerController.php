@@ -109,6 +109,30 @@ class FreelancerController extends Controller
         return redirect()->route('freelancer.profile')->with('status', 'Update successfully!')->with('freelancer', $freelancer);
     }
 
+    public function deleteImage($index)
+    {
+        $userData = Session::get('user_data');
+        $user = User::where('email', $userData['email'])->first();
+        $freelancer = Freelancer::where('user_id', $user->id)->first();
+
+        $imagePaths = json_decode($freelancer->image_paths, true);
+
+        if (isset($imagePaths[$index])) {
+            Storage::delete(str_replace('storage/', '', $imagePaths[$index]));
+
+            unset($imagePaths[$index]);
+
+            $imagePaths = array_values($imagePaths);
+
+            $freelancer->image_paths = json_encode($imagePaths, JSON_UNESCAPED_SLASHES);
+            $freelancer->save();
+
+            return response()->json(['success' => true]);
+        }
+
+        return response()->json(['success' => false]);
+    }
+
     public function changePassword(Request $request)
     {
         $request->validate([

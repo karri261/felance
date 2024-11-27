@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Report;
+use App\Models\JobPost;
 use Illuminate\Support\Facades\Auth;
 
 class ReportController extends Controller
@@ -25,5 +26,19 @@ class ReportController extends Controller
         ]);
 
         return redirect()->back()->with('status', 'Report submitted successfully.');
+    }
+
+    public function index()
+    {
+        $reports = Report::all();
+        $waitingJobsCount = JobPost::where('status', 'Waiting for approval')->count();
+        return view('Admin/pages.manage_report', compact('reports', 'waitingJobsCount'));
+    }
+
+    public function report_detail_for_admin($report_id)
+    {
+        $report = Report::find($report_id);
+        $waitingJobsCount = JobPost::where('status', 'Waiting for approval')->count();
+        return view('Admin/pages.report_detail', compact('report', 'waitingJobsCount'));
     }
 }

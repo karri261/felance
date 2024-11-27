@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title')</title>
+    <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
     <link rel="stylesheet" href="{{ asset('freelancer_assets/css/style.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -31,32 +32,6 @@
                 </div>
                 <div class="navbar-menu-wrapper d-flex" style="align-items: center; justify-content: end;">
                     <ul class="navbar-nav d-flex" style="flex-direction: row">
-                        {{-- <li class="nav-item dropdown">
-                            <a class="nav-link notify-dropdown" id="notifyDropdown" href="#"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="fa-solid fa-bell"></i>
-                            </a>
-                            <div class="dropdown-menu navbar-dropdown" aria-labelledby="messageDropdown">
-                                <a class="dropdown-item d-flex" style="align-items: center" href="">
-                                    <p class="mb-0 me-2" style="font-weight: 500">You have xx new notifications</p>
-                                    <span
-                                        style="background: #29B2FE; padding: 5px 10px; border-radius: 20px; color: #fff; font-size: 13px; margin-left:15px">View
-                                        all</span>
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item preview-item d-flex align-items-center">
-                                    <div class="preview-thumbnail">
-                                        <img src="" alt="image"
-                                            style="width: 48px; border-radius: 50%">
-                                    </div>
-                                    <div class="preview-item-content flex-grow ms-2">
-                                        <p class="mb-1" style="font-weight: 500">Marian Garner
-                                        </p>
-                                        <p class="mb-1"> The meeting is cancelled </p>
-                                    </div>
-                                </a>
-                            </div>
-                        </li> --}}
                         <li class="nav-item">
                             <a class="nav-link d-flex dropdown-toggle" id="UserDropdown" href="#"
                                 style="align-items: center" data-bs-toggle="dropdown" aria-expanded="false">

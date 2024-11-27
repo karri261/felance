@@ -116,7 +116,8 @@
                                                     </div>
                                                     <div class="col-md-3">
                                                         <div class="form-group">
-                                                            <label class="form-label" style="margin-right: 15px">Your CV</label>
+                                                            <label class="form-label" style="margin-right: 15px">Your
+                                                                CV</label>
                                                             <br>
                                                             <input type="file" name="cv" id="cv"
                                                                 accept=".pdf,.doc,.docx" onchange="updateFileName()"
@@ -207,18 +208,28 @@
                                                         <div class="col-lg-4" style="margin: 30px 0">
                                                             <div class="form-group d-flex justify-content-center">
                                                                 @if (isset($imagePaths[$i]))
-                                                                    <button type="button"
-                                                                        style="border: none; width: 270px; height: 270px;"
-                                                                        onclick="document.getElementById('image{{ $i + 1 }}').click()">
-                                                                        <img id="imagePreview{{ $i + 1 }}"
-                                                                            src="{{ asset($imagePaths[$i]) }}"
-                                                                            alt="Image Preview"
-                                                                            style="width: 100%; height: 100%; object-fit: cover;">
-                                                                    </button>
-                                                                    <input class="form-control" type="file"
-                                                                        name="image[]" id="image{{ $i + 1 }}"
-                                                                        style="display: none"
-                                                                        onchange="updateImage({{ $i + 1 }})">
+                                                                    <div
+                                                                        style="position: relative; width: 270px; height: 270px;">
+                                                                        <button type="button"
+                                                                            style="border: none; width: 100%; height: 100%;"
+                                                                            onclick="document.getElementById('image{{ $i + 1 }}').click()">
+                                                                            <img id="imagePreview{{ $i + 1 }}"
+                                                                                src="{{ asset($imagePaths[$i]) }}"
+                                                                                alt="Image Preview"
+                                                                                style="width: 100%; height: 100%; object-fit: cover;">
+                                                                        </button>
+                                                                        <!-- Thêm nút xóa -->
+                                                                        <button type="button"
+                                                                            class="btn btn-danger btn-sm"
+                                                                            style="position: absolute; top: 5px; right: 5px;"
+                                                                            onclick="deleteImage({{ $i }})">
+                                                                            <i class="fa-solid fa-trash"></i>
+                                                                        </button>
+                                                                        <input class="form-control" type="file"
+                                                                            name="image[]" id="image{{ $i + 1 }}"
+                                                                            style="display: none"
+                                                                            onchange="updateImage({{ $i + 1 }})">
+                                                                    </div>
                                                                 @else
                                                                     <input class="form-control" type="file"
                                                                         name="image[]" id="image{{ $i + 1 }}"
@@ -318,9 +329,6 @@
                                                 <button type="submit" class="btn btn-success" style="margin: 0 5px">
                                                     <i class="fa-regular fa-floppy-disk"></i> Save changes
                                                 </button>
-                                                {{-- <button type="button" class="btn btn-danger" style="margin: 0 5px">
-                                                        <i class="fa-solid fa-trash-can"></i> Cancel
-                                                    </button> --}}
                                             </div>
                                         </form>
                                     </div>
@@ -438,7 +446,7 @@
 
         function updateImage(index) {
             var imageInput = document.getElementById(`image${index}`);
-            
+
             var imagePreview = document.getElementById(`imagePreview${index}`);
             var imageText = document.getElementById(`imageText${index}`);
 
@@ -456,6 +464,28 @@
                 imagePreview.src = '';
                 imagePreview.style.display = 'none';
                 imageText.style.display = 'block';
+            }
+        }
+
+        function deleteImage(index) {
+            if (confirm('Are you sure you want to delete this image?')) {
+                fetch(`/freelancer/delete-image/${index}`, {
+                        method: 'DELETE',
+                        headers: {
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                            'Accept': 'application/json',
+                        },
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            document.getElementById(`imagePreview${index + 1}`).src = '';
+                            document.getElementById(`imagePreview${index + 1}`).style.display = 'none';
+                            document.getElementById(`imageText${index + 1}`).style.display = 'block';
+                            document.getElementById(`image${index + 1}`).value = '';
+                        }
+                    })
+                    .catch(error => console.error('Error:', error));
             }
         }
     </script>

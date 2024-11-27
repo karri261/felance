@@ -51,6 +51,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/job-detail/{job_id}', [JobPostController::class, 'jobDetail'])->name('freelancer.jobDetail');
 
         Route::get('/profile', [FreelancerController::class, 'profile'])->name('freelancer.profile');
+        Route::delete('/delete-image/{index}', [FreelancerController::class, 'deleteImage'])->name('freelancer.deleteImage');
         Route::post('/update-profile', [FreelancerController::class, 'updateProfile'])->name('freelancer.updateProfile');
         Route::post('/change-password', [FreelancerController::class, 'changePassword'])->name('freelancer.changePassword');
         Route::post('/deactivate-account', [FreelancerController::class, 'deactivateAccount'])->name('freelancer.deactivateAccount');
@@ -77,6 +78,7 @@ Route::middleware(['auth'])->group(function () {
 
         Route::get('/profile', [EmployerController::class, 'profile'])->name('employer.profile');
         Route::post('/update-profile', [EmployerController::class, 'updateProfile'])->name('employer.updateProfile');
+        Route::delete('/delete-image/{index}', [EmployerController::class, 'deleteImage'])->name('employer.deleteImage');
         Route::post('/change-password', [EmployerController::class, 'changePassword'])->name('employer.changePassword');
         Route::post('/deactivate-account', [EmployerController::class, 'deactivateAccount'])->name('employer.deactivateAccount');
 
@@ -106,8 +108,30 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/conversations/{id}/messages', [MessageController::class, 'sendMessage']);
         Route::post('/conversations', [MessageController::class, 'createConversation']);
     });
+});
 
-    Route::prefix('admin')->group(function () {
+Route::prefix('admin')->group(function () {
+    Route::get('/login', [AdminController::class, 'login'])->name('admin.login');
+    Route::post('/login', [AdminController::class, 'postLogin'])->name('admin.postLogin');
+    Route::get('/logout', [AdminController::class, 'logout'])->name('admin.logout');
+
+    Route::middleware(['admin'])->group(function () {
         Route::get('/', [AdminController::class, 'index'])->name('admin');
+        Route::get('/manage-user', [AdminController::class, 'index'])->name('manage-user');
+        Route::prefix('approve-job-post')->group(function () {
+            Route::get('/', [JobPostController::class, 'showWaitingJobs'])->name('approve.job.post');
+            Route::get('/job-detail/{job_id}', [JobPostController::class, 'job_detail_for_admin'])->name(name: 'approve.jobDetail');
+        });
+        Route::prefix('manage-job')->group(function () {
+            Route::get('/', [JobPostController::class, 'AdminfilterJobs'])->name('filter-jobs');
+            Route::get('/job-detail/{job_id}', [JobPostController::class, 'job_detail_for_admin'])->name(name: 'jobDetail');
+        });
+        Route::prefix('manage-report')->group(function () {
+            Route::get('/', [ReportController::class, 'index'])->name('manage-report');
+            Route::get('/report-detail/{report_id}', [ReportController::class, 'report_detail_for_admin'])->name('reportDetail');
+        });
     });
+    Route::get('/users/toggle-status/{id}', [AdminController::class, 'toggleStatus'])->name('users.toggle-status');
+    Route::delete('/users/delete/{id}', [AdminController::class, 'delete'])->name('users.delete');
+    Route::get('/freelancers/sort', [AdminController::class, 'sort'])->name('freelancers.sort');
 });

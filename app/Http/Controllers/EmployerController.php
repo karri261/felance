@@ -113,6 +113,30 @@ class EmployerController extends Controller
         return redirect()->route('employer.profile')->with('status', 'Update successfully!')->with('employer', $employer);
     }
 
+    public function deleteImage($index)
+    {
+        $userData = Session::get('user_data');
+        $user = User::where('email', $userData['email'])->first();
+        $employer = Employer::where('user_id', $user->id)->first();
+
+        $imagePaths = json_decode($employer->image_paths, true);
+
+        if (isset($imagePaths[$index])) {
+            Storage::delete(str_replace('storage/', '', $imagePaths[$index]));
+
+            unset($imagePaths[$index]);
+
+            $imagePaths = array_values($imagePaths);
+
+            $employer->image_paths = json_encode($imagePaths, JSON_UNESCAPED_SLASHES);
+            $employer->save();
+
+            return response()->json(['success' => true]);
+        }
+
+        return response()->json(['success' => false]);
+    }
+
     public function changePassword(Request $request)
     {
         $request->validate([

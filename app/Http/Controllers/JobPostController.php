@@ -11,6 +11,23 @@ use App\Models\Applicant;
 
 class JobPostController extends Controller
 {
+    public function index()
+    {
+        $jobs = JobPost::inRandomOrder()
+            ->take(5)
+            ->get();
+
+        $jobs = JobPost::inRandomOrder()->paginate(5);
+        return view('welcome', compact('jobs'));
+    }
+
+    public function showWaitingJobs()
+    {
+        $jobs = JobPost::where('status', 'Waiting for approval')->paginate(10);
+        $waitingJobsCount = JobPost::where('status', 'Waiting for approval')->count();
+        return view('Admin/pages.approve_job_post', compact('jobs', 'waitingJobsCount'));
+    }
+
     public function filterJobs(Request $request)
     {
         $query = JobPost::query();
@@ -84,6 +101,53 @@ class JobPostController extends Controller
         return view('employer.job-list', compact('jobs'))->render();
     }
 
+    public function AdminfilterJobs(Request $request)
+    {
+        $query = JobPost::query();
+
+        if ($request->filled('job_name')) {
+            $query->where('job_title', 'like', '%' . $request->job_name . '%');
+        }
+
+        if ($request->filled('location')) {
+            $query->where('location', 'like', '%' . $request->location . '%');
+        }
+
+        if ($request->filled('categories')) {
+            $query->whereIn('categories', $request->categories);
+        }
+
+        if ($request->filled('salary')) {
+            switch ($request->salary) {
+                case 'lt_50':
+                    $query->where('salary_max', '<', 50);
+                    break;
+                case 'lt_100':
+                    $query->where('salary_max', '<', 100);
+                    break;
+                case 'lt_250':
+                    $query->where('salary_max', '<', 250);
+                    break;
+                case 'gt_250':
+                    $query->where('salary_min', '>', 250);
+                    break;
+            }
+        }
+
+        if ($request->filled('status')) {
+            $query->where('status', $request->status);
+        }
+
+        $jobs = $query->orderBy('created_at', 'desc')->paginate(7);
+
+        if ($request->ajax()) {
+            return view('Admin/pages.job_list_partial', compact('jobs'))->render();
+        }
+        $waitingJobsCount = JobPost::where('status', 'Waiting for approval')->count();
+
+        return view('Admin/pages.manage_job', compact('jobs', 'waitingJobsCount'));
+    }
+
     public function jobDetail($job_id)
     {
         $user = Auth::user();
@@ -98,9 +162,9 @@ class JobPostController extends Controller
         $isFavorited = $job->isFavoritedBy(Auth::id());
 
         $relatedJobs = JobPost::where('categories', $job->categories)
-        ->where('job_id', '!=', $job_id) // Loại bỏ công việc hiện tại
-        ->take(5) // Giới hạn số lượng công việc liên quan
-        ->get();
+            ->where('job_id', '!=', $job_id) // Loại bỏ công việc hiện tại
+            ->take(5) // Giới hạn số lượng công việc liên quan
+            ->get();
 
         return view('freelancer.job-detail', compact('job', 'responsibilities', 'description', 'background', 'user', 'freelancer', 'isFavorited', 'relatedJobs'));
     }
@@ -121,6 +185,18 @@ class JobPostController extends Controller
         $background = $this->convertToListItems($job->background);
 
         return view('employer.job-detail', compact('job', 'responsibilities', 'background', 'description', 'user', 'employer', 'pendingApplications'));
+    }
+
+    public function job_detail_for_admin($job_id)
+    {
+        $job = JobPost::find($job_id); 
+
+        $description = $this->convertToListItems($job->job_description);
+        $responsibilities = $this->convertToListItems($job->responsibilities);
+        $waitingJobsCount = JobPost::where('status', 'Waiting for approval')->count();
+        $background = $this->convertToListItems($job->background);
+
+        return view('Admin/pages.job_detail', compact('job', 'responsibilities', 'background', 'description', 'waitingJobsCount'));
     }
 
     function convertToListItems($htmlContent)

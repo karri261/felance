@@ -587,6 +587,11 @@ input:focus {
 .profile #pills-deactivate .form-group .input-group input {
     border: none;
 }
+
+.image-container:hover .edit-btn,
+.image-container:hover .delete-btn {
+    display: inline-block;
+}
 /* ===============================Inbox========================= */
 
 .message-area {
