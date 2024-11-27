@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
@@ -108,6 +109,23 @@ Route::middleware(['auth'])->group(function () {
     });
 
     Route::prefix('admin')->group(function () {
-        Route::get('/', [AdminController::class, 'index'])->name('admin');
+        Route::get('/', [DashboardController::class, 'index'])->name('admin');
+        Route::get('/manage-user', [AdminController::class, 'index'])->name('manage-user');
+        Route::prefix('approve-job-post')->group(function (){
+            Route::get('/', [JobPostController::class, 'showWaitingJobs'])->name('approve.job.post');
+            Route::get('/job-detail/{job_id}', [JobPostController::class, 'job_detail_for_admin'])->name(name: 'approve.jobDetail');
+        });
+        Route::prefix('manage-job')->group(function (){
+            Route::get('/job-detail/{job_id}', [JobPostController::class, 'job_detail_for_admin'])->name(name: 'jobDetail');
+            Route::get('/', [JobPostController::class, 'AdminfilterJobs'])->name('filter-jobs');
+        });
+        Route::prefix('manage-report')->group(function (){
+            Route::get('/', [ReportController::class, 'index'])->name('manage-report');
+            Route::get('/report-detail/{report_id}', [ReportController::class, 'report_detail_for_admin'])->name('reportDetail');
+        });
     });
-});
+    Route::get('/users/toggle-status/{id}', [AdminController::class, 'toggleStatus'])->name('users.toggle-status');
+    Route::delete('/users/delete/{id}', [AdminController::class, 'delete'])->name('users.delete');
+    Route::get('/freelancers/sort', [AdminController::class, 'sort'])->name('freelancers.sort');
+
+    });

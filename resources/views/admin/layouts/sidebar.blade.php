@@ -1,84 +1,22 @@
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
     <ul class="nav">
-        <li class="nav-item">
-            <a class="nav-link" href="index.html">
-                <i class="mdi mdi-grid-large menu-icon"></i>
-                <span class="menu-title">Dashboard</span>
-            </a>
-        </li>
-        <li class="nav-item nav-category">UI Elements</li>
-        <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false"
-                aria-controls="ui-basic">
-                <i class="menu-icon mdi mdi-floor-plan"></i>
-                <span class="menu-title">UI Elements</span>
-                <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="ui-basic">
-                <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">Buttons</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="pages/ui-features/dropdowns.html">Dropdowns</a></li>
-                    <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Typography</a>
-                    </li>
-                </ul>
-            </div>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="collapse" href="#form-elements" aria-expanded="false"
-                aria-controls="form-elements">
+        <li class="nav-item" id="approve-nav-item">
+            <a class="nav-link" href="{{ route('approve.job.post') }}">
                 <i class="menu-icon mdi mdi-card-text-outline"></i>
-                <span class="menu-title">Form elements</span>
-                <i class="menu-arrow"></i>
+                <span class="menu-title">Approve job post</span>
+                <div class="notification-bell">
+                    <div class="circle-bell">
+                        {{-- <span id="notification-count">{{ $waitingJobsCount }}</span> --}}
+                        <span id="notification-count">{{ $waitingJobsCount }}</span>
+
+                    </div>
+                </div>
             </a>
-            <div class="collapse" id="form-elements">
-                <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"><a class="nav-link" href="pages/forms/basic_elements.html">Basic
-                            Elements</a></li>
-                </ul>
-            </div>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="collapse" href="#charts" aria-expanded="false" aria-controls="charts">
-                <i class="menu-icon mdi mdi-chart-line"></i>
-                <span class="menu-title">Charts</span>
-                <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="charts">
-                <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="pages/charts/chartjs.html">ChartJs</a></li>
-                </ul>
-            </div>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="collapse" href="#tables" aria-expanded="false" aria-controls="tables">
-                <i class="menu-icon mdi mdi-table"></i>
-                <span class="menu-title">Tables</span>
-                <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="tables">
-                <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="pages/tables/basic-table.html">Basic
-                            table</a></li>
-                </ul>
-            </div>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="collapse" href="#icons" aria-expanded="false" aria-controls="icons">
-                <i class="menu-icon mdi mdi-layers-outline"></i>
-                <span class="menu-title">Icons</span>
-                <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="icons">
-                <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="pages/icons/font-awesome.html">Font
-                            Awesome</a></li>
-                </ul>
-            </div>
-        </li>
-        <li class="nav-item">
+        <li class="nav-item" id="manage-ui-nav-item">
             <a class="nav-link" data-bs-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
-                <i class="menu-icon mdi mdi-account-circle-outline"></i>
-                <span class="menu-title">User Pages</span>
+                <i class="menu-icon mdi mdi-floor-plan"></i>
+                <span class="menu-title">Manage UI</span>
                 <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="auth">
@@ -96,10 +34,22 @@
                 </ul>
             </div>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" href="docs/documentation.html">
+        <li class="nav-item" id="manage-job-nav-item">
+            <a class="nav-link"  href="{{ route('filter-jobs') }}" aria-expanded="false" aria-controls="tables">
+                <i class="menu-icon mdi mdi-table"></i>
+                <span class="menu-title">Manage jobs</span>
+            </a>
+        </li>
+        <li class="nav-item" id="manage-user-nav-item">
+            <a class="nav-link" href="{{ route('manage-user') }}">
+                <i class="menu-icon mdi mdi-account-circle-outline"></i>
+                <span class="menu-title">Manage Users</span>
+            </a>
+        </li>
+        <li class="nav-item" id="manage-report">
+            <a class="nav-link" href="{{ route('manage-report') }}">
                 <i class="menu-icon mdi mdi-file-document"></i>
-                <span class="menu-title">Documentation</span>
+                <span class="menu-title">Manage Reports</span>
             </a>
         </li>
     </ul>
