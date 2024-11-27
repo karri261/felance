@@ -117,7 +117,7 @@ Route::prefix('admin')->group(function () {
 
     Route::middleware(['admin'])->group(function () {
         Route::get('/', [AdminController::class, 'index'])->name('admin');
-        Route::get('/manage-user', [AdminController::class, 'index'])->name('manage-user');
+        Route::get('/manage-user', [AdminController::class, 'magUser'])->name('manage-user');
         Route::prefix('approve-job-post')->group(function () {
             Route::get('/', [JobPostController::class, 'showWaitingJobs'])->name('approve.job.post');
             Route::get('/job-detail/{job_id}', [JobPostController::class, 'job_detail_for_admin'])->name(name: 'approve.jobDetail');

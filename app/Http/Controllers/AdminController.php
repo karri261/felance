@@ -40,6 +40,13 @@ class AdminController extends Controller
         return view('Admin/index', compact('freelancers', 'waitingJobsCount'));
     }
 
+    public function magUser()
+    {
+        $freelancers = Freelancer::with('user:id,firstname,lastname,status')->get();
+        $waitingJobsCount = JobPost::where('status', 'Waiting for approval')->count();
+        return view('Admin/pages.manage_user', compact('freelancers', 'waitingJobsCount'));
+    }
+
     public function sort(Request $request)
     {
         $order = $request->get('order', 'latest');
