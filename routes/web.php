@@ -124,11 +124,6 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/report-detail/{report_id}', [ReportController::class, 'report_detail_for_admin'])->name('reportDetail');
         });
     });
-    // Route::get('/approve-job-post', [JobPostController::class, 'showWaitingJobs'])->name('approve.job.post');
-    // Route::get('/job-detail/{job_id}', [JobPostController::class, 'job_detail_for_admin'])->name('jobDetail');
-    // Route::get('/manage-job', [JobPostController::class, 'AdminfilterJobs'])->name('filter-jobs');
-
-    // Route::get('/manage-user', [AdminController::class, 'index'])->name('manage-user');
     Route::get('/users/toggle-status/{id}', [AdminController::class, 'toggleStatus'])->name('users.toggle-status');
     Route::delete('/users/delete/{id}', [AdminController::class, 'delete'])->name('users.delete');
     Route::get('/freelancers/sort', [AdminController::class, 'sort'])->name('freelancers.sort');
