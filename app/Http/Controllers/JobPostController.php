@@ -30,7 +30,8 @@ class JobPostController extends Controller
 
     public function filterJobs(Request $request)
     {
-        $query = JobPost::query();
+        $user = Auth::user();
+        $query = JobPost::where('status', 'Approved');
 
         if ($request->filled('job_name')) {
             $query->where('job_title', 'like', '%' . $request->job_name . '%');
@@ -58,21 +59,14 @@ class JobPostController extends Controller
             }
         }
 
-        if ($request->filled('status')) {
-            $status = $request->status;
+        $jobs = $query->orderBy('created_at', 'desc')->paginate(7)->appends(request()->query());
+        $freelancer = Freelancer::where('user_id', $user->id)->first();
 
-            if ($status === 'Waiting for approval') {
-                $query->where('status', 'Waiting for approval');
-            } elseif ($status === 'Approved') {
-                $query->where('status', 'Approved');
-            } elseif ($status === 'Rejected') {
-                $query->where('status', 'Rejected');
-            }
+        if ($request->ajax()) {
+            return view('freelancer.job-list', compact('jobs'))->render();
         }
 
-        $jobs = $query->orderBy('created_at', 'desc')->paginate(7);
-
-        return view('freelancer.job-list', compact('jobs'))->render();
+        return view('freelancer.index', compact('jobs', 'user','freelancer'));
     }
 
     public function EmployfilterJobs(Request $request)
@@ -81,7 +75,6 @@ class JobPostController extends Controller
         $userId =  $user->id;
 
         $query = JobPost::where('user_id', $userId);
-        // $query = JobPost::query();
 
         if ($request->filled('job_name')) {
             $query->where('job_title', 'like', '%' . $request->job_name . '%');

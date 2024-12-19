@@ -73,7 +73,7 @@
                     <h4 class="box-title mb-20 fw-500">Related Job</h4>
                     <div id="job-list" class="related-jobs-slider tab-content">
                         @foreach ($relatedJobs as $relatedJob)
-                            @if ($relatedJob->finish === 0)
+                            @if ($relatedJob->finish === 0 && $relatedJob->status == 'Approved')
                                 <div class="box">
                                     <div class="box-body" style="padding: 0">
                                         <div class="d-lg-flex justify-content-between">

@@ -20,7 +20,10 @@ class FreelancerController extends Controller
 {
     public function dashboard()
     {
-        $jobs = JobPost::where('status', 'approved')->orderBy('created_at', 'desc')->paginate(7);
+        $jobs = JobPost::where('status', 'approved' )
+        ->where('finish', 0)
+        ->where('end_date', '>=', now())
+        ->orderBy('created_at', 'desc')->paginate(7);
         $user = Auth::user();
         $freelancer = Freelancer::where('user_id', $user->id)->first();
         return view('freelancer.index', compact('jobs', 'user', 'freelancer'));
