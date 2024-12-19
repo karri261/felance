@@ -18,7 +18,7 @@
     <div class="d-lg-flex half min-vh-100">
         <div class="bg order-1 order-md-2"
             style="background-image: url('{{ asset('guest_assets/images/elephant_pic.jpg') }}')"></div>
-        <div class="contents order-2 order-md-1" style="margin-top: 20px">
+        <div class="contents order-2 order-md-1" style="padding: 50px 0">
             <div class="container">
                 <div class="row align-items-center justify-content-center">
                     <div class="col-md-6">

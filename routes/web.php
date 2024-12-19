@@ -11,6 +11,12 @@ use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ReportController;
 
 Route::get('/', [HomeController::class, 'index'])->name('welcome');
+Route::prefix('find-job')->group(function () {
+    Route::get('/', [HomeController::class, 'findJob'])->name('findJob');
+    Route::get('/filter-jobs', [HomeController::class, 'filterJobs'])->name('filterJobs');
+    Route::get('/company_profile/{user_id}', [HomeController::class, 'companyProfile'])->name('companyProfile');
+    Route::get('/job-detail/{job_id}', [HomeController::class, 'jobDetail'])->name('guest.jobDetail');
+});
 
 Route::get('/login', [UserController::class, 'login'])->name('login');
 Route::post('/login', [UserController::class, 'postLogin'])->name('postLogin');

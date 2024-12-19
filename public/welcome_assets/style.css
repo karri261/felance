@@ -189,8 +189,8 @@ strong {
 }
 
 .navbar {
-    background: transparent;
-    position: absolute;
+    background: #fff;
+    position: fixed;
     z-index: 9;
     right: 0;
     left: 0;

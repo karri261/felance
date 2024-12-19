@@ -9,29 +9,23 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
-    {{-- Quynh them start --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
-    {{-- slider start --}}
     <link rel="stylesheet" type="text/css" href="slick/slick.css" />
     <link rel="stylesheet" type="text/css" href="slick/slick-theme.css" />
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
-    {{-- slider end --}}
     <style>
         @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
     </style>
-    <!-- Libraries Stylesheet -->
     <link href="{{ asset('homepage/lib/animate/animate.min.css') }}" rel="stylesheet">
     <link href="{{ asset('homepage/lib/owlcarousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
 
-    <!-- Customized Bootstrap Stylesheet -->
     <link href="{{ asset('homepage/css/bootstrap.min.css') }}" rel="stylesheet">
 
     <link href="{{ asset('homepage/css/bootstrap.min.css') }}" rel="stylesheet">
-    {{-- Quynh them end --}}
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
@@ -46,16 +40,16 @@
     {{-- Header --}}
     <nav class="navbar navbar-expand-lg">
         <div class="container">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            {{-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
-            </button>
+            </button> --}}
 
             <a href="{{ url('/') }}" class="navbar-brand d-flex mx-auto mx-lg-0">
                 <img src="{{ asset('welcome_assets/images/logo_name.png') }}" alt="">
             </a>
 
-            <div class="collapse navbar-collapse" id="navbarNav" style="margin-top: 10px;">
+            {{-- <div class="collapse navbar-collapse" id="navbarNav" style="margin-top: 10px;">
                 <ul class="navbar-nav ms-lg-2">
                     <li class="nav-item dropdown">
                         <a class="nav-link" href="#" id="navbarDropdown" role="button">
@@ -119,7 +113,7 @@
                         </ul>
                     </li>
                 </ul>
-            </div>
+            </div> --}}
 
             <div class="d-lg-flex align-items-center d-none ms-auto" style="margin-top: 10px;">
                 <ul class="navbar-nav ms-lg-2">
@@ -137,6 +131,7 @@
             </div>
         </div>
     </nav>
+
     <div class="container">
         <div class="hero">
             <div class="hero-content">
@@ -149,7 +144,9 @@
                         <i class="fa-solid fa-magnifying-glass"></i>
                     </span>
                     <input type="text" placeholder="Job title, keywords,...">
-                    <button>Find job</button>
+                    <button>
+                        <a href="{{ route('findJob') }}" style="color: #fff">Find job</a>
+                    </button>
                 </div>
             </div>
             <div class="hero-image">
@@ -257,21 +254,13 @@
         {{-- Slide show end --}}
 
         {{-- Job list start --}}
-        <!-- JavaScript Libraries -->
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="{{ asset('homepage/lib/wow/wow.min.js') }}"></script>
-        <script src="{{ asset('homepage/lib/easing/easing.min.js') }}"></script>
-        <script src="{{ asset('homepage/lib/waypoints/waypoints.min.js') }}"></script>
-        <script src="{{ asset('homepage/lib/owlcarousel/owl.carousel.min.js') }}"></script>
-        <script src="{{ asset('homepage/js/main.js') }}"></script>
         <div class="" style="text-align:center; padding:30px 0;">
             <p class="text-center wow fadeInUp top joblist">Job Listing</p>
             @if (isset($jobs) && count($jobs) > 0)
                 @foreach ($jobs as $job)
-                    <div class="box wow fadeInUp">
+                    <div class="box wow fadeInUp" style="width: 90%; margin-right: auto; margin-left: auto">
                         <div class="box-body">
-                            <div class=left-box">
+                            <div class="left-box">
                                 <div class="left-top">
                                     <div class="left-top-logo">
                                         <img src="{{ asset($job->company_logo) }}"
@@ -281,8 +270,9 @@
                                         border-radius: 50%;">
                                     </div>
                                     <div class="left-top-title">
-                                        <a href="#" class="company-link">
-                                            <span class="company-name">{{ $job->company_name }}</span>
+                                        <a href="{{ route('companyProfile', $job->user_id) }}" class="company-link">
+                                            <span class="company-name"
+                                                style="color: #1e1e1e">{{ $job->company_name }}</span>
                                             <span class="freelancer-tag">Freelancer</span>
                                         </a>
                                         <span class="place-time" style="text-align: left;">
@@ -294,21 +284,21 @@
                                 </div>
                                 <div class="left-buttom ">
                                     <div class="left-buttom-tag">
-                                        <span>
+                                        <span style="color: #1e1e1e">
                                             <span class="tag-title">Salary:</span> ${{ $job->salary_min }} -
                                             ${{ $job->salary_max }}
                                         </span>
-                                        <span class="tag-open">
+                                        <span class="tag-open" style="color: #1e1e1e">
                                             <span class="tag-title">Openings Position:</span>
                                             {{ $job->openings_position }}
                                         </span>
-                                        <span class="tag-exp">
+                                        <span class="tag-exp" style="color: #1e1e1e">
                                             <span class="tag-title">Experience:</span> {{ $job->experience_required }}
                                             year
                                         </span>
                                     </div>
                                     <div class="left-buttom-more">
-                                        <a href="{{ route('jobDetail', ['job_id' => $job->job_id]) }}"
+                                        <a href="{{ route('guest.jobDetail', ['job_id' => $job->job_id]) }}"
                                             class="btn btn-sm mt-lg-0 mt-2 more-info-btn">More Info</a>
                                     </div>
                                 </div>
@@ -316,7 +306,8 @@
                             <div class="right-box">
                                 <span class="job-title">
                                     <small class="text-fade fs-12">Openings Position</small><br>
-                                    <span class="job-title-name">{{ $job->job_title }}</span>
+                                    <span class="job-title-name"
+                                        style="color: #1e1e1e; font-weight: 500">{{ $job->job_title }}</span>
                                 </span>
                                 <form action="{{ route('freelancer.applyJob') }}" method="POST">
                                     @csrf
@@ -330,11 +321,8 @@
                         </div>
                     </div>
                 @endforeach
-                <div class="custom-pagination">
-                    {{ $jobs->links('pagination::bootstrap-5') }}
-                </div>
             @else
-                <p>Không có công việc nào. </p>
+                <p>No job here</p>
             @endif
 
         </div>
@@ -394,7 +382,7 @@
                             </div>
                         </div>
                         <div class="ll-item-main"><a class="button button-sm button-primary-outline"
-                                href="{{ route('login') }}">Start Now</a></div>
+                                href="{{ route('register') }}">Start Now</a></div>
                     </li>
                 </ul>
             </div>
@@ -436,7 +424,8 @@
                         <p><i class="fa fa-check icon-about me-3"></i>Flexible solutions tailored to your business
                             needs</p>
                         <div class="">
-                            <a class="btn btn-primary py-3 px-3 about-button" href="">Hire Freelancers Now</a>
+                            <a class="btn btn-primary py-3 px-3 about-button" href="{{ route('login') }}">Hire
+                                Freelancers Now</a>
                         </div>
                     </div>
                 </div>
@@ -448,333 +437,66 @@
         <section class="container-fluid freelancer-section">
             <p class="freelancer-title wow fadeInUp top" data-wow-delay="0.1s">Top Freelancers</p>
             <div class="slider-freelancer wow fadeInUp" data-wow-delay="0.3s">
-                <div class="freelancer-card">
-                    <img src="{{ asset('homepage/images/freelnce-1.jpg') }}" alt="Freelancer 1"
-                        class="freelancer-avatar">
-                    <p class="freelancer-name">Kevin Ble</p>
-                    <p class="freelancer-work">Frontend Developer</p>
-                    <div class="freelancer-info">
-                        <span>
-                            <svg class="freelancer-icon" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="12" cy="12" r="9" stroke="black" stroke-width="1.5"
-                                    stroke-linecap="round" stroke-linejoin="round"></circle>
-                                <path
-                                    d="M15.3333 7.72222H12M12 7.72222H10.3333C9.04467 7.72222 8 8.67984 8 9.86111C8 11.0424 9.04467 12 10.3333 12H12M12 7.72222V6.5M12 7.72222V12M12 12H13.6667C14.9553 12 16 12.9576 16 14.1389C16 15.3202 14.9553 16.2778 13.6667 16.2778H12M12 12V16.2778M12 16.2778H8M12 16.2778V17.5"
-                                    stroke="black" stroke-width="1.5" stroke-linecap="round"
-                                    stroke-linejoin="round">
-                                </path>
-                            </svg>
-                            $450/month
-                        </span>
-                        <span>
-                            <svg class="freelancer-icon" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M12.5599 20.8207C12.2247 21.0598 11.7753 21.0598 11.4401 20.8207C6.61138 17.3773 1.48557 10.2971 6.6667 5.18128C8.08118 3.78463 9.99963 3 12 3C14.0004 3 15.9188 3.78463 17.3333 5.18128C22.5144 10.2971 17.3886 17.3773 12.5599 20.8207Z"
-                                    stroke="#111111" stroke-width="1.5" stroke-linecap="round"
-                                    stroke-linejoin="round">
-                                </path>
-                                <path
-                                    d="M12 12C13.1046 12 14 11.1046 14 10C14 8.89543 13.1046 8 12 8C10.8954 8 10 8.89543 10 10C10 11.1046 10.8954 12 12 12Z"
-                                    stroke="#111111" stroke-width="1.5" stroke-linecap="round"
-                                    stroke-linejoin="round">
-                                </path>
-                            </svg>
-                            San Diego</span>
-                        <span>
-                            <svg class="freelancer-icon" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3M12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3M12 21C14.7614 21 15.9413 15.837 15.9413 12C15.9413 8.16303 14.7614 3 12 3M12 21C9.23858 21 8.05895 15.8369 8.05895 12C8.05895 8.16307 9.23858 3 12 3M3.49988 8.99998C10.1388 8.99998 13.861 8.99998 20.4999 8.99998M3.49988 15C10.1388 15 13.861 15 20.4999 15"
-                                    stroke="black" stroke-width="1.5" stroke-linecap="round"
-                                    stroke-linejoin="round">
-                                </path>
-                            </svg>
-                            Japanese</span>
+                @foreach ($freelancers as $freelancer)
+                    <div class="freelancer-card">
+                        <img src="{{ asset($freelancer->avatar) }}" class="freelancer-avatar">
+                        <p class="freelancer-name">
+                            <span>{{ $freelancer->user->firstname }} {{ $freelancer->user->lastname }}</span>
+                        </p>
+                        <ul class="rating-star" style="font-size: 14px">
+                            @php
+                                $score = $freelancer->rating;
+                                $fullStars = floor($score);
+                                $halfStar = $score - $fullStars >= 0.5;
+                                $emptyStars = 5 - $fullStars - ($halfStar ? 1 : 0);
+                            @endphp
+
+                            @for ($i = 0; $i < $fullStars; $i++)
+                                <li class="active"><i class="fa fa-star" style="font-size: 16px"></i></li>
+                            @endfor
+
+                            @if ($halfStar)
+                                <li class="active half"><i class="fa fa-star-half-alt" style="font-size: 16px"></i></li>
+                            @endif
+
+                            @for ($i = 0; $i < $emptyStars; $i++)
+                                <li><i class="fa fa-star" style="color: #ddd; font-size: 16px"></i></li>
+                            @endfor
+
+                            <span style="margin-left: 5px">({{ $freelancer->rating }})</span>
+                        </ul>
+                        <p class="freelancer-work">{{ $freelancer->user->email }}</p>
+                        <div class="freelancer-info">
+                            <span>
+                                <svg class="freelancer-icon" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M12.5599 20.8207C12.2247 21.0598 11.7753 21.0598 11.4401 20.8207C6.61138 17.3773 1.48557 10.2971 6.6667 5.18128C8.08118 3.78463 9.99963 3 12 3C14.0004 3 15.9188 3.78463 17.3333 5.18128C22.5144 10.2971 17.3886 17.3773 12.5599 20.8207Z"
+                                        stroke="#111111" stroke-width="1.5" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                    </path>
+                                    <path
+                                        d="M12 12C13.1046 12 14 11.1046 14 10C14 8.89543 13.1046 8 12 8C10.8954 8 10 8.89543 10 10C10 11.1046 10.8954 12 12 12Z"
+                                        stroke="#111111" stroke-width="1.5" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                    </path>
+                                </svg>
+                                {{ $freelancer->address }}
+                            </span>
+                            <span>
+                                <svg class="freelancer-icon" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3M12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3M12 21C14.7614 21 15.9413 15.837 15.9413 12C15.9413 8.16303 14.7614 3 12 3M12 21C9.23858 21 8.05895 15.8369 8.05895 12C8.05895 8.16307 9.23858 3 12 3M3.49988 8.99998C10.1388 8.99998 13.861 8.99998 20.4999 8.99998M3.49988 15C10.1388 15 13.861 15 20.4999 15"
+                                        stroke="black" stroke-width="1.5" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                    </path>
+                                </svg>
+                                {{ $freelancer->languages }}
+                            </span>
+                        </div>
                     </div>
-                    <div class="freelancer-tags">
-                        <span class="tag">Developer</span>
-                        <span class="tag">Software</span>
-                    </div>
-                    <div class="freelancer-rating">
-                        <span>⭐4.8 (1)</span>
-                        <span>5 services</span>
-                    </div>
-                </div>
-                <div class="freelancer-card">
-                    <img src="{{ asset('homepage/images/freelnce-4.jpg') }}" alt="Freelancer 1"
-                        class="freelancer-avatar">
-                    <p class="freelancer-name">Kevin Ble</p>
-                    <p class="freelancer-work">Frontend Developer</p>
-                    <div class="freelancer-info">
-                        <span>
-                            <svg class="freelancer-icon" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="12" cy="12" r="9" stroke="black" stroke-width="1.5"
-                                    stroke-linecap="round" stroke-linejoin="round"></circle>
-                                <path
-                                    d="M15.3333 7.72222H12M12 7.72222H10.3333C9.04467 7.72222 8 8.67984 8 9.86111C8 11.0424 9.04467 12 10.3333 12H12M12 7.72222V6.5M12 7.72222V12M12 12H13.6667C14.9553 12 16 12.9576 16 14.1389C16 15.3202 14.9553 16.2778 13.6667 16.2778H12M12 12V16.2778M12 16.2778H8M12 16.2778V17.5"
-                                    stroke="black" stroke-width="1.5" stroke-linecap="round"
-                                    stroke-linejoin="round">
-                                </path>
-                            </svg>
-                            $450/month
-                        </span>
-                        <span>
-                            <svg class="freelancer-icon" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M12.5599 20.8207C12.2247 21.0598 11.7753 21.0598 11.4401 20.8207C6.61138 17.3773 1.48557 10.2971 6.6667 5.18128C8.08118 3.78463 9.99963 3 12 3C14.0004 3 15.9188 3.78463 17.3333 5.18128C22.5144 10.2971 17.3886 17.3773 12.5599 20.8207Z"
-                                    stroke="#111111" stroke-width="1.5" stroke-linecap="round"
-                                    stroke-linejoin="round">
-                                </path>
-                                <path
-                                    d="M12 12C13.1046 12 14 11.1046 14 10C14 8.89543 13.1046 8 12 8C10.8954 8 10 8.89543 10 10C10 11.1046 10.8954 12 12 12Z"
-                                    stroke="#111111" stroke-width="1.5" stroke-linecap="round"
-                                    stroke-linejoin="round">
-                                </path>
-                            </svg>
-                            San Diego</span>
-                        <span>
-                            <svg class="freelancer-icon" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3M12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3M12 21C14.7614 21 15.9413 15.837 15.9413 12C15.9413 8.16303 14.7614 3 12 3M12 21C9.23858 21 8.05895 15.8369 8.05895 12C8.05895 8.16307 9.23858 3 12 3M3.49988 8.99998C10.1388 8.99998 13.861 8.99998 20.4999 8.99998M3.49988 15C10.1388 15 13.861 15 20.4999 15"
-                                    stroke="black" stroke-width="1.5" stroke-linecap="round"
-                                    stroke-linejoin="round">
-                                </path>
-                            </svg>
-                            Japanese</span>
-                    </div>
-                    <div class="freelancer-tags">
-                        <span class="tag">Developer</span>
-                        <span class="tag">Software</span>
-                    </div>
-                    <div class="freelancer-rating">
-                        <span>⭐4.8 (1)</span>
-                        <span>5 services</span>
-                    </div>
-                </div>
-                <div class="freelancer-card">
-                    <img src="{{ asset('homepage/images/freelnce-5.jpg') }}" alt="Freelancer 1"
-                        class="freelancer-avatar">
-                    <p class="freelancer-name">Kevin Ble</p>
-                    <p class="freelancer-work">Frontend Developer</p>
-                    <div class="freelancer-info">
-                        <span>
-                            <svg class="freelancer-icon" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="12" cy="12" r="9" stroke="black" stroke-width="1.5"
-                                    stroke-linecap="round" stroke-linejoin="round"></circle>
-                                <path
-                                    d="M15.3333 7.72222H12M12 7.72222H10.3333C9.04467 7.72222 8 8.67984 8 9.86111C8 11.0424 9.04467 12 10.3333 12H12M12 7.72222V6.5M12 7.72222V12M12 12H13.6667C14.9553 12 16 12.9576 16 14.1389C16 15.3202 14.9553 16.2778 13.6667 16.2778H12M12 12V16.2778M12 16.2778H8M12 16.2778V17.5"
-                                    stroke="black" stroke-width="1.5" stroke-linecap="round"
-                                    stroke-linejoin="round">
-                                </path>
-                            </svg>
-                            $450/month
-                        </span>
-                        <span>
-                            <svg class="freelancer-icon" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M12.5599 20.8207C12.2247 21.0598 11.7753 21.0598 11.4401 20.8207C6.61138 17.3773 1.48557 10.2971 6.6667 5.18128C8.08118 3.78463 9.99963 3 12 3C14.0004 3 15.9188 3.78463 17.3333 5.18128C22.5144 10.2971 17.3886 17.3773 12.5599 20.8207Z"
-                                    stroke="#111111" stroke-width="1.5" stroke-linecap="round"
-                                    stroke-linejoin="round">
-                                </path>
-                                <path
-                                    d="M12 12C13.1046 12 14 11.1046 14 10C14 8.89543 13.1046 8 12 8C10.8954 8 10 8.89543 10 10C10 11.1046 10.8954 12 12 12Z"
-                                    stroke="#111111" stroke-width="1.5" stroke-linecap="round"
-                                    stroke-linejoin="round">
-                                </path>
-                            </svg>
-                            San Diego</span>
-                        <span>
-                            <svg class="freelancer-icon" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3M12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3M12 21C14.7614 21 15.9413 15.837 15.9413 12C15.9413 8.16303 14.7614 3 12 3M12 21C9.23858 21 8.05895 15.8369 8.05895 12C8.05895 8.16307 9.23858 3 12 3M3.49988 8.99998C10.1388 8.99998 13.861 8.99998 20.4999 8.99998M3.49988 15C10.1388 15 13.861 15 20.4999 15"
-                                    stroke="black" stroke-width="1.5" stroke-linecap="round"
-                                    stroke-linejoin="round">
-                                </path>
-                            </svg>
-                            Japanese</span>
-                    </div>
-                    <div class="freelancer-tags">
-                        <span class="tag">Developer</span>
-                        <span class="tag">Software</span>
-                    </div>
-                    <div class="freelancer-rating">
-                        <span>⭐4.8 (1)</span>
-                        <span>5 services</span>
-                    </div>
-                </div>
-                <div class="freelancer-card">
-                    <img src="{{ asset('homepage/images/freelnce-6.jpg') }}" alt="Freelancer 1"
-                        class="freelancer-avatar">
-                    <p class="freelancer-name">Kevin Ble</p>
-                    <p class="freelancer-work">Frontend Developer</p>
-                    <div class="freelancer-info">
-                        <span>
-                            <svg class="freelancer-icon" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="12" cy="12" r="9" stroke="black" stroke-width="1.5"
-                                    stroke-linecap="round" stroke-linejoin="round"></circle>
-                                <path
-                                    d="M15.3333 7.72222H12M12 7.72222H10.3333C9.04467 7.72222 8 8.67984 8 9.86111C8 11.0424 9.04467 12 10.3333 12H12M12 7.72222V6.5M12 7.72222V12M12 12H13.6667C14.9553 12 16 12.9576 16 14.1389C16 15.3202 14.9553 16.2778 13.6667 16.2778H12M12 12V16.2778M12 16.2778H8M12 16.2778V17.5"
-                                    stroke="black" stroke-width="1.5" stroke-linecap="round"
-                                    stroke-linejoin="round">
-                                </path>
-                            </svg>
-                            $450/month
-                        </span>
-                        <span>
-                            <svg class="freelancer-icon" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M12.5599 20.8207C12.2247 21.0598 11.7753 21.0598 11.4401 20.8207C6.61138 17.3773 1.48557 10.2971 6.6667 5.18128C8.08118 3.78463 9.99963 3 12 3C14.0004 3 15.9188 3.78463 17.3333 5.18128C22.5144 10.2971 17.3886 17.3773 12.5599 20.8207Z"
-                                    stroke="#111111" stroke-width="1.5" stroke-linecap="round"
-                                    stroke-linejoin="round">
-                                </path>
-                                <path
-                                    d="M12 12C13.1046 12 14 11.1046 14 10C14 8.89543 13.1046 8 12 8C10.8954 8 10 8.89543 10 10C10 11.1046 10.8954 12 12 12Z"
-                                    stroke="#111111" stroke-width="1.5" stroke-linecap="round"
-                                    stroke-linejoin="round">
-                                </path>
-                            </svg>
-                            San Diego</span>
-                        <span>
-                            <svg class="freelancer-icon" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3M12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3M12 21C14.7614 21 15.9413 15.837 15.9413 12C15.9413 8.16303 14.7614 3 12 3M12 21C9.23858 21 8.05895 15.8369 8.05895 12C8.05895 8.16307 9.23858 3 12 3M3.49988 8.99998C10.1388 8.99998 13.861 8.99998 20.4999 8.99998M3.49988 15C10.1388 15 13.861 15 20.4999 15"
-                                    stroke="black" stroke-width="1.5" stroke-linecap="round"
-                                    stroke-linejoin="round">
-                                </path>
-                            </svg>
-                            Japanese</span>
-                    </div>
-                    <div class="freelancer-tags">
-                        <span class="tag">Developer</span>
-                        <span class="tag">Software</span>
-                    </div>
-                    <div class="freelancer-rating">
-                        <span>⭐4.8 (1)</span>
-                        <span>5 services</span>
-                    </div>
-                </div>
-                <div class="freelancer-card">
-                    <img src="{{ asset('homepage/images/freelnce-7.jpg') }}" alt="Freelancer 1"
-                        class="freelancer-avatar">
-                    <p class="freelancer-name">Kevin Ble</p>
-                    <p class="freelancer-work">Frontend Developer</p>
-                    <div class="freelancer-info">
-                        <span>
-                            <svg class="freelancer-icon" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="12" cy="12" r="9" stroke="black" stroke-width="1.5"
-                                    stroke-linecap="round" stroke-linejoin="round"></circle>
-                                <path
-                                    d="M15.3333 7.72222H12M12 7.72222H10.3333C9.04467 7.72222 8 8.67984 8 9.86111C8 11.0424 9.04467 12 10.3333 12H12M12 7.72222V6.5M12 7.72222V12M12 12H13.6667C14.9553 12 16 12.9576 16 14.1389C16 15.3202 14.9553 16.2778 13.6667 16.2778H12M12 12V16.2778M12 16.2778H8M12 16.2778V17.5"
-                                    stroke="black" stroke-width="1.5" stroke-linecap="round"
-                                    stroke-linejoin="round">
-                                </path>
-                            </svg>
-                            $450/month
-                        </span>
-                        <span>
-                            <svg class="freelancer-icon" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M12.5599 20.8207C12.2247 21.0598 11.7753 21.0598 11.4401 20.8207C6.61138 17.3773 1.48557 10.2971 6.6667 5.18128C8.08118 3.78463 9.99963 3 12 3C14.0004 3 15.9188 3.78463 17.3333 5.18128C22.5144 10.2971 17.3886 17.3773 12.5599 20.8207Z"
-                                    stroke="#111111" stroke-width="1.5" stroke-linecap="round"
-                                    stroke-linejoin="round">
-                                </path>
-                                <path
-                                    d="M12 12C13.1046 12 14 11.1046 14 10C14 8.89543 13.1046 8 12 8C10.8954 8 10 8.89543 10 10C10 11.1046 10.8954 12 12 12Z"
-                                    stroke="#111111" stroke-width="1.5" stroke-linecap="round"
-                                    stroke-linejoin="round">
-                                </path>
-                            </svg>
-                            San Diego</span>
-                        <span>
-                            <svg class="freelancer-icon" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3M12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3M12 21C14.7614 21 15.9413 15.837 15.9413 12C15.9413 8.16303 14.7614 3 12 3M12 21C9.23858 21 8.05895 15.8369 8.05895 12C8.05895 8.16307 9.23858 3 12 3M3.49988 8.99998C10.1388 8.99998 13.861 8.99998 20.4999 8.99998M3.49988 15C10.1388 15 13.861 15 20.4999 15"
-                                    stroke="black" stroke-width="1.5" stroke-linecap="round"
-                                    stroke-linejoin="round">
-                                </path>
-                            </svg>
-                            Japanese</span>
-                    </div>
-                    <div class="freelancer-tags">
-                        <span class="tag">Developer</span>
-                        <span class="tag">Software</span>
-                    </div>
-                    <div class="freelancer-rating">
-                        <span>⭐4.8 (1)</span>
-                        <span>5 services</span>
-                    </div>
-                </div>
-                <div class="freelancer-card">
-                    <img src="{{ asset('homepage/images/freelnce-8.jpg') }}" alt="Freelancer 1"
-                        class="freelancer-avatar">
-                    <p class="freelancer-name">Kevin Ble</p>
-                    <p class="freelancer-work">Frontend Developer</p>
-                    <div class="freelancer-info">
-                        <span>
-                            <svg class="freelancer-icon" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="12" cy="12" r="9" stroke="black" stroke-width="1.5"
-                                    stroke-linecap="round" stroke-linejoin="round"></circle>
-                                <path
-                                    d="M15.3333 7.72222H12M12 7.72222H10.3333C9.04467 7.72222 8 8.67984 8 9.86111C8 11.0424 9.04467 12 10.3333 12H12M12 7.72222V6.5M12 7.72222V12M12 12H13.6667C14.9553 12 16 12.9576 16 14.1389C16 15.3202 14.9553 16.2778 13.6667 16.2778H12M12 12V16.2778M12 16.2778H8M12 16.2778V17.5"
-                                    stroke="black" stroke-width="1.5" stroke-linecap="round"
-                                    stroke-linejoin="round">
-                                </path>
-                            </svg>
-                            $450/month
-                        </span>
-                        <span>
-                            <svg class="freelancer-icon" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M12.5599 20.8207C12.2247 21.0598 11.7753 21.0598 11.4401 20.8207C6.61138 17.3773 1.48557 10.2971 6.6667 5.18128C8.08118 3.78463 9.99963 3 12 3C14.0004 3 15.9188 3.78463 17.3333 5.18128C22.5144 10.2971 17.3886 17.3773 12.5599 20.8207Z"
-                                    stroke="#111111" stroke-width="1.5" stroke-linecap="round"
-                                    stroke-linejoin="round">
-                                </path>
-                                <path
-                                    d="M12 12C13.1046 12 14 11.1046 14 10C14 8.89543 13.1046 8 12 8C10.8954 8 10 8.89543 10 10C10 11.1046 10.8954 12 12 12Z"
-                                    stroke="#111111" stroke-width="1.5" stroke-linecap="round"
-                                    stroke-linejoin="round">
-                                </path>
-                            </svg>
-                            San Diego</span>
-                        <span>
-                            <svg class="freelancer-icon" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3M12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3M12 21C14.7614 21 15.9413 15.837 15.9413 12C15.9413 8.16303 14.7614 3 12 3M12 21C9.23858 21 8.05895 15.8369 8.05895 12C8.05895 8.16307 9.23858 3 12 3M3.49988 8.99998C10.1388 8.99998 13.861 8.99998 20.4999 8.99998M3.49988 15C10.1388 15 13.861 15 20.4999 15"
-                                    stroke="black" stroke-width="1.5" stroke-linecap="round"
-                                    stroke-linejoin="round">
-                                </path>
-                            </svg>
-                            Japanese</span>
-                    </div>
-                    <div class="freelancer-tags">
-                        <span class="tag">Developer</span>
-                        <span class="tag">Software</span>
-                    </div>
-                    <div class="freelancer-rating">
-                        <span>⭐4.8 (1)</span>
-                        <span>5 services</span>
-                    </div>
-                </div>
-                {{-- <button class="slick-prev"><</button>
-                <button class="slick-next">></button> --}}
-                <!-- Thêm nhiều thẻ .freelancer-card cho các freelancer khác tương tự như trên -->
+                @endforeach
             </div>
 
             <script type="text/javascript">
@@ -812,16 +534,13 @@
                         ]
                     });
 
-                    // Đặt lại nội dung cho nút prev và next sau khi slider khởi động
                     function setArrowIcons() {
                         $('.slick-prev').html('<');
                         $('.slick-next').html('>');
                     }
 
-                    // Gọi hàm setArrowIcons khi slider đã khởi động xong
                     setArrowIcons();
 
-                    // Đảm bảo các biểu tượng được thiết lập lại sau mỗi lần thay đổi slide
                     $('.slider-freelancer').on('afterChange', function() {
                         setArrowIcons();
                     });
@@ -830,6 +549,18 @@
 
         </section>
         {{-- Top freelancer end --}}
+    </div>
+
+    <div class="shortcut-buttons">
+        <a href="{{ route('welcome') }}" class="shortcut-button" title="Homepage">
+            <i class="fa-solid fa-house"></i>
+        </a>
+        <a href="{{ route('login') }}" class="shortcut-button" title="Login">
+            <i class="fa-solid fa-arrow-right-to-bracket"></i>
+        </a>
+        <a href="{{ route('findJob') }}" class="shortcut-button" title="Find job">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </a>
     </div>
 
     <footer class="footer text-center text-lg-start text-white" style="background-color: #181824">
@@ -890,7 +621,7 @@
         </div>
         <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
             © 2024 Copyright:
-            {{-- <a class="text-white" href="{{ route('freelancer') }}">felance.com</a> --}}
+            <a class="text-white" href="{{ route('welcome') }}">felance.com</a>
         </div>
     </footer>
     {{-- Footer end --}}

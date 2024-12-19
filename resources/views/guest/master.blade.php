@@ -7,6 +7,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title')</title>
     <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
+    <link rel="stylesheet" href="{{ asset('welcome_assets/style.css') }}">
     <link rel="stylesheet" href="{{ asset('freelancer_assets/css/style.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -24,102 +25,41 @@
 </head>
 
 <body>
-    <div class="horizontal-menu">
-        <nav class="navbar top-navbar col-lg-12 col-12 p-0">
-            <div class="container">
-                <div class="navbar-brand-wrapper d-flex"
-                    style="text-align: center; align-items: center; justify-content: center">
-                    <a class="navbar-brand" href="{{ route('freelancer') }}">
-                        <img src="{{ asset('welcome_assets/images/logo_name.png') }}" alt="logo" /></a>
-                </div>
-                <div class="navbar-menu-wrapper d-flex" style="align-items: center; justify-content: end;">
-                    <ul class="navbar-nav d-flex" style="flex-direction: row">
-                        <li class="nav-item">
-                            <a class="nav-link d-flex dropdown-toggle" id="UserDropdown" href="#"
-                                style="align-items: center" data-bs-toggle="dropdown" aria-expanded="false">
-                                <img class="img-xs rounded-circle me-2" src="{{ asset($freelancer->avatar) }}"
-                                    alt="Profile image">
-                                <span class="d-none d-md-inline"> {{ $user->firstname }} {{ $user->lastname }} </span>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right navbar-dropdown"
-                                aria-labelledby="UserDropdown">
-                                <div class="dropdown-header text-center">
-                                    <img class="img-md rounded-circle" src="{{ asset($freelancer->avatar) }}"
-                                        alt="Profile image">
-                                    <p class="mb-1 mt-3" style="font-size: 20px; font-weight: bold; color: #1e1e1e">
-                                        {{ $user->firstname }} {{ $user->lastname }}</p>
-                                    <p class="mb-0" style="font-size: 17px">{{ $user->email }}</p>
-                                </div>
-                                <a href="{{ route('freelancer.profile') }}" class="dropdown-item mb-2">
-                                    <i class="fa-regular fa-user"
-                                        style="font-size: 17px; color: #29B2FE; margin-right: 10px"></i>
-                                    My Profile
-                                </a>
+    <nav class="navbar navbar-expand-lg" style="position: fixed">
+        <div class="container">
 
-                                <a class="dropdown-item" href="{{ route('logout') }}">
-                                    <i class="fa-solid fa-power-off"
-                                        style="font-size: 17px; color: #29B2FE; margin-right: 10px"></i>
-                                    SignOut
-                                </a>
-                            </div>
-                        </li>
-                    </ul>
-                    <button class="navbar-toggler navbar-toggler-right d-md-none ms-2" type="button"
-                        data-bs-toggle="collapse" data-bs-target="#navigateMenu">
-                        <i class="fa-solid fa-bars"></i>
-                    </button>
-                </div>
-            </div>
-        </nav>
-        <nav class="bottom-navbar collapse d-md-block" id="navigateMenu">
-            <div class="container">
-                <ul class="nav page-navigation">
+            <a href="{{ url('/') }}" class="navbar-brand d-flex mx-auto mx-lg-0">
+                <img src="{{ asset('welcome_assets/images/logo_name.png') }}" alt="">
+            </a>
+
+            <div class="d-lg-flex align-items-center d-none ms-auto" style="margin-top: 10px;">
+                <ul class="navbar-nav ms-lg-2">
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->is('freelancer') ? 'active' : '' }}"
-                            href="{{ route('freelancer') }}">
-                            <i class="fa-solid fa-house"></i>
-                            <span class="menu-title">Dashboard</span>
-                        </a>
+                        <a class="nav-link click-scroll" href="{{ route('login') }}">Log in</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link click-scroll" href="{{ route('register') }}">Sign up</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->is('freelancer/lists*') ? 'active' : '' }}"
-                            href="{{ route('freelancer.myLists') }}">
-                            <i class="fa-solid fa-list-check"></i>
-                            <span class="menu-title">Lists</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {{ request()->is('freelancer/inbox*') ? 'active' : '' }}"
-                            href="{{ route('freelancer.inbox') }}">
-                            <i class="fa-solid fa-message"></i>
-                            <span class="menu-title">Inbox</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {{ request()->is('feedback*') ? 'active' : '' }}"
-                            href="{{ route('freelancer.finishedJob') }}">
-                            <i class="fa-solid fa-comment-dots"></i>
-                            <span class="menu-title">Feedback</span>
-                        </a>
+                        <a class="nav-link start-button" href="{{ route('register') }}" style="background: #29B2FE">Start now</a>
                     </li>
                 </ul>
             </div>
-        </nav>
-    </div>
-    <div style=" padding-top: 170px; padding-bottom: 50px; background: #FAFBFD;">
+        </div>
+    </nav>
+
+    <div style=" padding-top: 120px; padding-bottom: 50px; background: #FAFBFD;">
         @yield('main-content')
         <div class="shortcut-buttons">
-            <a href="{{ route('freelancer') }}" class="shortcut-button" title="Dashboard">
-                <i class="fas fa-home"></i>
+            <a href="{{ route('welcome') }}" class="shortcut-button" title="Homepage">
+                <i class="fa-solid fa-house"></i>
             </a>
-            <a href="{{ route('freelancer.myLists') }}" class="shortcut-button" title="My lists">
-                <i class="fa-solid fa-list-check"></i>
+            <a href="{{ route('login') }}" class="shortcut-button" title="Login">
+                <i class="fa-solid fa-arrow-right-to-bracket"></i>
             </a>
-            <a href="{{ route('freelancer.inbox') }}" class="shortcut-button" title="Inbox">
-                <i class="fa-solid fa-message"></i>
-            </a>
-            <a href="{{ route('freelancer.finishedJob') }}" class="shortcut-button" title="Finished jobs">
-                <i class="fa-solid fa-comment-dots"></i>
+            <a href="{{ route('findJob') }}" class="shortcut-button" title="Find job">
+                <i class="fa-solid fa-magnifying-glass"></i>
             </a>
         </div>
     </div>

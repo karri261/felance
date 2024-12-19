@@ -209,64 +209,6 @@
     box-shadow: none;
 }
 
-
-/* ** Job Listing **
-.joblist{
-    font-size: 40px;
-    font-family: "IBM Plex Sans", serif;
-}
-.nav-pills .nav-item .active {
-    border-bottom: 2px solid var(--primary);
-}
-
-.nav-item h6{
-    font-family: "IBM Plex Sans", serif;
-}
-.job-item {
-    border: 1px solid transparent;
-    border-radius: 2px;
-    box-shadow: 0 0 45px rgba(0, 0, 0, .08);
-    transition: .5s;
-}
-
-.job-item:hover {
-    border-color: rgba(0, 0, 0, .08);
-    box-shadow: none;
-}
-.btn-primary {
-    background-color: #14a4f2;
-    border-color: #14a4f2;
-}
-.btn-primary:hover{
-    background-color: #0d88c9;
-    border-color: #0d88c9;
-}
-.btn-light {
-    color: #000;
-    background-color: #def6ff;
-    border-color: #cbf0ff;
-}
-.text-primary{
-    color:#23a2e6 !important;
-}
-.btn_more_job{
-    background-color: none;
-    text-decoration: underline;
-}
-.btn_more_job:hover{
-    color: var(--primary);
-}
-.tab-pane{
-    display:flex;
-    flex-direction: column;
-    justify-content: center;
-
-}
-.btn_more_job{
-    margin:auto;
-} */
-
-
 /*** Testimonial ***/
 .testimonial-carousel .owl-item .testimonial-item,
 .testimonial-carousel .owl-item.center .testimonial-item * {

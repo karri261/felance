@@ -53,7 +53,7 @@ body {
     justify-content: space-between;
     padding-top: 10%;
     /* height: 100vh; */
-    background-color: white;
+    /* background-color: white; */
 }
 
 .hero-content {
@@ -233,7 +233,7 @@ body {
 
 .company-name{
     font-size: 23px;
-    font-weight:bold;
+    /* font-weight:bold; */
 }
 .freelancer-tag{
     margin-left: 10px;
@@ -733,5 +733,68 @@ body {
     }
     .right-box{
         width:40%;
+    }
+}
+
+.rating-star {
+    padding: 0;
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0;
+}
+.rating-star li {
+    margin: 5px 3px;
+}
+.rating-star .active {
+    color: #ffc107;
+}
+
+.box-body .box-title {
+    display: inline-block;
+    margin: 0;
+    margin-bottom: 1rem;
+    color: #172b4c;
+}
+
+.box-body ul li {
+    line-height: 24px;
+}
+
+.list-unstyled {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+/* ===================SHORTCUT=================== */
+.shortcut-buttons {
+    display: none;
+    position: fixed;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+}
+
+.shortcut-button {
+    display: block;
+    background-color: #29B2FE;
+    color: white;
+    padding: 10px 15px;
+    margin: 10px;
+    text-align: center;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.shortcut-button:hover {
+    background-color: #0056b3;
+}
+
+@media (max-width: 768px) {
+    .shortcut-buttons {
+        display: block;
     }
 }
