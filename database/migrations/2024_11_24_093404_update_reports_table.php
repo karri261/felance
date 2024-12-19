@@ -13,14 +13,13 @@ class UpdateReportsTable extends Migration
      */
     public function up()
     {
-        Schema::table('reports', function (Blueprint $table) {
-            // Đổi tên cột 'reason' thành 'title'
-            // $table->renameColumn('reason', 'title');
-
-            // Thêm cột 'detail' kiểu VARCHAR(255)
-            $table->string('detail', 255)->nullable()->after('title');
-        });
+        if (!Schema::hasColumn('reports', 'detail')) {
+            Schema::table('reports', function (Blueprint $table) {
+                $table->string('detail', 255)->nullable()->after('title');
+            });
+        }
     }
+
 
     /**
      * Reverse the migrations.

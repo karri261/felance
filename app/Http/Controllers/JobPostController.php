@@ -28,53 +28,62 @@ class JobPostController extends Controller
         return view('Admin/pages.approve_job_post', compact('jobs'));
     }
 
-    public function filterJobs(Request $request)
-    {
-        $query = JobPost::query();
+    // public function filterJobs(Request $request)
+    // {
+    //     $query = JobPost::query();
+        
 
-        if ($request->filled('job_name')) {
-            $query->where('job_title', 'like', '%' . $request->job_name . '%');
-        }
+    //     if ($request->filled('job_name')) {
+    //         $query->where('job_title', 'like', '%' . $request->job_name . '%');
+    //     }
 
-        if ($request->filled('location')) {
-            $query->where('location', 'like', '%' . $request->location . '%');
-        }
+    //     if ($request->filled('location')) {
+    //         $query->where('location', 'like', '%' . $request->location . '%');
+    //     }
 
-        if ($request->filled('categories')) {
-            $query->whereIn('categories', $request->categories);
-        }
+    //     if ($request->filled('categories')) {
+    //         $query->whereIn('categories', $request->categories);
+    //     }
 
-        if ($request->filled('salary')) {
-            $salaryRange = $request->salary;
+    //     if ($request->filled('salary')) {
+    //         $salaryRange = $request->salary;
 
-            if ($salaryRange === 'lt_50') {
-                $query->where('salary_max', '<', 50);
-            } elseif ($salaryRange === 'lt_100') {
-                $query->where('salary_max', '<', 100);
-            } elseif ($salaryRange === 'lt_250') {
-                $query->where('salary_max', '<', 250);
-            } elseif ($salaryRange === 'gt_250') {
-                $query->where('salary_min', '>', 250);
-            }
-        }
+    //         if ($salaryRange === 'lt_50') {
+    //             $query->where('salary_max', '<', 50);
+    //         } elseif ($salaryRange === 'lt_100') {
+    //             $query->where('salary_max', '<', 100);
+    //         } elseif ($salaryRange === 'lt_250') {
+    //             $query->where('salary_max', '<', 250);
+    //         } elseif ($salaryRange === 'gt_250') {
+    //             $query->where('salary_min', '>', 250);
+    //         }
+    //     }
 
-        if ($request->filled('status')) {
-            $status = $request->status;
+    //     if ($request->filled('status')) {
+    //         $status = $request->status;
 
-            if ($status === 'Waiting for approval') {
-                $query->where('status', 'Waiting for approval');
-            } elseif ($status === 'Approved') {
-                $query->where('status', 'Approved');
-            } elseif ($status === 'Rejected') {
-                $query->where('status', 'Rejected');
-            }
-        }
+    //         if ($status === 'Waiting for approval') {
+    //             $query->where('status', 'Waiting for approval');
+    //         } elseif ($status === 'Approved') {
+    //             $query->where('status', 'Approved');
+    //         } elseif ($status === 'Rejected') {
+    //             $query->where('status', 'Rejected');
+    //         }
+    //     }
 
-        $jobs = $query->orderBy('created_at', 'desc')->paginate(7);
+    //     $jobs = $query->orderBy('created_at', 'desc')->paginate(7);
 
-        return view('freelancer.job-list', compact('jobs'))->render();
-    }
+    //     return view('freelancer.job-list', compact('jobs'))->render();
+    // }
 
+    
+    public function showManageJobs()
+{
+    // Lọc các job có status là "Approved" hoặc "Rejected"
+    $jobs = JobPost::whereIn('status', ['Approved', 'Rejected'])->get();
+
+    return view('Admin/pages.manage_job', compact('jobs'));
+}
     public function EmployfilterJobs(Request $request)
     {
         $query = JobPost::query();

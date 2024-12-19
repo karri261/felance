@@ -35777,11 +35777,17 @@ dl li {
     color: rgb(21 149 43);
     background-color: rgb(211, 250, 224);
 }
+.ok:hover{
+    background-color: rgb(15, 130, 53);
+    color:white;
+}
 .no {
     color: white;
     background-color: #f95f53;
 }
-
+.no:hover{
+    background-color: #f01909;
+}
 .job-title-name {
     font-size: 18px;
     font-weight: bold;
@@ -35796,8 +35802,8 @@ dl li {
     margin-bottom: 3px;
     padding: 3px 6px;
     font-size: 16px;
-    color: rgb(21 149 43);
-    background-color: rgb(211, 250, 224) !important;
+    /* color: rgb(21 149 43); */
+    /* background-color: rgb(211, 250, 224) !important; */
 }
 
 .place-time{

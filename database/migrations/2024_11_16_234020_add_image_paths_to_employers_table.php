@@ -6,11 +6,13 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    public function up(): void
+    public function up()
     {
-        Schema::table('employers', function (Blueprint $table) {
-            $table->json('image_paths')->nullable();
-        });
+        if (!Schema::hasColumn('employers', 'image_paths')) {
+            Schema::table('employers', function (Blueprint $table) {
+                $table->json('image_paths')->nullable();
+            });
+        }
     }
 
     public function down(): void

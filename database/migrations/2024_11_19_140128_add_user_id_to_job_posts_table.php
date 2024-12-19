@@ -6,11 +6,19 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    public function up(): void
+    // public function up(): void
+    // {
+    //     Schema::table('job_posts', function (Blueprint $table) {
+    //         $table->foreignId('user_id')->constrained('users')->onDelete('cascade')->after('id');
+    //     });
+    // }
+    public function up()
     {
-        Schema::table('job_posts', function (Blueprint $table) {
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade')->after('id');
-        });
+        if (!Schema::hasColumn('job_posts', 'user_id')) {
+            Schema::table('job_posts', function (Blueprint $table) {
+                $table->foreignId('user_id')->constrained('users')->onDelete('cascade')->after('id');
+            });
+        }
     }
 
     public function down(): void

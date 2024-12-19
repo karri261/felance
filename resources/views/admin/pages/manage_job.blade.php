@@ -158,7 +158,7 @@
         </div>
     </div>
 
-    <script>
+    {{-- <script>
         $(document).ready(function() {
             function fetchJobs() {
                 const jobName = $('input[name="job_name"]').val();
@@ -192,5 +192,41 @@
             $('input[name="categories[]"]').on('change', fetchJobs);
             $('input[name="salary"]').on('change', fetchJobs);
         });
-    </script>
+    </script> --}}
+
+{{-- <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('click', function(event) {
+            //Reject job post
+            const rejectButton = event.target.closest('#check-no');
+            if (rejectButton) {
+                const id = rejectButton.getAttribute('data-id');
+                if (confirm('Are you sure to reject this Job post?')) {
+                    fetch(`/admin/approve-job-post/approve-no/${id}`, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')
+                                    .getAttribute('content'),
+                            }
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                window.location.href = '/admin/manage-job';
+                                alert('Reject successfully. Sent email to Employer! hêhhehe');
+                               
+                            } else {
+                                alert('Có lỗi: '.data.message);
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            alert('Có lỗi xảy ra!',error.message);
+                        });
+                }
+            }
+        });
+    });
+</script> --}}
 @endsection

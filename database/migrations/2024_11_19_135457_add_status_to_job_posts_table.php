@@ -7,13 +7,15 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
 
-    public function up(): void
+    public function up()
     {
-        Schema::table('job_posts', function (Blueprint $table) {
-            $table->enum('status', ['Waiting for approval', 'Approved', 'Rejected'])
-                  ->default('Waiting for approval')
-                  ->after('end_date');
-        });
+        if (!Schema::hasColumn('job_posts', 'status')) {
+            Schema::table('job_posts', function (Blueprint $table) {
+                $table->enum('status', ['Waiting for approval', 'Approved', 'Rejected'])
+                    ->default('Waiting for approval')
+                    ->after('end_date');
+            });
+        }
     }
 
     public function down(): void
