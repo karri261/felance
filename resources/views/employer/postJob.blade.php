@@ -122,8 +122,12 @@
                         <hr class="my-15">
                         <div class="form-group">
                             <textarea rows="7" class="form-control" id="job_description" name="job_description"></textarea>
-                            <script>
-                                CKEDITOR.replace('job_description');
+                            <script type="module">
+                                ClassicEditor
+                                    .create(document.querySelector('#job_description'))
+                                    .catch(error => {
+                                        console.error(error);
+                                    });
                             </script>
                         </div>
                         <h4 class="box-title text-primary mt-30 fs-18">
@@ -133,8 +137,12 @@
                         <hr class="my-15">
                         <div class="form-group">
                             <textarea rows="7" class="form-control" id="responsibilities" name="responsibilities"></textarea>
-                            <script>
-                                CKEDITOR.replace('responsibilities');
+                            <script type="module">
+                                ClassicEditor
+                                    .create(document.querySelector('#responsibilities'))
+                                    .catch(error => {
+                                        console.error(error);
+                                    });
                             </script>
                         </div>
                         <h4 class="box-title text-primary mt-30 fs-18">
@@ -144,11 +152,18 @@
                         <hr class="my-15">
                         <div class="form-group">
                             <textarea rows="7" class="form-control" id="background" name="background"></textarea>
-                            <script>
-                                CKEDITOR.replace('background');
+                            <script type="module">
+                                ClassicEditor
+                                    .create(document.querySelector('#background'))
+                                    .catch(error => {
+                                        console.error(error);
+                                    });
                             </script>
                         </div>
                         <div class="d-flex justify-content-end" style="margin-top: 20px">
+                            <a href=" {{ route('employer') }}" class="btn btn-warning" style="margin: 0 5px; color: #fff">
+                                <i class="fa-solid fa-ban"></i> Cancel
+                            </a>
                             <button type="submit" class="btn btn-success" style="margin: 0 5px">
                                 <i class="fa-regular fa-floppy-disk"></i> Save changes
                             </button>

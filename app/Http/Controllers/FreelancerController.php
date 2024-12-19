@@ -256,12 +256,8 @@ class FreelancerController extends Controller
         $freelancer = Freelancer::where('user_id', $user->id)->first();
 
         $completedJobs = JobPost::whereHas('applicants', function ($query) use ($user) {
-            $query->where('user_id', $user->id)
-                ->where('finish', '1');
-        })->with(['applicants' => function ($query) use ($user) {
-            $query->where('user_id', $user->id)
-                ->with('rating');
-        }])->paginate(7);
+            $query->where('user_id', $user->id)->where('finish', '1');
+        })->with('applicants.rating')->paginate(3);
 
         return view('freelancer.finishedJob', compact('completedJobs', 'freelancer', 'user'));
     }

@@ -163,6 +163,9 @@
                             </script>
                         </div>
                         <div class="d-flex justify-content-end" style="margin-top: 20px">
+                            <a href=" {{ route('employer') }}" class="btn btn-warning" style="margin: 0 5px; color: #fff">
+                                <i class="fa-solid fa-ban"></i> Cancel
+                            </a>
                             <button type="submit" class="btn btn-success" style="margin: 0 5px">
                                 <i class="fa-regular fa-floppy-disk"></i> Save changes
                             </button>

@@ -179,7 +179,7 @@ class EmployerController extends Controller
         $user = Auth::user();
         $employer = Employer::where('user_id', $user->id)->first();
 
-        if ( !$employer->company_name || !$employer->address) {
+        if (!$employer->company_name || !$employer->address) {
             return redirect()->route('employer')
                 ->with('error', 'Please complete your company information before posting a job.');
         }
@@ -303,7 +303,13 @@ class EmployerController extends Controller
         $job = JobPost::findOrFail($job_id);
         $applicants = Applicant::with('user', 'job', 'freelancer')
             ->where('job_id', $job_id)
-            ->get();
+            ->get()
+            ->map(function ($applicant) {
+                $applicant->total_jobs = Applicant::where('user_id', $applicant->user_id)
+                    ->where('status', 'accepted')
+                    ->count();
+                return $applicant;
+            });
         $employer = Employer::where('user_id', $user->id)->first();
 
         return view('employer.applicant', compact('job', 'user', 'employer', 'applicants'));
@@ -323,7 +329,12 @@ class EmployerController extends Controller
         $images = json_decode($freelancer->image_paths, true);
 
         $userView = User::where('id', $user_id)->first();
-        return view('employer.applicant-profile', compact('user', 'job', 'freelancer', 'userView', 'employer', 'applicant', 'images'));
+
+        $completedJobs = JobPost::whereHas('applicants', function ($query) use ($userView) {
+            $query->where('user_id', $userView->id)->where('finish', '1');
+        })->with('applicants.rating')->paginate(3);
+
+        return view('employer.applicant-profile', compact('user', 'job', 'freelancer', 'userView', 'employer', 'applicant', 'images', 'completedJobs'));
     }
 
     public function applicantProfileRate($user_id, $job_id)
@@ -364,11 +375,21 @@ class EmployerController extends Controller
 
             Mail::to($appUser->email)->send(new \App\Mail\ApplicationAccept($mailContent));
 
-            Conversation::create([
-                'user1_id' => $job->user_id,
-                'user2_id' => $applicant->user_id,
-                'applicant_id' => $applicantId,
-            ]);
+            $conversationExists = Conversation::where(function ($query) use ($job, $applicant) {
+                $query->where('user1_id', $job->user_id)
+                    ->where('user2_id', $applicant->user_id);
+            })->orWhere(function ($query) use ($job, $applicant) {
+                $query->where('user1_id', $applicant->user_id)
+                    ->where('user2_id', $job->user_id);
+            })->exists();
+
+            if (!$conversationExists) {
+                Conversation::create([
+                    'user1_id' => $job->user_id,
+                    'user2_id' => $applicant->user_id,
+                    'applicant_id' => $applicantId,
+                ]);
+            }
         } elseif ($request->action === 'reject') {
             $applicant->status = 'rejected';
             $applicant->save();
@@ -393,8 +414,14 @@ class EmployerController extends Controller
         $job = JobPost::findOrFail($job_id);
         $applicants = Applicant::with('user', 'job', 'freelancer')
             ->where('job_id', $job_id)
-            ->where('status','accepted')
-            ->get();
+            ->where('status', 'accepted')
+            ->get()
+            ->map(function ($applicant) {
+                $applicant->total_jobs = Applicant::where('user_id', $applicant->user_id)
+                    ->where('status', 'accepted')
+                    ->count();
+                return $applicant;
+            });
 
         return view('employer.rating', compact('job', 'user', 'employer', 'applicants'));
     }
@@ -420,7 +447,7 @@ class EmployerController extends Controller
 
         $job_id = $applicant->job_id;
         $freelancer = Freelancer::where('user_id', $applicant->user_id)->first();
-        $freelancer->rating = $averageRating; 
+        $freelancer->rating = $averageRating;
         $freelancer->save();
 
         return redirect()->route('employer.rating', ['job_id' => $job_id])->with('success', 'Rating saved successfully!');

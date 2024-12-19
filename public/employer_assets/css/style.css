@@ -52,6 +52,11 @@ a {
     margin-top: 10px !important;
     margin-bottom: 10px !important;
 }
+@media (min-width: 767.98px) {
+    .ms-lg-10 {
+        margin-left: 10px;
+    }
+}
 .mt-20 {
     margin-top: 20px !important;
 }
@@ -107,8 +112,10 @@ a {
 .float-start {
     float: left !important;
 }
-.bs-1 {
-    border-left: 1px solid #f3f6f9 !important;
+@media (min-width: 767.98px) {
+    .bs-1 {
+        border-left: 1px solid #f3f6f9 !important;
+    }
 }
 .waves-effect {
     position: relative;
@@ -175,7 +182,7 @@ a {
     font-size: 20px;
 }
 .horizontal-menu .top-navbar .navbar-menu-wrapper .navbar-nav .nav-item img {
-    width: 36px;
+    width: 48px;
 }
 
 .horizontal-menu
@@ -273,6 +280,37 @@ a {
 .footer a {
     color: #fff;
 }
+/* ===================SHORTCUT=================== */
+.shortcut-buttons {
+    display: none;
+    position: fixed;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+}
+
+.shortcut-button {
+    display: block;
+    background-color: #29B2FE;
+    color: white;
+    padding: 10px 15px;
+    margin: 10px;
+    text-align: center;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.shortcut-button:hover {
+    background-color: #0056b3;
+}
+
+@media (max-width: 768px) {
+    .shortcut-buttons {
+        display: block;
+    }
+}
 /* ===================PROFILE==================== */
 @media (max-width: 767.98px) {
     .profile {
@@ -347,9 +385,9 @@ a {
 }
 
 /* ================DASHBOARD=================== */
-#job-list {
+/* #job-list {
     height: 68vh;
-}
+} */
 .tab-content .box {
     position: relative;
     margin-bottom: 30px;
@@ -380,8 +418,8 @@ a {
     border-radius: 5px;
 }
 .tab-content .box .box-body .avatar-lg {
-    width: 48px;
-    height: 48px;
+    width: 63px;
+    height: 63px;
     line-height: 48px;
     font-size: 1.286rem;
 }
@@ -881,7 +919,8 @@ a {
 [type="radio"]:not(.filled-in) + label:after {
     border: none !important;
 }
-[type="checkbox"] + label, [type="radio"] + label {
+[type="checkbox"] + label,
+[type="radio"] + label {
     line-height: 20px !important;
 }
 .rate:not(:checked) > label:before {
@@ -934,4 +973,3 @@ body.modal-open .box.position-sticky {
 .modal-dialog {
     z-index: 1050 !important;
 }
-

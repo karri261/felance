@@ -111,71 +111,78 @@
                         </span>
                     </div>
                     <div class="freelancer-rating">
-                        <span>⭐ {{ $applicant->freelancer->rating }}</span>
+                        <span>⭐ {{ $applicant->freelancer->rating }} ({{ $applicant->total_jobs }})</span>
                         <div>
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                data-bs-target="#modal-{{ $applicant->id }}">
-                                Rate
-                            </button>
+                            @if ($applicant->rating)
+                                <button type="button" class="btn btn-secondary" disabled>
+                                    Already Rated
+                                </button>
+                            @else
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                    data-bs-target="#modal-{{ $applicant->id }}">
+                                    Rate
+                                </button>
+                            @endif
+                                <!-- Modal -->
+                                <div class="modal fade" id="modal-{{ $applicant->id }}" tabindex="-1"
+                                    aria-labelledby="modalLabel-{{ $applicant->id }}" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <form action="{{ route('employer.rate') }}" method="POST">
+                                                @csrf
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="modalLabel-{{ $applicant->id }}">
+                                                        Rate for {{ $applicant->user->firstname }}
+                                                        {{ $applicant->user->lastname }}
+                                                        in {{ $job->job_title }} position.
+                                                    </h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <input type="hidden" name="applicant_id"
+                                                        value="{{ $applicant->id }}">
+                                                    <div class="rate-box">
+                                                        <div class="rate">
+                                                            <input type="radio" id="star5-{{ $applicant->id }}"
+                                                                name="rate" value="5" />
+                                                            <label for="star5-{{ $applicant->id }}" title="text">5
+                                                                stars</label>
+                                                            <input type="radio" id="star4-{{ $applicant->id }}"
+                                                                name="rate" value="4" />
+                                                            <label for="star4-{{ $applicant->id }}" title="text">4
+                                                                stars</label>
+                                                            <input type="radio" id="star3-{{ $applicant->id }}"
+                                                                name="rate" value="3" />
+                                                            <label for="star3-{{ $applicant->id }}" title="text">3
+                                                                stars</label>
+                                                            <input type="radio" id="star2-{{ $applicant->id }}"
+                                                                name="rate" value="2" />
+                                                            <label for="star2-{{ $applicant->id }}" title="text">2
+                                                                stars</label>
+                                                            <input type="radio" id="star1-{{ $applicant->id }}"
+                                                                name="rate" value="1" />
+                                                            <label for="star1-{{ $applicant->id }}" title="text">1
+                                                                star</label>
+                                                        </div>
+                                                    </div>
 
-                            <!-- Modal -->
-                            <div class="modal fade" id="modal-{{ $applicant->id }}" tabindex="-1"
-                                aria-labelledby="modalLabel-{{ $applicant->id }}" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <form action="{{ route('employer.rate') }}" method="POST">
-                                            @csrf
-                                            <div class="modal-header">
-                                                <h1 class="modal-title fs-5" id="modalLabel-{{ $applicant->id }}">
-                                                    Rate for {{ $applicant->user->firstname }}
-                                                    {{ $applicant->user->lastname }}
-                                                    in {{ $job->job_title }} position.
-                                                </h1>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <input type="hidden" name="applicant_id" value="{{ $applicant->id }}">
-                                                <div class="rate-box">
-                                                    <div class="rate">
-                                                        <input type="radio" id="star5-{{ $applicant->id }}"
-                                                            name="rate" value="5" />
-                                                        <label for="star5-{{ $applicant->id }}" title="text">5
-                                                            stars</label>
-                                                        <input type="radio" id="star4-{{ $applicant->id }}"
-                                                            name="rate" value="4" />
-                                                        <label for="star4-{{ $applicant->id }}" title="text">4
-                                                            stars</label>
-                                                        <input type="radio" id="star3-{{ $applicant->id }}"
-                                                            name="rate" value="3" />
-                                                        <label for="star3-{{ $applicant->id }}" title="text">3
-                                                            stars</label>
-                                                        <input type="radio" id="star2-{{ $applicant->id }}"
-                                                            name="rate" value="2" />
-                                                        <label for="star2-{{ $applicant->id }}" title="text">2
-                                                            stars</label>
-                                                        <input type="radio" id="star1-{{ $applicant->id }}"
-                                                            name="rate" value="1" />
-                                                        <label for="star1-{{ $applicant->id }}" title="text">1
-                                                            star</label>
+                                                    <div class="comment-box">
+                                                        <p>Leave a comment:</p>
+                                                        <textarea name="comment" cols="30" rows="5" style="width: 100%"></textarea>
+                                                    </div>
+
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-bs-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-primary">Save
+                                                            changes</button>
                                                     </div>
                                                 </div>
-
-                                                <div class="comment-box">
-                                                    <p>Leave a comment:</p>
-                                                    <textarea name="comment" cols="30" rows="5" style="width: 100%"></textarea>
-                                                </div>
-
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary"
-                                                        data-bs-dismiss="modal">Close</button>
-                                                    <button type="submit" class="btn btn-primary">Save changes</button>
-                                                </div>
-                                            </div>
-                                        </form>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
                         </div>
                     </div>
 

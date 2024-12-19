@@ -97,13 +97,12 @@
                         </span>
                     </div>
                     <div class="freelancer-rating">
-                        <span>⭐ {{ $applicant->freelancer->rating }}</span>
+                        <span>⭐ {{ $applicant->freelancer->rating }} ({{ $applicant->total_jobs }})</span>
                         <a href="" style="text-decoration: none">
                             <span>
                                 <a
                                     href="{{ route('employer.applicantProfile', ['user_id' => $applicant->user_id, 'job_id' => $applicant->job_id]) }}">View
                                     profile</a>
-
                             </span>
                         </a>
                     </div>

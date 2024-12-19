@@ -17,7 +17,6 @@
                         <button class="btn-report" data-bs-toggle="modal" data-bs-target="#reportModal{{ $applicant->id }}">
                             <i class="fa-regular fa-flag"></i>
                         </button>
-
                         <div class="modal fade" id="reportModal{{ $applicant->id }}" tabindex="-1"
                             aria-labelledby="reportModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
@@ -185,12 +184,12 @@
                                 <p class="fs-14" style="text-align: justify">
                                     {{ $freelancer->bio }}
                                 </p>
-
                                 <h4 class="box-title fs-18 mb-0 mt-20">
                                     Featured Image
                                 </h4>
                                 <hr>
                                 <div class="popup-gallery d-flex justify-content-center">
+                                    
                                     <div class="row" style="justify-content: center">
                                         @if (!empty($images) && is_array($images))
                                             @foreach ($images as $image)
@@ -203,6 +202,73 @@
                                             <p class="text-muted fs-14">No images available</p>
                                         @endif
                                     </div>
+                                    <div id="feedback"></div>
+                                </div>
+                                <h4 class="box-title fs-18 mb-0">
+                                    Feedback
+                                </h4>
+                                <hr>
+                                <div>
+                                    @if ($completedJobs->isEmpty())
+                                        <div class="text-center" style="padding: 70px 0">
+                                            <i class="fa-solid fa-briefcase" style="color: #ccc;"></i>
+                                            No jobs at the moment.
+                                        </div>
+                                    @else
+                                        @foreach ($completedJobs as $job)
+                                            <div class="rating-box d-flex">
+                                                <div class="company-logo" style="margin-right: 10px">
+                                                    <img src="{{ asset($job->company_logo) }}" alt=""
+                                                        style="width: 63px; height: 63px;">
+                                                </div>
+                                                <div class="rating-main">
+                                                    <h6 class="company-name" style="margin-bottom: 0">
+                                                        {{ $job->company_name }}
+                                                    </h6>
+                                                    @foreach ($job->applicants as $applicant)
+                                                        <div class="rating-inf d-flex align-items-center">
+                                                            <ul class="rating-star"
+                                                                style="font-size: 12px; justify-content: flex-start">
+                                                                @php
+                                                                    $score = $applicant->rating->score;
+                                                                    $fullStars = floor($score);
+                                                                    $halfStar = $score - $fullStars >= 0.5;
+                                                                    $emptyStars = 5 - $fullStars - ($halfStar ? 1 : 0);
+                                                                @endphp
+
+                                                                @for ($i = 0; $i < $fullStars; $i++)
+                                                                    <li class="active"><i class="fa fa-star"></i></li>
+                                                                @endfor
+
+                                                                @if ($halfStar)
+                                                                    <li class="active half"><i
+                                                                            class="fa fa-star-half-alt"></i>
+                                                                    </li>
+                                                                @endif
+
+                                                                @for ($i = 0; $i < $emptyStars; $i++)
+                                                                    <li><i class="fa fa-star" style="color: #ddd"></i>
+                                                                    </li>
+                                                                @endfor
+                                                            </ul>
+                                                            <span style="font-size: 14px; color: #5c5c5c">
+                                                                | Job name: {{ $job->job_title }}
+                                                            </span>
+                                                        </div>
+                                                        <div class="rating-comment">
+                                                            Comment: {{ $applicant->rating->comment }}
+                                                        </div>
+                                                    @endforeach
+                                                </div>
+                                            </div>
+                                            <hr style="color: #b7b7b7; height: 50%;">
+                                        @endforeach
+                                        <div class="d-flex justify-content-center">
+                                            <div class="custom-pagination">
+                                                {{ $completedJobs->fragment('feedback')->links('pagination::bootstrap-5') }}
+                                            </div>
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
                         </div>

@@ -77,7 +77,11 @@ class JobPostController extends Controller
 
     public function EmployfilterJobs(Request $request)
     {
-        $query = JobPost::query();
+        $user = Auth::user();
+        $userId =  $user->id;
+
+        $query = JobPost::where('user_id', $userId);
+        // $query = JobPost::query();
 
         if ($request->filled('job_name')) {
             $query->where('job_title', 'like', '%' . $request->job_name . '%');
@@ -96,9 +100,35 @@ class JobPostController extends Controller
             }
         }
 
-        $jobs = $query->orderBy('created_at', 'desc')->paginate(7);
+        if ($request->filled('finish')) {
+            $finish = $request->finish;
 
-        return view('employer.job-list', compact('jobs'))->render();
+            if ($finish === 'complete') {
+                $query->where('finish', true);
+            } elseif ($finish == 'unfinish') {
+                $query->where('finish', false);
+            }
+        }
+
+        if ($request->filled('recruit')) {
+            $recruit = $request->recruit;
+
+            if ($recruit === 'open') {
+                $query->where('end_date', '>=', now());
+            } elseif ($recruit == 'close') {
+                $query->where('end_date', '<', now());
+            }
+        }
+
+        $jobs = $query->orderBy('created_at', 'desc')->paginate(7)->appends(request()->query());
+
+        if ($request->ajax()) {
+            return view('employer.job-list', compact('jobs'))->render();
+        }
+    
+        $employer = Employer::where('user_id', $user->id)->first();
+        $missingInfo = !$employer->company_name || !$employer->address;
+        return view('employer.index', compact('jobs', 'user', 'employer', 'missingInfo'));
     }
 
     public function AdminfilterJobs(Request $request)

@@ -16,8 +16,11 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/perfect-scrollbar@1.5.0/css/perfect-scrollbar.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/perfect-scrollbar@1.5.0/dist/perfect-scrollbar.min.js"></script>
-    <script src="https://cdn.ckeditor.com/4.21.0/standard/ckeditor.js"></script>
-
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    {{-- <script type="module" src="{{ asset('employer_assets/ckeditor5/ckeditor5/ckeditor5.js') }}"></script> --}}
+    <script src="https://cdn.ckeditor.com/ckeditor5/41.1.0/classic/ckeditor.js"></script>
 </head>
 
 <body>
@@ -34,7 +37,7 @@
                         <li class="nav-item">
                             <a class="nav-link d-flex dropdown-toggle" id="UserDropdown" href="#"
                                 style="align-items: center" data-bs-toggle="dropdown" aria-expanded="false">
-                                <img class="img-xs rounded-circle me-2" src="{{ asset($employer->company_logo) }}"
+                                <img class="img-xs rounded-circle" src="{{ asset($employer->company_logo) }}"
                                     alt="Profile image">
                                 <span class="d-none d-md-inline"> {{ $user->firstname }} {{ $user->lastname }} </span>
                             </a>
@@ -98,6 +101,17 @@
     </div>
     <div style=" padding-top: 170px; padding-bottom: 50px; background: #FAFBFD;">
         @yield('main-content')
+        <div class="shortcut-buttons">
+            <a href="{{ route('employer') }}" class="shortcut-button" title="Dashboard">
+                <i class="fas fa-home"></i>
+            </a>
+            <a href="{{ route('employer.postJob') }}" class="shortcut-button" title="Post job">
+                <i class="fas fa-briefcase"></i>
+            </a>
+            <a href="{{ route('employer.inbox') }}" class="shortcut-button" title="Inbox">
+                <i class="fas fa-envelope"></i>
+            </a>
+        </div>
     </div>
     <div class="footer text-center text-lg-start text-white" style="background-color: #181824">
         <div class="container py-4">
