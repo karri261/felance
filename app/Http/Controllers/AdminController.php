@@ -17,7 +17,7 @@ class AdminController extends Controller
         // Lấy dữ liệu freelancers cùng các cột trong bảng users qua quan hệ
         $freelancers = Freelancer::with('user:id,firstname,lastname,status')->get();
         $employers = Employer::with('user:id,firstname,lastname,status')->get();
-        return view('Admin/pages.manage_user', compact('freelancers','employers'));
+        return view('Admin/pages.manage_user', compact('freelancers', 'employers'));
     }
 
     public function sort(Request $request)
@@ -70,14 +70,14 @@ class AdminController extends Controller
             return response()->json(['success' => false, 'message' => 'User not found.'], 404);
         }
         $reason = $request->input('reason', null);
-        if ($reason===null) $reason = "no reason";
+        if ($reason === null)
+            $reason = "no reason";
 
-        if ($user->status==='active') {
+        if ($user->status === 'active') {
             $mailContent = [
                 'userName' => $user->firstname . ' ' . $user->lastname,
                 'reason' => $reason,
             ];
-            \Log::info($mailContent['reason']);
 
             Mail::to($user->email)->queue(new \App\Mail\BanUser($mailContent));
         } else {
@@ -89,7 +89,7 @@ class AdminController extends Controller
 
         $user->status = $user->status === 'active' ? 'banned' : 'active';
         $user->save();
-        
+
         return response()->json([$id, 'success' => true, 'new_status' => $user->status]);
     }
 
@@ -119,7 +119,7 @@ class AdminController extends Controller
             ], 500);
         }
     }
-    public function approveNo($id)
+    public function approveNo(Request $request, $id)
     {
         try {
             $jobPost = JobPost::findOrFail($id);
@@ -127,9 +127,14 @@ class AdminController extends Controller
             $jobPost->save();
             $user = User::where('id', $jobPost->user_id)->first();
 
+            $reason = $request->input('reason', null);
+            if ($reason === null)
+                $reason = "no reason";
+
             $mailContent = [
                 'employerName' => $user->firstname . ' ' . $user->lastname,
                 'jobTitle' => $jobPost->job_title,
+                'reason' => $reason,
                 // 'jobUrl' => route('jobs.show', $jobPost->id), // Link tới bài đăng đã được phê duyệt
             ];
             Mail::to($user->email)->queue(new \App\Mail\JobRejected($mailContent));
@@ -146,6 +151,6 @@ class AdminController extends Controller
             ], 500);
         }
     }
-    
+
 
 }

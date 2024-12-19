@@ -9,7 +9,7 @@
                         <div class="box-body" id="approve-box-body">
                             <div class="left-box" id="approve-left-box">
                                 <div class="left-top">
-                                    <div class="left-top-logo"> 
+                                    <div class="left-top-logo">
                                         <img src="{{ asset($job->company_logo) }}" class="">
                                     </div>
                                     <div class="left-top-title">
@@ -75,7 +75,7 @@
                 if (approveButton) {
                     const id = approveButton.getAttribute('data-id');
                     if (confirm('Are you sure to approve this Job post?')) {
-                        console.log("here");
+
                         fetch(`/admin/approve-job-post/approve-ok/${id}`, {
                                 method: 'POST',
                                 headers: {
@@ -83,13 +83,14 @@
                                     'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')
                                         .getAttribute('content'),
                                 }
+
                             })
                             .then(response => response.json())
                             .then(data => {
                                 if (data.success) {
                                     location.reload();
                                     alert('Approve successfully. Sent email to Employer!');
-                                    
+
                                 } else {
                                     alert('Có lỗi: ' + data.message);
                                 }
@@ -105,13 +106,22 @@
                 if (rejectButton) {
                     const id = rejectButton.getAttribute('data-id');
                     if (confirm('Are you sure to reject this Job post?')) {
+                        reason = prompt('Please enter the reason for rejecting this job:');
+                        if (!reason) {
+                            alert('Reject reason is required.');
+                            return;
+                        }
+
                         fetch(`/admin/approve-job-post/approve-no/${id}`, {
                                 method: 'POST',
                                 headers: {
                                     'Content-Type': 'application/json',
-                                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')
-                                        .getAttribute('content'),
-                                }
+                                    'X-Requested-With': 'XMLHttpRequest',
+                                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                                },
+                                body: JSON.stringify({
+                                    reason: reason
+                                }),
                             })
                             .then(response => response.json())
                             .then(data => {
@@ -124,7 +134,7 @@
                             })
                             .catch(error => {
                                 console.error('Error:', error);
-                                alert('Có lỗi xảy ra!',error.message);
+                                alert('Có lỗi xảy ra!', error.message);
                             });
                     }
                 }

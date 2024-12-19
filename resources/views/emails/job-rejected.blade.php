@@ -45,7 +45,7 @@
         <h2 style="color: #FF0000;">Your job post has been rejected</h2>
         <p>Dear {{ $mailContent['employerName'] }},</p>
         <p>We regret to inform you that your job posting titled <strong>"{{ $mailContent['jobTitle'] }}"</strong> has been rejected
-            due to the following reason(s):</p>
+            due to the following reason(s): {{ $mailContent['reason'] }}</p>
         {{-- <blockquote style="background-color: #f9f9f9; padding: 10px; border-left: 4px solid #FF0000; color: #333;">
             {{ $rejection_reason }}
         </blockquote> --}}
