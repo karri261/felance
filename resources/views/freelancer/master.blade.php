@@ -108,6 +108,20 @@
     </div>
     <div style=" padding-top: 170px; padding-bottom: 50px; background: #FAFBFD;">
         @yield('main-content')
+        <div class="shortcut-buttons">
+            <a href="{{ route('freelancer') }}" class="shortcut-button" title="Dashboard">
+                <i class="fas fa-home"></i>
+            </a>
+            <a href="{{ route('freelancer.myLists') }}" class="shortcut-button" title="Post job">
+                <i class="fa-solid fa-list-check"></i>
+            </a>
+            <a href="{{ route('freelancer.inbox') }}" class="shortcut-button" title="Inbox">
+                <i class="fa-solid fa-message"></i>
+            </a>
+            <a href="{{ route('freelancer.finishedJob') }}" class="shortcut-button" title="Inbox">
+                <i class="fa-solid fa-comment-dots"></i>
+            </a>
+        </div>
     </div>
     <div class="footer text-center text-lg-start text-white" style="background-color: #181824">
         <div class="container py-4">

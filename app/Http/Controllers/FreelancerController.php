@@ -180,8 +180,9 @@ class FreelancerController extends Controller
         $freelancer = Freelancer::where('user_id', $userId)->first();
         $imagePaths = json_decode($freelancer->image_paths);
 
-        $favoriteJobs = Favorite::where('user_id', $userId)->with('job')->get();
-        $applicants = Applicant::where('user_id', $userId)->with('job')->get();
+        $favoriteJobs = Favorite::where('user_id', $userId)->with('job')->paginate(4);
+        $applicants = Applicant::where('user_id', $userId)->with('job')->paginate(4);
+
         return view('freelancer.my-list', compact('user', 'freelancer', 'imagePaths', 'favoriteJobs', 'applicants'));
     }
 
@@ -260,7 +261,7 @@ class FreelancerController extends Controller
 
         $completedJobs = JobPost::whereHas('applicants', function ($query) use ($user) {
             $query->where('user_id', $user->id)->where('finish', '1');
-        })->with('applicants.rating')->paginate(3);
+        })->with('applicants.rating')->paginate(5);
 
         return view('freelancer.finishedJob', compact('completedJobs', 'freelancer', 'user'));
     }

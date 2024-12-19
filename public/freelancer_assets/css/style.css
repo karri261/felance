@@ -264,7 +264,37 @@ input:focus {
 .horizontal-menu .bottom-navbar .page-navigation > .nav-item > .nav-link span {
     margin-left: 7px;
 }
+/* ===================SHORTCUT=================== */
+.shortcut-buttons {
+    display: none;
+    position: fixed;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+}
 
+.shortcut-button {
+    display: block;
+    background-color: #29B2FE;
+    color: white;
+    padding: 10px 15px;
+    margin: 10px;
+    text-align: center;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.shortcut-button:hover {
+    background-color: #0056b3;
+}
+
+@media (max-width: 768px) {
+    .shortcut-buttons {
+        display: block;
+    }
+}
 /* ===================FOOTER===================== */
 .logo-grap {
     display: flex;

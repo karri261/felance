@@ -23,7 +23,7 @@
 
         <div class="row">
             <div class="col-lg-3 col-md-4 col-12 mb-20">
-                <div class="position-sticky" style="top: 60px">
+                <div class="position-sticky" style="top: 200px">
                     <div class="box box-widget widget-user-2">
                         <div class="widget-user-header bg-secondary-light">
                             <div class="widget-user-image">
@@ -37,7 +37,8 @@
                         <div class="box-footer">
                             <ul class="nav d-block fs-16" id="pills-tab23" role="tablist">
                                 <li class="nav-item">
-                                    <a class="py-10 nav-link active" id="pills-favorite-tab" data-bs-toggle="pill"
+                                    <a class="py-10 nav-link {{ request('tab') != 'applied' ? 'active' : '' }}"
+                                     id="pills-favorite-tab" data-bs-toggle="pill"
                                         href="#pills-favorite" role="tab" aria-controls="pills-favorite"
                                         aria-selected="true">
                                         <i class="fa-regular fa-heart"></i>
@@ -45,7 +46,8 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="py-10 nav-link" id="pills-appliedJob-tab" data-bs-toggle="pill"
+                                    <a class="py-10 nav-link {{ request('tab') == 'applied' ? 'active' : '' }}" 
+                                     id="pills-appliedJob-tab" data-bs-toggle="pill"
                                         href="#pills-appliedJob" role="tab" aria-controls="pills-appliedJob"
                                         aria-selected="true">
                                         <i class="fa-solid fa-briefcase"></i>
@@ -63,7 +65,7 @@
                 <div class="box">
                     <div class="box-body">
                         <div class="tab-content" id="pills-tabContent23">
-                            <div class="tab-pane fade show active" id="pills-favorite" role="tabpanel"
+                            <div class="tab-pane fade {{ request('tab') != 'applied' ? 'show active' : '' }}" id="pills-favorite" role="tabpanel"
                                 aria-labelledby="pills-favorite-tab">
                                 <div class="row">
                                     <div class="col-12">
@@ -88,10 +90,6 @@
                                                                         <a href="#" class="text-dark mb-1"
                                                                             style="text-decoration: none; font-size: 20px">
                                                                             {{ $favorite->job->short_describe }}
-                                                                            {{-- <span
-                                                                                style="background-color: #e9f5ea; color: #3da643; font-size: 75%; padding: 2px 5px; border-radius: 5px">
-                                                                                Freelancer
-                                                                            </span> --}}
                                                                         </a>
                                                                         <span class="fs-14">
                                                                             {{ $favorite->job->company_name }} - 
@@ -148,6 +146,11 @@
                                                     </div>
                                                 </div>
                                             @endforeach
+                                            <div class="d-flex justify-content-center">
+                                                <div class="custom-pagination">
+                                                    {{ $favoriteJobs->links('pagination::bootstrap-5') }}
+                                                </div>
+                                            </div>
                                         @else
                                             <div class="text-center py-5">
                                                 <i class="fa-regular fa-heart fa-3x mb-3" style="color: #ccc;"></i>
@@ -158,7 +161,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="tab-pane fade" id="pills-appliedJob" role="tabpanel"
+                            <div class="tab-pane fade {{ request('tab') == 'applied' ? 'show active' : '' }}" id="pills-appliedJob" role="tabpanel"
                                 aria-labelledby="pills-appliedJob-tab">
                                 <div class="row">
                                     <div class="col-12">
@@ -236,6 +239,11 @@
                                                     </div>
                                                 </div>
                                             @endforeach
+                                            <div class="d-flex justify-content-center">
+                                                <div class="custom-pagination">
+                                                    {{ $applicants->appends(['tab' => 'applied'])->links('pagination::bootstrap-5') }}
+                                                </div>
+                                            </div>
                                         @else
                                             <div class="text-center py-5">
                                                 <i class="fa-solid fa-briefcase fa-3x mb-3" style="color: #ccc;"></i>
