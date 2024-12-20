@@ -6,7 +6,11 @@
                 <span class="menu-title">Approve job post</span>
                 <div class="notification-bell">
                     <div class="circle-bell">
-                        <span id="notification-count">{{ $waitingJobsCount }}</span>
+                        @if ($waitingJobsCount <= 5)
+                            <span id="notification-count">{{ $waitingJobsCount }}</span>
+                        @else
+                            <span id="notification-count">5+</span>
+                        @endif
                     </div>
                 </div>
             </a>
@@ -31,12 +35,6 @@
                             Register </a></li>
                 </ul>
             </div>
-        </li>
-        <li class="nav-item" id="manage-job-nav-item">
-            <a class="nav-link"  href="{{ route('filter-jobs') }}" aria-expanded="false" aria-controls="tables">
-                <i class="menu-icon mdi mdi-table"></i>
-                <span class="menu-title">Manage jobs</span>
-            </a>
         </li>
         <li class="nav-item" id="manage-user-nav-item">
             <a class="nav-link" href="{{ route('manage-user') }}">

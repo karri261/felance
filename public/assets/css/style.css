@@ -30416,7 +30416,7 @@ dl li {
     -webkit-align-items: center;
     align-items: center;
     white-space: nowrap;
-    padding: 10px 35px 10px 35px;
+    padding: 10px 35px 10px 28px;
     color: #484848;
     -webkit-transition-duration: 0.45s;
     -moz-transition-duration: 0.45s;
@@ -35671,17 +35671,19 @@ dl li {
     font-size: 14px;
     position: absolute;
     top: 13px;
-    right: 2px;
+    right: 7px;
 }
 
 #notification-count {
     margin: 0;
     padding: 0;
+    font-size: 10px;
 }
 
 .box {
-    padding-bottom: 10px;
-    margin-right: -34%;
+    /* padding-bottom: 10px;
+    margin-right: -25%; */
+    width: 100%;
     margin-bottom: 20px;
     background-color: white;
     border-radius: 8px 8px 8px 8px;
@@ -35694,7 +35696,7 @@ dl li {
 
 .box-body {
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     padding: 10px;
 }
 
@@ -36175,6 +36177,21 @@ dl li {
   z-index: 10;
 }
 /* manage user end */
+
+/* manage report start */
+.big-div{
+    padding: 6px 20px;
+}
+
+.report-title{
+    font-size: 25px;
+    font-weight: 500;
+}
+
+.report-content{
+    background: white;
+}
+/* manage report end */
 
 :root {
     --primary: #14a4f2;

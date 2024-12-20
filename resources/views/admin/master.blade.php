@@ -24,6 +24,7 @@
     <!-- End plugin css for this page -->
     <!-- inject:css -->
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('freelancer_assets/css/style.css') }}">
     <!-- endinject -->
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
@@ -32,7 +33,7 @@
 
 </head>
 
-<body class="with-welcome-text">
+<body class="with-welcome-text" style="min-width: 840px;">
     <div class="container-scroller">
         @include('admin.layouts.header')
         <div class="container-fluid page-body-wrapper">

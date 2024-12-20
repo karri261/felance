@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Freelancer;
+use App\Models\Employer;
 use App\Models\JobPost;
 use App\Models\User;
 use Carbon\Carbon;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class AdminController extends Controller
 {
@@ -32,7 +34,7 @@ class AdminController extends Controller
         Auth::guard('admin')->logout();
         return redirect()->route('admin.login');
     }
-    
+
     public function index()
     {
         $freelancers = Freelancer::with('user:id,firstname,lastname,status')->get();
@@ -42,9 +44,14 @@ class AdminController extends Controller
 
     public function magUser()
     {
-        $freelancers = Freelancer::with('user:id,firstname,lastname,status')->get();
+        $currentTab = $request->tab ?? 'freelancers';
+        $freelancers = Freelancer::with('user:id,firstname,lastname,status')
+            ->paginate(8, ['*'], 'freelancer_page');
+
+        $employers = Employer::with('user:id,firstname,lastname,status')
+            ->paginate(8, ['*'], 'employer_page');
         $waitingJobsCount = JobPost::where('status', 'Waiting for approval')->count();
-        return view('Admin/pages.manage_user', compact('freelancers', 'waitingJobsCount'));
+        return view('Admin/pages.manage_user', compact('freelancers', 'waitingJobsCount', 'employers', 'currentTab'));
     }
 
     public function sort(Request $request)
@@ -69,32 +76,141 @@ class AdminController extends Controller
         ]);
     }
 
-    public function toggleStatus($id)
+    public function sortEmployer(Request $request)
+    {
+        $order = $request->get('order', 'latest');
+        $employers = Employer::with('user');
+
+        if ($order === 'latest') {
+            $employers = $employers->orderBy('created_at', 'desc');
+        } else if ($order === 'oldest') {
+            $employers = $employers->orderBy('created_at', 'asc');
+        }
+
+        $employers = $employers->get()->map(function ($employer) {
+            $employer->formatted_date = Carbon::parse($employer->created_at)->format('d-m-Y');
+            return $employer;
+        });
+
+        return response()->json([
+            'success' => true,
+            'employers' => $employers,
+        ]);
+    }
+
+    public function toggleStatus(Request $request, $id)
     {
         $user = User::find($id);
         if (!$user) {
             return response()->json(['success' => false, 'message' => 'User not found.'], 404);
         }
+        $reason = $request->input('reason', null);
+        if ($reason === null)
+            $reason = "no reason";
 
+        if ($user->status === 'active') {
+            $mailContent = [
+                'userName' => $user->firstname . ' ' . $user->lastname,
+                'reason' => $reason,
+            ];
+
+            Mail::to($user->email)->send(new \App\Mail\BanUser($mailContent));
+        } else {
+            $mailContent = [
+                'userName' => $user->firstname . ' ' . $user->lastname,
+            ];
+            Mail::to($user->email)->send(new \App\Mail\UnbanUser($mailContent));
+        }
         $user->status = $user->status === 'active' ? 'banned' : 'active';
         $user->save();
 
         return response()->json([$id, 'success' => true, 'new_status' => $user->status]);
     }
 
-    public function delete($id)
+    public function approveOk($id)
     {
-        $user = User::find($id);
-
-        if (!$user) {
-            return response()->json(['success' => false, 'message' => 'User not found.'], 404);
-        }
-
         try {
-            $user->delete();
-            return response()->json(['success' => true, 'message' => 'User deleted successfully.']);
+            $jobPost = JobPost::findOrFail($id);
+            $jobPost->status = 'Approved';
+            $jobPost->save();
+            $user = User::where('id', $jobPost->user_id)->first();
+
+            $mailContent = [
+                'employerName' => $user->firstname . ' ' . $user->lastname,
+                'jobTitle' => $jobPost->job_title,
+            ];
+            Mail::to($user->email)->send(new \App\Mail\JobApproved($mailContent));
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Đã phê duyệt bài đăng thành công!'
+            ]);
         } catch (\Exception $e) {
-            return response()->json(['success' => false, 'message' => 'Failed to delete user.']);
+            return response()->json([
+                'success' => false,
+                'message' => 'Có lỗi xảy ra tại đây: ' . $e->getMessage()
+            ], 500);
         }
+    }
+    public function approveNo(Request $request, $id)
+    {
+        try {
+            $jobPost = JobPost::findOrFail($id);
+            $jobPost->status = 'Rejected';
+            $jobPost->save();
+            $user = User::where('id', $jobPost->user_id)->first();
+
+            $reason = $request->input('reason', null);
+            if ($reason === null)
+                $reason = "no reason";
+
+            $mailContent = [
+                'employerName' => $user->firstname . ' ' . $user->lastname,
+                'jobTitle' => $jobPost->job_title,
+                'reason' => $reason,
+            ];
+            Mail::to($user->email)->send(new \App\Mail\JobRejected($mailContent));
+
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Đã từ chối bài đăng!'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Có lỗi xảy ra khi từ chối bài đăng: ' . $e->getMessage()
+            ], 500);
+        }
+    }
+
+    public function employerProfileforJob($user_id)
+    {
+        $employer = Employer::where('user_id', $user_id)->first();
+        $images = $employer && $employer->image_paths ? json_decode($employer->image_paths, true) : [];
+
+        $userView = User::where('id', $user_id)->first();
+        $waitingJobsCount = JobPost::where('status', 'Waiting for approval')->count();
+        return view('admin/pages.employer-pro5-forJob', compact('userView', 'employer', 'images', 'waitingJobsCount'));
+    }
+
+    public function employerProfileforView($user_id)
+    {
+        $employer = Employer::where('user_id', $user_id)->first();
+        $images = $employer && $employer->image_paths ? json_decode($employer->image_paths, true) : [];
+
+        $userView = User::where('id', $user_id)->first();
+        $waitingJobsCount = JobPost::where('status', 'Waiting for approval')->count();
+        return view('admin/pages.employer-pro5-forView', compact('userView', 'employer', 'images', 'waitingJobsCount'));
+    }
+
+    public function freelancerProfileforView($user_id)
+    {
+        $freelancer = Freelancer::where('user_id', $user_id)->first();
+        $images = $freelancer && $freelancer->image_paths ? json_decode($freelancer->image_paths, true) : [];
+
+        $userView = User::where('id', $user_id)->first();
+        $waitingJobsCount = JobPost::where('status', 'Waiting for approval')->count();
+        return view('admin/pages.freelancer-pro5-forView', compact('userView', 'freelancer', 'images', 'waitingJobsCount'));
     }
 }

@@ -127,17 +127,24 @@ Route::prefix('admin')->group(function () {
         Route::prefix('approve-job-post')->group(function () {
             Route::get('/', [JobPostController::class, 'showWaitingJobs'])->name('approve.job.post');
             Route::get('/job-detail/{job_id}', [JobPostController::class, 'job_detail_for_admin'])->name(name: 'approve.jobDetail');
+            Route::post('/approve-ok/{id}', [AdminController::class, 'approveOk'])->name('approve.ok');
+            Route::post('/approve-no/{id}', [AdminController::class, 'approveNo'])->name('approve.no');
         });
         Route::prefix('manage-job')->group(function () {
-            Route::get('/', [JobPostController::class, 'AdminfilterJobs'])->name('filter-jobs');
+            Route::get('/', [JobPostController::class, 'showManageJobs'])->name('filter-jobs');
+            Route::delete('/delete/{job}', [AdminController::class, 'delete'])->name('job.delete');
             Route::get('/job-detail/{job_id}', [JobPostController::class, 'job_detail_for_admin'])->name(name: 'jobDetail');
+            Route::get('/company_profile/{user_id}', [AdminController::class, 'employerProfileforJob'])->name('admin.employerProfileforJob');
+            Route::get('/employer_profile/{user_id}', [AdminController::class, 'employerProfileforView'])->name('admin.employerProfileforView');
+            Route::get('/freelancer_profile/{user_id}', [AdminController::class, 'freelancerProfileforView'])->name('admin.freelancerProfileforView');
         });
         Route::prefix('manage-report')->group(function () {
             Route::get('/', [ReportController::class, 'index'])->name('manage-report');
             Route::get('/report-detail/{report_id}', [ReportController::class, 'report_detail_for_admin'])->name('reportDetail');
         });
     });
-    Route::get('/users/toggle-status/{id}', [AdminController::class, 'toggleStatus'])->name('users.toggle-status');
+    Route::post('/users/toggle-status/{id}', [AdminController::class, 'toggleStatus'])->name('users.toggle-status');
     Route::delete('/users/delete/{id}', [AdminController::class, 'delete'])->name('users.delete');
     Route::get('/freelancers/sort', [AdminController::class, 'sort'])->name('freelancers.sort');
+    Route::get('/employers/sort', [AdminController::class, 'sortEmployer'])->name('employers.sort');
 });

@@ -23,7 +23,7 @@ class JobPostController extends Controller
 
     public function showWaitingJobs()
     {
-        $jobs = JobPost::where('status', 'Waiting for approval')->paginate(10);
+        $jobs = JobPost::where('status', 'Waiting for approval')->paginate(7);
         $waitingJobsCount = JobPost::where('status', 'Waiting for approval')->count();
         return view('Admin/pages.approve_job_post', compact('jobs', 'waitingJobsCount'));
     }
@@ -67,6 +67,13 @@ class JobPostController extends Controller
         }
 
         return view('freelancer.index', compact('jobs', 'user','freelancer'));
+    }
+
+    public function showManageJobs()
+    {
+        $jobs = JobPost::whereIn('status', ['Approved', 'Rejected'])->get();
+        $waitingJobsCount = JobPost::where('status', 'Waiting for approval')->count();
+        return view('Admin/pages.manage_job', compact('jobs', 'waitingJobsCount'));
     }
 
     public function EmployfilterJobs(Request $request)
