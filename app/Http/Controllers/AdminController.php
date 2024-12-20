@@ -7,10 +7,12 @@ use App\Models\Freelancer;
 use App\Models\Employer;
 use App\Models\JobPost;
 use App\Models\User;
+use App\Models\Images;
 use Carbon\Carbon;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+
 
 class AdminController extends Controller
 {
@@ -38,8 +40,23 @@ class AdminController extends Controller
     public function index()
     {
         $freelancers = Freelancer::with('user:id,firstname,lastname,status')->get();
+        $freelancersCount = Freelancer::count();
+        $employersCount = Employer::count();
+        $usersCount = User::count();
+        $jobsCount = JobPost::where('status', 'Approved')->count();
+        $topFreelancers = Freelancer::orderBy('rating', 'desc')->take(5)->get();
+
+        $userData = User::where('created_at', '>=', now()->subDays(5))
+            ->selectRaw('DATE(created_at) as date, COUNT(*) as count')
+            ->groupBy('date')
+            ->orderBy('date', 'asc')
+            ->get();
+        $dates = $userData->pluck('date');
+        $counts = $userData->pluck('count');
+
         $waitingJobsCount = JobPost::where('status', 'Waiting for approval')->count();
-        return view('Admin/index', compact('freelancers', 'waitingJobsCount'));
+
+        return view('Admin/index', compact('freelancers', 'waitingJobsCount', 'freelancersCount', 'employersCount', 'usersCount', 'jobsCount', 'topFreelancers', 'dates', 'counts'));
     }
 
     public function magUser()
@@ -212,5 +229,94 @@ class AdminController extends Controller
         $userView = User::where('id', $user_id)->first();
         $waitingJobsCount = JobPost::where('status', 'Waiting for approval')->count();
         return view('admin/pages.freelancer-pro5-forView', compact('userView', 'freelancer', 'images', 'waitingJobsCount'));
+    }
+
+    public function show_manage_ui()
+    {
+        $session1 = Images::where('name', 'session1')->first();
+        $session2 = Images::where('name', 'session2')->get();
+        $brandlogo = Images::where('name', 'brand-logo')->get();
+
+        $session2_id2 = Images::findOrFail(2);
+        $session2_id3 = Images::findOrFail(3);
+        $session2_id4 = Images::findOrFail(4);
+        $session2_id5 = Images::findOrFail(5);
+
+        $brandlogo_id6 = Images::findOrFail(6);
+        $brandlogo_id7 = Images::findOrFail(7);
+        $brandlogo_id8 = Images::findOrFail(8);
+        $brandlogo_id9 = Images::findOrFail(9);
+        $brandlogo_id10 = Images::findOrFail(10);
+        $brandlogo_id11 = Images::findOrFail(11);
+
+        $waitingJobsCount = JobPost::where('status', 'Waiting for approval')->count();
+        return view('Admin/pages.manage_ui', compact('session1', 'session2_id2', 'session2_id3', 'session2_id4', 'session2_id5', 'brandlogo_id6', 'brandlogo_id7', 'brandlogo_id8', 'brandlogo_id9', 'brandlogo_id10', 'brandlogo_id11', 'waitingJobsCount'));
+    }
+
+    public function store_image_session1(Request $request)
+    {
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Giới hạn tệp hợp lệ
+        ]);
+
+        $file = $request->file('image');
+        $filename = time() . '_' . $file->getClientOriginalName(); // Tạo tên file duy nhất
+
+        $path = 'homepage/images/';
+        $file->move(public_path($path), $filename); // Lưu file vào thư mục
+
+        $imagePath = $path . $filename;
+
+        $image = Images::where('name', 'session1')->first();
+        if ($image) {
+            $image->image_path = $imagePath;
+            $image->save();
+        } else {
+            $image = new Images();
+            $image->name = 'session1';
+            $image->image_path = $imagePath;
+            $image->save();
+        }
+
+        return redirect()->back()->with('success', 'Ảnh đã được cập nhật thành công!');
+    }
+    public function store_image_session2(Request $request, $imageId)
+    {
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        $file = $request->file('image');
+        $filename = time() . '_' . $file->getClientOriginalName(); // Đặt tên file duy nhất
+        $path = 'homepage/images/';
+        $file->move(public_path($path), $filename); // Lưu file vào thư mục public/homepage/images/
+
+        $imagePath = $path . $filename; // Đường dẫn ảnh
+
+        // Cập nhật các hàng trong cơ sở dữ liệu có id = 2, 3, 4, 5
+        Images::where('id', $imageId)->update(['image_path' => $imagePath]);
+
+        // Thông báo thành công và chuyển hướng về trang trước
+        return redirect()->back()->with('success', 'Image updated successfully!');
+    }
+
+    public function store_image_brandlogo(Request $request, $imageId)
+    {
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        $file = $request->file('image');
+        $filename = time() . '_' . $file->getClientOriginalName(); // Đặt tên file duy nhất
+        $path = 'homepage/images/';
+        $file->move(public_path($path), $filename); // Lưu file vào thư mục public/homepage/images/
+
+        $imagePath = $path . $filename; // Đường dẫn ảnh
+
+        // Cập nhật các hàng trong cơ sở dữ liệu có id = 2, 3, 4, 5
+        Images::where('id', $imageId)->update(['image_path' => $imagePath]);
+
+        // Thông báo thành công và chuyển hướng về trang trước
+        return redirect()->back()->with('success', 'Image updated successfully!');
     }
 }

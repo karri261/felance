@@ -8927,7 +8927,6 @@ select:disabled {
     display: none !important;
 }
 
-
 button:not(:disabled),
 [type="button"]:not(:disabled),
 [type="reset"]:not(:disabled),
@@ -23446,7 +23445,7 @@ code {
     font-size: 20px;
 }
 .home-tab .chartjs-wrapper {
-    height: 150px !important;
+    height: auto !important;
 }
 @media (max-width: 991px) {
     .home-tab .chartjs-wrapper {
@@ -35700,12 +35699,12 @@ dl li {
     padding: 10px;
 }
 
-#approve-box-body{
-    justify-content:flex-start !important;
+#approve-box-body {
+    justify-content: flex-start !important;
 }
 
-#approve-left-box{
-    width:70%;
+#approve-left-box {
+    width: 70%;
     padding-left: 30px;
 }
 
@@ -35733,7 +35732,7 @@ dl li {
 }
 
 .right-box {
-    padding-top:10px;
+    padding-top: 10px;
     padding-left: 50px;
     width: 25%;
     display: flex;
@@ -35742,10 +35741,10 @@ dl li {
     border-left: 1px solid rgb(211, 208, 208);
 }
 
-#approve-right-box{
+#approve-right-box {
     align-items: center !important;
 }
-#approve-check{
+#approve-check {
     margin-left: 0 !important;
 }
 
@@ -35768,9 +35767,9 @@ dl li {
     color: rgb(21 149 43);
     background-color: rgb(211, 250, 224);
 }
-.ok:hover{
+.ok:hover {
     background-color: rgb(15, 130, 53);
-    color:white;
+    color: white;
 }
 .no {
     color: white;
@@ -35795,9 +35794,9 @@ dl li {
     background-color: rgb(211, 250, 224) !important;
 }
 
-.place-time{
-    font-size:15px;
-    color:#2b2f32;
+.place-time {
+    font-size: 15px;
+    color: #2b2f32;
 }
 
 .left-buttom {
@@ -35902,15 +35901,15 @@ dl li {
 .job-detail .detail-box .btn-instagram {
     background-color: #c21c54;
 }
-.job-information{
-    display:flex;
-    gap:30px;
+.job-information {
+    display: flex;
+    gap: 30px;
 }
-.job-information-right{
-    width:35%;
+.job-information-right {
+    width: 35%;
 }
-.detail-infor{
-    color:gray;
+.detail-infor {
+    color: gray;
     font-size: 15px;
 }
 /* job detail end */
@@ -35930,8 +35929,8 @@ dl li {
 #job-list {
     height: 68vh;
 }
-#location-input-group{
-    width:100%;
+#location-input-group {
+    width: 100%;
 }
 .tab-content .box {
     position: relative;
@@ -36128,97 +36127,235 @@ dl li {
     text-decoration: none;
 }
 .form-select {
-  margin-left: 3px; 
-  width: 10px;
-  height:20px;
-  border: none;
-  outline: none !important;
-  background-color: transparent;
-  color: inherit;
+    margin-left: 3px;
+    width: 10px;
+    height: 20px;
+    border: none;
+    outline: none !important;
+    background-color: transparent;
+    color: inherit;
 }
 .form-select:hover {
-  background-color: rgb(227, 225, 225) !important;
+    background-color: rgb(227, 225, 225) !important;
 }
-#sortDropdown{
-  width: 25px;
-  height:20px;
+#sortDropdown {
+    width: 25px;
+    height: 20px;
 }
-#sortDropdown:hover{
-  background-color: rgb(227, 225, 225) !important;
-
+#sortDropdown:hover {
+    background-color: rgb(227, 225, 225) !important;
 }
 /* Nền màu cho trạng thái "blocked" */
 .blocked-bg {
-  background-color: rgb(255, 195, 198); /* Màu đỏ nhạt */
-  padding: 5px 10px;
-  border-radius: 5px;
-  color: #721c24; /* Màu chữ tương phản */
-  display: inline-block;
-  text-align: center;
+    background-color: rgb(255, 195, 198); /* Màu đỏ nhạt */
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: #721c24; /* Màu chữ tương phản */
+    display: inline-block;
+    text-align: center;
 }
 
 /* Nền màu cho trạng thái "active" */
 .active-bg {
-  background-color: rgb(167, 226, 246); /* Màu xanh nhạt */
-  padding: 5px 10px;
-  border-radius: 5px;
-  color: #004085; 
-  display: inline-block;
-  text-align: center;
+    background-color: rgb(167, 226, 246); /* Màu xanh nhạt */
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: #004085;
+    display: inline-block;
+    text-align: center;
 }
 
-.input-group{
-  width:250px;
+.input-group {
+    width: 250px;
 }
 
-.btn-search{
-  border: none;
-  outline: none !important;
-  background-color: transparent;
-  position:absolute;
-  right:10px;
-  top:10px;
-  z-index: 10;
+.btn-search {
+    border: none;
+    outline: none !important;
+    background-color: transparent;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    z-index: 10;
 }
 /* manage user end */
 
 /* manage report start */
-.card{
-    margin-right:10px;
-    padding-right: 30px !important; 
+.card {
+    margin-right: 10px;
+    padding-right: 30px !important;
 }
 
-.report-body{
-    display:flex;
+.report-body {
+    display: flex;
     flex-direction: column;
     gap: 40px;
     font-size: 18px;
 }
 
-.report-body p{
+.report-body p {
     font-size: 15px;
 }
-.report-title{
+.report-title {
     font-size: 25px !important;
     font-weight: 500;
 }
 
-.report-infor{
-    display:flex;
+.report-infor {
+    display: flex;
     justify-content: space-between;
 }
 
-.report-buttons{
+.report-buttons {
     display: flex;
     justify-content: center;
     gap: 30px;
-    padding-bottom:30px;
+    padding-bottom: 30px;
 }
-.report-buttons span{
+.report-buttons span {
     align-content: center;
-    font-size: 15px;;
+    font-size: 15px;
 }
 /* manage report end */
+
+/* manage ui start*/
+.image-session1 {
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+}
+
+.image_hero {
+    width: 500px;
+    border-radius: 10px;
+}
+
+.link-session1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+}
+
+.link-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+.file-label {
+    display: inline-block;
+    color: #089ed1;
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: 16px;
+    text-align: center;
+}
+
+.file-label:hover {
+    color: #097397;
+}
+
+.file-label span {
+    pointer-events: none;
+}
+
+.link-and-btn {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+}
+
+.link-preview {
+    text-decoration: none;
+    color: #089ed1;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 10px 20px;
+    border: 2px solid #089ed1;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+.link-preview:hover {
+    background-color: #089ed1;
+    color: #fff;
+}
+
+.save-btn {
+    background-color: #a7e2f6;
+    color: #089ed1;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.save-btn:hover {
+    background-color: #089ed1;
+    transform: scale(1.05);
+    color: white;
+}
+
+/* session2 */
+.parent-session2 {
+    display: grid;
+    grid-template-columns: repeat(
+        2,
+        1fr
+    ); /* 2 cột, mỗi cột chiếm 1 phần (50%) */
+    gap: 10px; /* Khoảng cách giữa các div con */
+    width: 100%; /* Tùy chỉnh kích thước cha nếu cần */
+}
+
+.child {
+    background-color: #a7e2f6; /* Màu nền cho div con */
+    text-align: center;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px; /* Bo góc */
+}
+.image_session2 {
+    width: 300px;
+    height: fit-content;
+}
+
+.link-pre-session2 {
+    padding-top: 30px;
+    justify-content: center;
+    display: flex;
+}
+
+.image2 {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    padding-top: 20px;
+    height: -webkit-fill-available;
+}
+
+.image-card {
+    justify-content: end;
+    flex-direction: column;
+    display: flex;
+}
+
+/* brand-logo */
+.parent-brandlogo {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Tạo 3 cột, mỗi cột chiếm 1 phần */
+    gap: 30px; /* Khoảng cách giữa các div con */
+    width: 100%; /* Tùy chỉnh kích thước cha nếu cần */
+}
+.image_brandlogo {
+    width: 200px;
+    height: fit-content;
+}
+/* manage ui end */
 
 :root {
     --primary: #14a4f2;

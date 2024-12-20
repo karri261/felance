@@ -40,10 +40,6 @@
     {{-- Header --}}
     <nav class="navbar navbar-expand-lg">
         <div class="container">
-            {{-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button> --}}
 
             <a href="{{ url('/') }}" class="navbar-brand d-flex mx-auto mx-lg-0">
                 <img src="{{ asset('welcome_assets/images/logo_name.png') }}" alt="">
@@ -150,8 +146,7 @@
                 </div>
             </div>
             <div class="hero-image">
-                <img src="{{ asset('homepage/images/background_hero.svg') }}" alt="Freelancer illustration"
-                    style="transform: scaleX(-1); " class="image_hero">
+                <img src="{{ asset($session1->image_path) }}" alt="Freelancer illustration" class="image_hero">
                 <img src="https://technowich.com/wp-content/uploads/2020/07/lightbulb.svg" class="image_idea">
             </div>
         </div>
@@ -159,62 +154,62 @@
         <div class="slider_brand">
             <div class="logo">
                 <div class="image">
-                    <img src="https://felan.ricetheme.com/wp-content/uploads/2024/06/Company-logo-8.svg">
+                    <img src="{{ asset($brandlogo_id6->image_path) }}">
                 </div>
             </div>
             <div class="logo">
                 <div class="image">
-                    <img src="https://felan.ricetheme.com/wp-content/uploads/2024/06/Company-logo-1.svg">
+                    <img src="{{ asset($brandlogo_id7->image_path) }}">
                 </div>
             </div>
             <div class="logo">
                 <div class="image">
-                    <img src="https://felan.ricetheme.com/wp-content/uploads/2024/06/Company-logo-2.svg">
+                    <img src="{{ asset($brandlogo_id8->image_path) }}">
                 </div>
             </div>
             <div class="logo">
                 <div class="image">
-                    <img src="https://felan.ricetheme.com/wp-content/uploads/2024/06/Company-logo-3.svg">
+                    <img src="{{ asset($brandlogo_id9->image_path) }}">
                 </div>
             </div>
             <div class="logo">
                 <div class="image">
-                    <img src="https://felan.ricetheme.com/wp-content/uploads/2024/06/Company-logo-4.svg">
+                    <img src="{{ asset($brandlogo_id10->image_path) }}">
                 </div>
             </div>
             <div class="logo">
                 <div class="image">
-                    <img src="https://felan.ricetheme.com/wp-content/uploads/2024/06/Company-logo-5.svg">
+                    <img src="{{ asset($brandlogo_id11->image_path) }}">
                 </div>
             </div>
             <div class="logo">
                 <div class="image">
-                    <img src="https://felan.ricetheme.com/wp-content/uploads/2024/06/Company-logo-8.svg">
+                    <img src="{{ asset($brandlogo_id6->image_path) }}">
                 </div>
             </div>
             <div class="logo">
                 <div class="image">
-                    <img src="https://felan.ricetheme.com/wp-content/uploads/2024/06/Company-logo-1.svg">
+                    <img src="{{ asset($brandlogo_id7->image_path) }}">
                 </div>
             </div>
             <div class="logo">
                 <div class="image">
-                    <img src="https://felan.ricetheme.com/wp-content/uploads/2024/06/Company-logo-2.svg">
+                    <img src="{{ asset($brandlogo_id8->image_path) }}">
                 </div>
             </div>
             <div class="logo">
                 <div class="image">
-                    <img src="https://felan.ricetheme.com/wp-content/uploads/2024/06/Company-logo-3.svg">
+                    <img src="{{ asset($brandlogo_id9->image_path) }}">
                 </div>
             </div>
             <div class="logo">
                 <div class="image">
-                    <img src="https://felan.ricetheme.com/wp-content/uploads/2024/06/Company-logo-4.svg">
+                    <img src="{{ asset($brandlogo_id10->image_path) }}">
                 </div>
             </div>
             <div class="logo">
                 <div class="image">
-                    <img src="https://felan.ricetheme.com/wp-content/uploads/2024/06/Company-logo-5.svg">
+                    <img src="{{ asset($brandlogo_id11->image_path) }}">
                 </div>
             </div>
         </div>
@@ -391,24 +386,23 @@
         {{-- How to start end --}}
 
         <!-- About Start -->
-        <section class="about">
+        <section class="about" id="session2">
             <div class="container">
                 <div class="row g-5 align-items-center">
                     <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
                         <div class="row g-0 about-bg rounded overflow-hidden">
                             <div class="col-6 text-start">
-                                <img class="img-fluid w-100" src="{{ asset('homepage/images/about-1.jpg') }}">
+                                <img class="img-fluid w-100" src="{{ asset($session2_id2->image_path) }}">
                             </div>
                             <div class="col-6 text-start">
-                                <img class="img-fluid" src="{{ asset('homepage/images/about-2.jpg') }}"
-                                    style="width: 85%; margin-top: 15%;">
+                                <img class="img-fluid" src="{{ asset($session2_id3->image_path) }}"
+                                style="width: 85%; margin-top: 15%;">
                             </div>
                             <div class="col-6 text-end">
-                                <img class="img-fluid" src="{{ asset('homepage/images/about-3.jpg') }}"
-                                    style="width: 85%;">
+                                <img class="img-fluid" src="{{ asset($session2_id4->image_path) }}" style="width: 85%;">
                             </div>
                             <div class="col-6 text-end">
-                                <img class="img-fluid w-100" src="{{ asset('homepage/images/about-4.jpg') }}">
+                                <img class="img-fluid w-100" src="{{ asset($session2_id5->image_path) }}">
                             </div>
                         </div>
                     </div>
@@ -456,7 +450,8 @@
                             @endfor
 
                             @if ($halfStar)
-                                <li class="active half"><i class="fa fa-star-half-alt" style="font-size: 16px"></i></li>
+                                <li class="active half"><i class="fa fa-star-half-alt" style="font-size: 16px"></i>
+                                </li>
                             @endif
 
                             @for ($i = 0; $i < $emptyStars; $i++)

@@ -853,7 +853,8 @@ a {
     font-size: 18px;
     color: #1e1e1e;
 }
-.appProfile .rating-star {
+.appProfile .rating-star,
+.admin .rating-star {
     padding: 0;
     list-style-type: none;
     display: flex;
@@ -861,10 +862,12 @@ a {
     align-items: center;
     margin-bottom: 0;
 }
-.appProfile .rating-star li {
+.appProfile .rating-star li,
+.admin .rating-star li {
     margin: 5px 3px;
 }
-.appProfile .rating-star .active {
+.appProfile .rating-star .active,
+.admin .rating-star .active {
     color: #ffc107;
 }
 

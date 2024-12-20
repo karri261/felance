@@ -48,4 +48,9 @@ class JobPost extends Model
     {
         return $this->hasMany(Applicant::class, 'job_id', 'job_id');
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

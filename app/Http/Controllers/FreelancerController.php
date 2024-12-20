@@ -23,6 +23,9 @@ class FreelancerController extends Controller
         $jobs = JobPost::where('status', 'approved' )
         ->where('finish', 0)
         ->where('end_date', '>=', now())
+        ->whereHas('user', function($query) {
+            $query->where('status', 'active');
+        })
         ->orderBy('created_at', 'desc')->paginate(7);
         $user = Auth::user();
         $freelancer = Freelancer::where('user_id', $user->id)->first();

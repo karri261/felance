@@ -1,5 +1,11 @@
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
     <ul class="nav">
+        <li class="nav-item {{ request()->routeIs('admin') ? 'active' : '' }}" id="manage-ui-nav-item">
+            <a class="nav-link" href="{{ route('admin') }}">
+                <i class="menu-icon mdi mdi-home"></i>
+                <span class="menu-title">Home</span>
+            </a>
+        </li>
         <li class="nav-item" id="approve-nav-item">
             <a class="nav-link" href="{{ route('approve.job.post') }}">
                 <i class="menu-icon mdi mdi-card-text-outline"></i>
@@ -15,34 +21,19 @@
                 </div>
             </a>
         </li>
-        <li class="nav-item" id="manage-ui-nav-item">
-            <a class="nav-link" data-bs-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
+        <li class="nav-item {{ request()->routeIs('manage-UI') ? 'active' : '' }}" id="manage-ui-nav-item">
+            <a class="nav-link" href="{{ route('manage-UI') }}">
                 <i class="menu-icon mdi mdi-floor-plan"></i>
                 <span class="menu-title">Manage UI</span>
-                <i class="menu-arrow"></i>
             </a>
-            <div class="collapse" id="auth">
-                <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"> <a class="nav-link" href="pages/samples/blank-page.html"> Blank
-                            Page </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="pages/samples/error-404.html"> 404
-                        </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="pages/samples/error-500.html"> 500
-                        </a></li>
-                    <li class="nav-item"> <a class="nav-link" href="pages/samples/login.html"> Login </a>
-                    </li>
-                    <li class="nav-item"> <a class="nav-link" href="pages/samples/register.html">
-                            Register </a></li>
-                </ul>
-            </div>
         </li>
-        <li class="nav-item" id="manage-user-nav-item">
+        <li class="nav-item {{ request()->routeIs('manage-user') ? 'active' : '' }}" id="manage-user-nav-item">
             <a class="nav-link" href="{{ route('manage-user') }}">
                 <i class="menu-icon mdi mdi-account-circle-outline"></i>
                 <span class="menu-title">Manage Users</span>
             </a>
         </li>
-        <li class="nav-item" id="manage-report">
+        <li class="nav-item {{ request()->routeIs('manage-report') ? 'active' : '' }}" id="manage-report">
             <a class="nav-link" href="{{ route('manage-report') }}">
                 <i class="menu-icon mdi mdi-file-document"></i>
                 <span class="menu-title">Manage Reports</span>

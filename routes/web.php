@@ -144,6 +144,10 @@ Route::prefix('admin')->group(function () {
             Route::post('/no-action', [ReportController::class, 'noAction']);
             Route::post('/ban-reported-user', [ReportController::class, 'banUser']);
         });
+        Route::get('/manage-UI', [AdminController::class, 'show_manage_ui'])->name('manage-UI');
+        Route::post('/upload-image-session1', [AdminController::class, 'store_image_session1'])->name('upload.imageSession1');
+        Route::post('/upload-image-session2/{imageId}', action: [AdminController::class, 'store_image_session2'])->name('upload.imageSession2');
+        Route::post('/upload-image-brandlogo/{imageId}', action: [AdminController::class, 'store_image_brandlogo'])->name('upload.imageBrandlogo');
     });
     Route::post('/users/toggle-status/{id}', [AdminController::class, 'toggleStatus'])->name('users.toggle-status');
     Route::delete('/users/delete/{id}', [AdminController::class, 'delete'])->name('users.delete');

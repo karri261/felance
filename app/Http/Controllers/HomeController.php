@@ -7,14 +7,31 @@ use App\Models\JobPost;
 use App\Models\Employer;
 use App\Models\Freelancer;
 use App\Models\User;
+use App\Models\Images;
 
 class HomeController extends Controller
 {
     public function index()
     {
         $jobs = JobPost::latest('created_at')->take(5)->get();   
-        $freelancers = Freelancer::orderBy('rating', 'desc')->take(8)->get();       
-        return view('welcome', compact('jobs', 'freelancers'));
+        $freelancers = Freelancer::orderBy('rating', 'desc')->take(8)->get();
+
+        $session1 = Images::where('name', 'session1')->first();
+        $session2 = Images::where('name', 'session2')->get();
+        $brandlogo = Images::where('name', 'brand-logo')->get();
+
+        $session2_id2 = Images::findOrFail(2);
+        $session2_id3 = Images::findOrFail(3);
+        $session2_id4 = Images::findOrFail(4);
+        $session2_id5 = Images::findOrFail(5);
+        $brandlogo_id6 = Images::findOrFail(6);
+        $brandlogo_id7 = Images::findOrFail(7);
+        $brandlogo_id8 = Images::findOrFail(8);  
+        $brandlogo_id9 = Images::findOrFail(9);
+        $brandlogo_id10 = Images::findOrFail(10);
+        $brandlogo_id11 = Images::findOrFail(11);
+        
+        return view('welcome', compact('jobs', 'freelancers', 'session1', 'session2_id2', 'session2_id3', 'session2_id4', 'session2_id5', 'brandlogo_id6', 'brandlogo_id7', 'brandlogo_id8', 'brandlogo_id9', 'brandlogo_id10', 'brandlogo_id11'));
     }
 
     public function findJob()

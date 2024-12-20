@@ -20,6 +20,28 @@
                                         alt="user">
                                     <h4 class="mt-10 mb-10">{{ $userView->firstname }} {{ $userView->lastname }}</h4>
                                     <div href="mailto:dummy@gmail.com">{{ $userView->email }}</div>
+                                    <ul class="rating-star">
+                                        @php
+                                            $score = $freelancer->rating;
+                                            $fullStars = floor($score);
+                                            $halfStar = $score - $fullStars >= 0.5;
+                                            $emptyStars = 5 - $fullStars - ($halfStar ? 1 : 0);
+                                        @endphp
+            
+                                        @for ($i = 0; $i < $fullStars; $i++)
+                                            <li class="active"><i class="fa fa-star"></i></li>
+                                        @endfor
+            
+                                        @if ($halfStar)
+                                            <li class="active half"><i class="fa fa-star-half-alt"></i></li>
+                                        @endif
+            
+                                        @for ($i = 0; $i < $emptyStars; $i++)
+                                            <li><i class="fa fa-star" style="color: #ddd"></i></li>
+                                        @endfor
+            
+                                        <span style="margin-left: 5px">({{ $freelancer->rating }})</span>
+                                    </ul>
                                 </div>
                                 <div class="social-links d-flex">
                                     <a href="{{ $freelancer->facebook }}" target="_blank">
