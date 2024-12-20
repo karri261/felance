@@ -35768,6 +35768,10 @@ dl li {
     color: rgb(21 149 43);
     background-color: rgb(211, 250, 224);
 }
+.ok:hover{
+    background-color: rgb(15, 130, 53);
+    color:white;
+}
 .no {
     color: white;
     background-color: #f95f53;
@@ -36179,17 +36183,40 @@ dl li {
 /* manage user end */
 
 /* manage report start */
-.big-div{
-    padding: 6px 20px;
+.card{
+    margin-right:10px;
+    padding-right: 30px !important; 
 }
 
+.report-body{
+    display:flex;
+    flex-direction: column;
+    gap: 40px;
+    font-size: 18px;
+}
+
+.report-body p{
+    font-size: 15px;
+}
 .report-title{
-    font-size: 25px;
+    font-size: 25px !important;
     font-weight: 500;
 }
 
-.report-content{
-    background: white;
+.report-infor{
+    display:flex;
+    justify-content: space-between;
+}
+
+.report-buttons{
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    padding-bottom:30px;
+}
+.report-buttons span{
+    align-content: center;
+    font-size: 15px;;
 }
 /* manage report end */
 

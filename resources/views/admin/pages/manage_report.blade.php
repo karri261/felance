@@ -1,37 +1,6 @@
 @extends('admin.master')
 
 @section('main-content')
-    {{-- <table class="table">
-    <thead>
-        <tr>
-            <th>Report ID</th>
-            <th>Reporter</th>
-            <th>Reported User</th>
-            <th>Reason</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach ($reports as $report)
-        <tr>
-            <td>{{ $report->id }}</td>
-            <td>{{ $report->reporter_id }}</td>
-            <td>{{ $report->reported_user_id }}</td>
-            <td>{{ $report->reason }}</td>
-            <td>
-                <form action="{{ route('manage-report', $report->id) }}" method="POST">
-                    @csrf
-                    <select name="decision" class="form-select">
-                        <option value="dismiss">Dismiss</option>
-                        <option value="block">Block</option>
-                    </select>
-                    <button type="submit" class="btn btn-success">Resolve</button>
-                </form>
-            </td>
-        </tr>
-        @endforeach
-    </tbody>
-</table> --}}
     <div class="main-panel">
         <div class="content-wrapper" id="manage-user-content-wrapper">
             <div class="row">
@@ -93,29 +62,6 @@
                                                             </div>
                                                         </div>
                                                     </th>
-                                                    {{-- <th class="py-3 px-6 text-center" style="width: 20%;">
-                                                    <div style="
-                                                        padding-top:10px;
-                                                        display: flex;
-                                                        flex-direction: row;
-                                                        justify-content: center;">
-                                                        Create at
-                                                        <div class="dropdown d-inline-block">
-                                                            <button class="btn p-0 border-0 bg-transparent"
-                                                                type="button" id="sortDropdown"
-                                                                data-bs-toggle="dropdown" aria-expanded="false">
-                                                            </button>
-                                                            <i class="fa-solid fa-caret-down"
-                                                                style="position: absolute;top: 2px;left: 7px; z-index:0;"></i>
-                                                            <ul class="dropdown-menu" aria-labelledby="sortDropdown">
-                                                                <li><a class="dropdown-item sort-link" href="#"
-                                                                        data-sort="latest">Latest</a></li>
-                                                                <li><a class="dropdown-item sort-link" href="#"
-                                                                        data-sort="oldest">Oldest</a></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </th> --}}
                                                     <th class="py-3 px-6 text-center" colspan="2" style="width:15%;">View
                                                     </th>
                                                 </tr>
@@ -137,9 +83,6 @@
 
                                                             </div>
                                                         </td>
-                                                        {{-- <td class="py-3 px-6 text-center">
-                                                        {{ \Carbon\Carbon::parse($report->created_at)->format('d-m-Y') }}
-                                                    </td> --}}
                                                         <td class="py-3 px-6 text-block action">
                                                             <a
                                                                 href="{{ route('reportDetail', ['report_id' => $report->id]) }}">

@@ -141,6 +141,8 @@ Route::prefix('admin')->group(function () {
         Route::prefix('manage-report')->group(function () {
             Route::get('/', [ReportController::class, 'index'])->name('manage-report');
             Route::get('/report-detail/{report_id}', [ReportController::class, 'report_detail_for_admin'])->name('reportDetail');
+            Route::post('/no-action', [ReportController::class, 'noAction']);
+            Route::post('/ban-reported-user', [ReportController::class, 'banUser']);
         });
     });
     Route::post('/users/toggle-status/{id}', [AdminController::class, 'toggleStatus'])->name('users.toggle-status');
