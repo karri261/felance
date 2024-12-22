@@ -351,7 +351,11 @@ class EmployerController extends Controller
         $images = json_decode($freelancer->image_paths, true);
 
         $userView = User::where('id', $user_id)->first();
-        return view('employer.applicant-profile-rate', compact('user', 'job', 'freelancer', 'userView', 'employer', 'applicant', 'images'));
+        $completedJobs = JobPost::whereHas('applicants', function ($query) use ($userView) {
+            $query->where('user_id', $userView->id)->where('finish', '1');
+        })->with('applicants.rating')->paginate(3);
+
+        return view('employer.applicant-profile-rate', compact('user', 'job', 'freelancer', 'userView', 'employer', 'applicant', 'images', 'completedJobs'));
     }
 
     public function browserRequest(Request $request, $applicantId)
