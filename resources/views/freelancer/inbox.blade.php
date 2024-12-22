@@ -124,7 +124,10 @@
                                         </div>
                                     </div>
                                     <div class="send-box">
-                                        <input v-model="message" @keyup.enter="sendMessage" @input="handleTyping"
+                                        {{-- <input v-model="message" @keyup.enter="sendMessage" @input="handleTyping"
+                                            type="text" class="form-control" aria-label="message…"
+                                            placeholder="Write message…"> --}}
+                                        <input v-model="message" @keyup.enter="sendMessage"
                                             type="text" class="form-control" aria-label="message…"
                                             placeholder="Write message…">
                                         <button @click="sendMessage" type="button">
@@ -164,6 +167,7 @@
                     this.loadConversations();
                 },
                 methods: {
+                    // Lấy danh sách các đoạn hội thoại
                     loadConversations() {
                         axios.get('/freelancer/conversations')
                             .then(response => {
@@ -174,7 +178,7 @@
                                 console.error('Error fetching conversations:', error);
                             });
                     },
-
+                    // Khởi tạo và Kết nối Socket.IO:
                     connectSocket() {
                         this.socket = io('http://localhost:6001', {
                             withCredentials: true,
@@ -190,6 +194,7 @@
 
                         this.socket.emit('join', `user.${this.userId}`);
 
+                        // Xử lý gửi và nhận tin nhắn
                         this.socket.on('message', (data) => {
                             if (this.selectedConversation && this.selectedConversation.id === data
                                 .conversation_id) {
@@ -223,6 +228,7 @@
                         });
                     },
 
+                    // Chọn đoạn hội thoại
                     selectConversation(conversation) {
                         this.selectedConversation = conversation;
                         this.messages = [];
@@ -243,19 +249,19 @@
                             });
                     },
 
-                    handleTyping() {
-                        if (!this.selectedConversation) return;
+                    // handleTyping() {
+                    //     if (!this.selectedConversation) return;
 
-                        // Emit socket event để thông báo người dùng đang gõ
-                        this.socket.emit('typing', {
-                            conversation_id: this.selectedConversation.id,
-                            user: {
-                                id: this.userId,
-                                name: this.userName
-                            },
-                            recipient_id: this.selectedConversation.user.user_id
-                        });
-                    },
+                    //     // Emit socket event để thông báo người dùng đang gõ
+                    //     this.socket.emit('typing', {
+                    //         conversation_id: this.selectedConversation.id,
+                    //         user: {
+                    //             id: this.userId,
+                    //             name: this.userName
+                    //         },
+                    //         recipient_id: this.selectedConversation.user.user_id
+                    //     });
+                    // },
 
                     sendMessage() {
                         if (this.message.trim() && this.selectedConversation) {
@@ -265,7 +271,7 @@
                             // Thêm vào pending messages
                             this.pendingMessages.add(messageContent);
 
-                            // Tạo optimistic message với ID tạm thời unique
+                            // Tạo optimistic message với ID tạm thời unique để gửi lên server và hiển thị UI
                             const optimisticMessage = {
                                 id: 'temp-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9),
                                 conversation_id: this.selectedConversation.id,

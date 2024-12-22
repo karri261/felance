@@ -28,14 +28,14 @@ io.on('connection', (socket) => {
         });
     });
 
-    socket.on('typing', (data) => {
-        socket.broadcast
-            .to(`user.${data.recipient_id}`)
-            .emit('userTyping', {
-                conversation_id: data.conversation_id,
-                user: data.user
-            });
-    });
+    // socket.on('typing', (data) => {
+    //     socket.broadcast
+    //         .to(`user.${data.recipient_id}`)
+    //         .emit('userTyping', {
+    //             conversation_id: data.conversation_id,
+    //             user: data.user
+    //         });
+    // });
 
     socket.on('disconnect', () => {
         console.log('User disconnected');
